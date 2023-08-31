@@ -24,24 +24,24 @@ backup_file_or_dir() {
 # =                                    run                                     =
 # ==============================================================================
 
-ANACONDA_PATH=$HOME/ProgramFiles/anaconda3
+ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
 
 
 # step 1.1:install minconda
-backup_file_or_dir $ANACONDA_PATH
+backup_file_or_dir $ANACONDA_HOME
 
 if [ ! -e ./miniconda.sh ]; then
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
 fi
-bash ./miniconda.sh -b -p $ANACONDA_PATH
+bash ./miniconda.sh -b -p $ANACONDA_HOME
 
 
 # step 1.2: install mamba
-$ANACONDA_PATH/bin/conda install -y -c conda-forge mamba
+$ANACONDA_HOME/bin/conda install -y -c conda-forge mamba
 
 
 # step 1.3: install tools
-$ANACONDA_PATH/bin/mamba env create -f tools.yml
+$ANACONDA_HOME/bin/mamba env create -f tools.yml
 
 
 # step 2: install vimrc
