@@ -70,8 +70,8 @@ cp ./.zshrc $HOME/.zshrc
 
 
 # step 3.5: set zsh in tmux
-backup_file_or_dir $HOME/.tumx.conf
-echo "set-option -g default-shell /usr/bin/zsh" > $HOME/.tumx.conf
+backup_file_or_dir $HOME/.tmux.conf
+echo "set-option -g default-shell /usr/bin/zsh" > $HOME/.tmux.conf
 
 
 # step 3.6: change default shell to zsh
