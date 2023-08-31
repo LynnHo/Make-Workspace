@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # ==============================================================================
 # =                                   utils                                    =
@@ -43,29 +44,24 @@ $ANACONDA_PATH/bin/mamba env create -f tools.yml
 # step 2: install vimrc
 backup_file_or_dir $HOME/.vimrc
 
-if [ ! -d $HOME/.vim_runtime ]; then
-    git clone --depth=1 https://github.com/amix/vimrc.git $HOME/.vim_runtime
-fi
+rm -rf $HOME/.vim_runtime
+git clone --depth=1 https://github.com/amix/vimrc.git $HOME/.vim_runtime
 sh $HOME/.vim_runtime/install_awesome_vimrc.sh
 
 
 # step 3.1: install oh-my-zsh
-if [ ! -d $HOME/.oh-my-zsh ]; then
-    git clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
-fi
+rm -rf $HOME/.oh-my-zsh
+git clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
 
 
 # step 3.2: install zsh-syntax-highlighting
-if [ ! -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-fi
+rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 
 # step 3.3: install zsh-autosuggestions
-if [ ! -d ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
+rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
 # step 3.4: install .zshrc
