@@ -172,6 +172,15 @@ fi
 # <<< conda initialize <<<
 alias conda="mamba"
 
+### auto loop envs
+act(){ conda activate "$1" }
+deact(){ conda deactivate }
+_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'act' conda_envs }
+compdef _act act
+for env in $(ls "$ANACONDA_HOME/envs"); do
+    alias $env="conda activate $ANACONDA_HOME/envs/$env"
+done
+
 
 ### tmux
 alias tmux="SHELL=zsh tmux"
