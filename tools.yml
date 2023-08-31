@@ -1,0 +1,16 @@
+name: tools
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3
+  - pip
+  - zsh
+  - tmux
+  - vim
+  - htop
+  - glances
+  - nvitop # - gpustat
+  - openssh
+  - sshpass
+  - pygments
