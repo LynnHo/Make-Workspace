@@ -68,16 +68,21 @@ rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
-# step 3.4: install .zshrc
+# step 3.4：install conda-zsh-completion
+rm -rf ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+
+
+# step 3.5: install .zshrc
 backup_file_or_dir $HOME/.zshrc
 cp ./.zshrc $HOME/.zshrc
 
 
-# step 3.5: set zsh in tmux
+# step 3.6: set zsh in tmux
 backup_file_or_dir $HOME/.tmux.conf
 echo "set-option -g default-shell /usr/bin/zsh" > $HOME/.tmux.conf
 
 
-# step 3.6: change default shell to zsh
+# step 3.7: change default shell to zsh
 chsh -s /usr/bin/zsh
 zsh
