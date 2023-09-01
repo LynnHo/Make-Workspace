@@ -85,4 +85,6 @@ echo "set-option -g default-shell /usr/bin/zsh" > $HOME/.tmux.conf
 
 # step 3.7: change default shell to zsh
 chsh -s /usr/bin/zsh
-zsh
+
+
+echo "Please re-login."
