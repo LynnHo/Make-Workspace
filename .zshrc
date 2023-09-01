@@ -94,6 +94,7 @@ plugins=(
   last-working-dir
   z
 
+  conda-zsh-completion
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
