@@ -31,7 +31,7 @@ ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
 backup_file_or_dir $ANACONDA_HOME
 
 if [ ! -e ./miniconda.sh ]; then
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
+    wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
 fi
 bash ./miniconda.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
