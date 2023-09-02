@@ -174,10 +174,9 @@ fi
 alias conda="mamba"
 
 ### auto loop envs
-act(){ conda activate "$1" }
+act() { conda activate "$1"}
+compctl -k "( $(conda env list | egrep -v '^\#|\*' | awk '{print $2}') )" act
 deact(){ conda deactivate }
-_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'act' conda_envs }
-compdef _act act
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
 done
@@ -193,16 +192,20 @@ alias ta="tmuxa"
 
 ### utils
 alias ccat="pygmentize -g -O style=monokai"
+killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 alias gpu="nvitop"
 alias smi="watch -d -n 1 nvidia-smi"
 alias gkall="fuser -k /dev/nvidia*"
 alias CPU="CUDA_VISIBLE_DEVICES=''"
-for i in {0..7}; do
-    alias CD$i="CUDA_VISIBLE_DEVICES=${i}"
-done
-for i in {0..7}{0..7}; do
-    alias CD$i="CUDA_VISIBLE_DEVICES=${i:0:1},${i:1:1}"
-done
-for i in {0..7}{0..7}{0..7}{0..7}; do
-    alias CD$i="CUDA_VISIBLE_DEVICES=${i:0:1},${i:1:1},${i:2:1},${i:3:1}"
+for a in {0..7}; do
+    alias "CD$a"="CUDA_VISIBLE_DEVICES=$a"
+    for b in {0..7}; do
+        alias "CD$a$b"="CUDA_VISIBLE_DEVICES=$a,$b"
+        for c in {0..7}; do
+            alias "CD$a$b$c"="CUDA_VISIBLE_DEVICES=$a,$b,$c"
+            for d in {0..7}; do
+                alias "CD$a$b$c$d"="CUDA_VISIBLE_DEVICES=$a,$b,$c,$d"
+            done
+        done
+    done
 done
