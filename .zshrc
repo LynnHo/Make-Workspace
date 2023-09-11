@@ -209,3 +209,8 @@ for a in {0..7}; do
         done
     done
 done
+CD(){
+    local device; local cmd
+    { read device; read cmd; } <<< $(echo $@ | awk '{for(i=1; i<=NF; i++) {if($i ~ /^[0-9]+$/) {printf("%s%s", sep, $i); sep=","} else {rest = substr($0, index($0, $i)); break}} print "\n" rest}')
+    execmd "CUDA_VISIBLE_DEVICES='$device' $cmd"
+}
