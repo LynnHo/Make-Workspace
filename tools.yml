@@ -8,8 +8,8 @@ dependencies:
   - zsh
   - tmux
   - vim
+  - bpytop
   - htop
-  - glances
   - nvitop # - gpustat
   - openssh
   - sshpass
