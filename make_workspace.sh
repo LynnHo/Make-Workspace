@@ -8,7 +8,7 @@ set -e
 # =                                   utils                                    =
 # ==============================================================================
 
-backup_file_or_dir() {
+backup_file_or_dir(){
     local FILE_PATH=$1
     local DATE_SUFFIX=$(date +%Y%m%d-%H%M%S)
     local NEW_FILE_PATH="${FILE_PATH}.bk_${DATE_SUFFIX}"
