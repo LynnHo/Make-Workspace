@@ -5,5 +5,5 @@
     ```console
     git clone https://github.com/LynnHo/Make-Workspace
     cd Make-Workspace
-    sh make_workspace.sh
+    bash make_workspace.sh
     ```
