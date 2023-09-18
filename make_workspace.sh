@@ -20,7 +20,7 @@ backup_file_or_dir(){
 }
 
 git_clone(){
-    if ! git clone "$@"; then
+    if ! git clone $@; then
         git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|')
     fi
 }
