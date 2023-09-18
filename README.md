@@ -10,5 +10,5 @@
 3. update .zshrc
 
     ```console
-    cd ~; mv -f .zshrc .zshrc.bk_$(date +%Y%m%d-%H%M%S); wget https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc; cd -
+    mv -f ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S); wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
     ```
