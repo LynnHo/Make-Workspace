@@ -170,7 +170,7 @@ alias conda="mamba"
 
 ### auto loop envs
 act() { conda activate "$1"}
-compctl -k "( $(conda env list | egrep -v '^\#|\*' | awk '{print $NF}') )" act
+compctl -k "( $(cat $HOME/.conda/environments.txt) )" act
 deact(){ conda deactivate }
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
