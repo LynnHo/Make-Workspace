@@ -7,8 +7,9 @@
     cd Make-Workspace
     bash make_workspace.sh
     ```
-3. update .zshrc
+3. update .zshrc (if needed)
 
     ```console
-    mv -f ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S); wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
+    mv ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S)
+    wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
     ```
