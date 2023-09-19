@@ -5,6 +5,7 @@
     ```console
     git clone https://github.com/LynnHo/Make-Workspace
     # mirror: git clone https://gitclone.com/github.com/LynnHo/Make-Workspace
+    # mirror: git clone https://ghproxy.com/https://github.com/LynnHo/Make-Workspace
     cd Make-Workspace
     bash make_workspace.sh
     ```
@@ -13,4 +14,5 @@
     ```console
     mv ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S) # optional: backup if needed
     wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
+    # mirror: wget -O ~/.zshrc https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
     ```
