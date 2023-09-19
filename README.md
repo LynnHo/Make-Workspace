@@ -10,6 +10,6 @@
 3. update .zshrc (if needed)
 
     ```console
-    mv ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S)
+    mv ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S) # optional: backup if needed
     wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
     ```
