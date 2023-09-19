@@ -22,7 +22,7 @@ backup_file_or_dir(){
 git_clone(){
     git clone $@ || \
     git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|') || \
-    git clone https://ghproxy.com/$@
+    git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
 }
 
 
