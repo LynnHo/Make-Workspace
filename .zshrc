@@ -211,7 +211,7 @@ alias ccat="pygmentize -g -O style=monokai"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 
 
-## your own utils
+## customized utils
 if [ -f "$HOME/.userrc" ]; then
     source "$HOME/.userrc"
 fi
