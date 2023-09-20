@@ -177,6 +177,7 @@ for env in $(ls "$ANACONDA_HOME/envs"); do
 done
 
 
+## utils
 ### tmux
 alias tmux="SHELL=zsh tmux"
 alias tmuxn="tmux new -s"
@@ -184,10 +185,14 @@ alias tmuxa="tmux a -t"
 alias tn="tmuxn"
 alias ta="tmuxa"
 
+### git
+git_clone(){
+    git clone $@ || \
+    git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|') || \
+    git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
+}
 
-### utils
-alias ccat="pygmentize -g -O style=monokai"
-killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
+### GPU
 alias gpu="nvitop"
 alias smi="watch -d -n 1 nvidia-smi"
 alias gkall="fuser -k /dev/nvidia*"
@@ -209,8 +214,8 @@ CD(){
     { read device; read cmd; } <<< $(echo $@ | awk '{for(i=1; i<=NF; i++) {if($i ~ /^[0-9]+$/) {printf("%s%s", sep, $i); sep=","} else {rest = substr($0, index($0, $i)); break}} print "\n" rest}')
     execmd "CUDA_VISIBLE_DEVICES='$device' $cmd"
 }
-git_clone(){
-    git clone $@ || \
-    git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|') || \
-    git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
-}
+
+
+### others
+alias ccat="pygmentize -g -O style=monokai"
+killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
