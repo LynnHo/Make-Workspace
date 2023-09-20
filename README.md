@@ -16,7 +16,7 @@
   
    + *do not edit `~/.zshrc`*
 
-5. manually update .zshrc
+5. manually update .zshrc (or it is automatically updated every day)
 
     ```console
     wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
