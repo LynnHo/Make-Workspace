@@ -9,10 +9,13 @@
     cd Make-Workspace
     bash make_workspace.sh
     ```
-3. update .zshrc (if needed)
+
+3. (optional) create `~/.userrc` and set your own utils (alias, functions, variables, etc.)
+
+4. manually update .zshrc
 
     ```console
-    mv ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S) # optional: backup if needed
+    mv ~/.zshrc ~/.zshrc.bk_$(date +%Y%m%d-%H%M%S) # (optional) backup if needed
     wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
     # mirror: wget -O ~/.zshrc https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
     ```
