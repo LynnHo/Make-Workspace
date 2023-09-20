@@ -215,3 +215,19 @@ killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r k
 if [ -f "$HOME/.userrc" ]; then
     source "$HOME/.userrc"
 fi
+
+
+# ==============================================================================
+# =                             auto update .zshrc                             =
+# ==============================================================================
+
+UPDATE_INTERVAL=1 # days
+if [ ! -f "$HOME/.zshrc_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $HOME/.zshrc_update_time)" +%s) + $(($UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
+    ( (
+        set -x
+        sleep 10
+        timeout 10 wget -o- -O $HOME/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
+        timeout 10 wget -o- -O $HOME/.zshrc https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
+        date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
+    ) > "$HOME/.zshrc_update_log" 2>&1 &)
+fi
