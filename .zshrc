@@ -229,6 +229,5 @@ fi
         timeout 10 wget -o- -O $HOME/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
         timeout 10 wget -o- -O $HOME/.zshrc https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
         date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
-        
     fi
 ) > "$HOME/.zshrc_update_log" 2>&1 &)
