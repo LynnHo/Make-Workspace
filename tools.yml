@@ -13,8 +13,10 @@ dependencies:
   - htop
   - nvitop # - gpustat
   - fd-find
+  - bat
+  - pygments
   - openssh
   - sshpass
-  - pygments
+  
   - pip:
     - thefuck
