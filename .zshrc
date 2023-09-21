@@ -207,7 +207,6 @@ CD(){
     execmd "CUDA_VISIBLE_DEVICES='$device' $cmd"
 }
 
-
 ### others
 alias ccat="pygmentize -g -O style=monokai"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
