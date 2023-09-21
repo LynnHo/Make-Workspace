@@ -17,6 +17,3 @@ dependencies:
   - pygments
   - openssh
   - sshpass
-  
-  - pip:
-    - thefuck
