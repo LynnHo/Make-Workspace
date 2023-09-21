@@ -126,7 +126,7 @@ export EDITOR='vim'
 # ==============================================================================
 
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
-alias reloadzsh="omz reload"
+alias rzshrc="omz reload"
 
 
 # ==============================================================================
@@ -181,7 +181,7 @@ alias tn="tmuxn"
 alias ta="tmuxa"
 
 ### git
-gitclone(){
+git_clone(){
     git clone $@ || \
     git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|') || \
     git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
