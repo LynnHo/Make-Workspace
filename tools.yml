@@ -9,6 +9,7 @@ dependencies:
   - tmux
   - vim
   - fzf
+  - fd-find
   - bpytop
   - htop
   - nvitop # - gpustat
