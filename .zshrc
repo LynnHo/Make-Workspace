@@ -133,8 +133,8 @@ alias rzshrc="omz reload"
 # =                                    fzf                                     =
 # ==============================================================================
 
-[[ $- == *i* ]] && source "/home/hezhenliang/.fzf/shell/completion.zsh" 2> /dev/null
-source "/home/hezhenliang/.fzf/shell/key-bindings.zsh"
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+source "$HOME/.fzf/shell/key-bindings.zsh"
 
 
 # ==============================================================================
