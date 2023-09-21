@@ -91,4 +91,9 @@ echo "set-option -g default-shell /usr/bin/zsh" > $HOME/.tmux.conf
 chsh -s /usr/bin/zsh
 
 
+# step 4: install fzf
+rm -rf ~/.fzf
+git_clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+
 echo "Please re-login."
