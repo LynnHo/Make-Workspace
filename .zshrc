@@ -80,6 +80,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  colored-man-pages
   extract
   git
   last-working-dir
@@ -125,6 +126,7 @@ export EDITOR='vim'
 # ==============================================================================
 
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
+alias reloadzsh="omz reload"
 
 
 # ==============================================================================
