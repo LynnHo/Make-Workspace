@@ -81,6 +81,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   fzf-tab
+
   colored-man-pages
   extract
   git
