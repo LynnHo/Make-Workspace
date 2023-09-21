@@ -8,6 +8,7 @@ dependencies:
   - zsh
   - tmux
   - vim
+  - fzf
   - bpytop
   - htop
   - nvitop # - gpustat
