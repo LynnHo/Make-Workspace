@@ -171,8 +171,9 @@ fi
 alias conda="mamba"
 
 ### conda activate
-act() { conda activate "$1"}
-compctl -k "( $(cat $HOME/.conda/environments.txt) )" act
+act(){ conda activate "$1" }
+_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'act' conda_envs }
+compdef _act act
 deact(){ conda deactivate }
 
 ### env alias
