@@ -158,10 +158,12 @@ fi
 # <<< conda initialize <<<
 alias conda="mamba"
 
-### auto loop envs
+### conda activate
 act() { conda activate "$1"}
 compctl -k "( $(cat $HOME/.conda/environments.txt) )" act
 deact(){ conda deactivate }
+
+### env alias
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
 done
@@ -209,6 +211,7 @@ CD(){
 ### others
 alias ccat="pygmentize -g -O style=monokai"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
+alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 
 
 ## customized utils
