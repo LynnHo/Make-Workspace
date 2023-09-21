@@ -84,7 +84,6 @@ plugins=(
 
   colored-man-pages
   extract
-  git
   last-working-dir
   z
 
