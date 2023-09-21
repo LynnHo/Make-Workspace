@@ -135,6 +135,21 @@ export TOOL_HOME="$ANACONDA_HOME/envs/tools"
 export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
 alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 
+## zsh
+ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
+alias rzshrc="exec zsh"
+
+
+## fzf
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+source "$HOME/.fzf/shell/key-bindings.zsh"
+
+
+## the fuck
+eval $(thefuck --alias)
+alias fuck="eval $(thefuck $(fc -ln -1))"
+alias f="fuck"
+
 
 ## conda
 # >>> conda initialize >>>
@@ -216,30 +231,6 @@ alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 if [ -f "$HOME/.userrc" ]; then
     source "$HOME/.userrc"
 fi
-
-
-# ==============================================================================
-# =                                    zsh                                     =
-# ==============================================================================
-
-ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
-alias rzshrc="exec zsh"
-
-
-# ==============================================================================
-# =                                    fzf                                     =
-# ==============================================================================
-
-[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
-source "$HOME/.fzf/shell/key-bindings.zsh"
-
-
-# ==============================================================================
-# =                                  the fuck                                  =
-# ==============================================================================
-
-eval $(thefuck --alias)
-alias f="fuck"
 
 
 # ==============================================================================
