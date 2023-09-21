@@ -133,6 +133,7 @@ export TOOL_HOME="$ANACONDA_HOME/envs/tools"
 
 ## PATH and LD_LIBRARY_PATH
 export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
+alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 
 
 ## conda
