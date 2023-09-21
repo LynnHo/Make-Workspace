@@ -9,10 +9,10 @@ dependencies:
   - tmux
   - vim
   - fzf
-  - fd-find
   - bpytop
   - htop
   - nvitop # - gpustat
+  - fd-find
   - openssh
   - sshpass
   - pygments
