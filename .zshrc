@@ -184,6 +184,11 @@ alias tmuxa="tmux a -t"
 alias tn="tmuxn"
 alias ta="tmuxa"
 
+### jump
+j(){ cd $1 }
+_j(){ local dirs=($(zshz 2>&1 -t | tac | awk '{print $NF}')); _describe 'j' dirs }
+compdef _j j; zstyle ':completion:*:j:*' sort false
+
 ### git
 git_clone(){
     git clone $@ || \
