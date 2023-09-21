@@ -137,18 +137,12 @@ alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
-alias rzshrc="exec zsh"
+alias rzshrc="omz reload"
 
 
 ## fzf
 [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
 source "$HOME/.fzf/shell/key-bindings.zsh"
-
-
-## the fuck
-eval $(thefuck --alias)
-alias fuck="eval $(thefuck $(fc -ln -1))"
-alias f="fuck"
 
 
 ## conda
