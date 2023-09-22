@@ -138,6 +138,7 @@ alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
 alias rzshrc="omz reload"
+zstyle ':completion:*:zshz:*' sort false
 
 
 ## fzf
@@ -183,11 +184,6 @@ alias tmuxn="tmux new -s"
 alias tmuxa="tmux a -t"
 alias tn="tmuxn"
 alias ta="tmuxa"
-
-### jump
-j(){ z $@ }
-_j(){ local dirs=($(zshz 2>&1 -t | tac | awk '{print $NF}')); _describe 'j' dirs }
-compdef _j j; zstyle ':completion:*:j:*' sort false
 
 ### git
 git_clone(){
