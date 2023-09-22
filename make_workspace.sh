@@ -93,7 +93,7 @@ backup $HOME/.zshrc
 cp ./.zshrc $HOME/.zshrc
 
 
-# step 3.4: change default shell to zsh
+# step 3.3: change default shell to zsh
 chsh -s /usr/bin/zsh
 
 
