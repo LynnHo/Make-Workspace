@@ -27,6 +27,6 @@
 
    ```console
    wget -O /tmp/tools.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
-   # mirror: wget -O ~/.zshrc https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
+   # mirror: wget -O /tmp/tools.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
    conda env update --name tools --file tools.yml
    ```
