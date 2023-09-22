@@ -179,7 +179,6 @@ done
 
 ## utils
 ### tmux
-alias tmux="SHELL=zsh tmux"
 alias tmuxn="tmux new -s"
 alias tmuxa="tmux a -t"
 alias tn="tmuxn"
