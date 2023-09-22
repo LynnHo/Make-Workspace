@@ -31,6 +31,7 @@ git_clone(){
 # ==============================================================================
 
 ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
+TOOL_HOME=$ANACONDA_HOME/envs/tools
 
 
 # step 1.1:install minconda
@@ -94,7 +95,7 @@ cp ./.zshrc $HOME/.zshrc
 
 # step 3.3: set zsh in tmux
 backup $HOME/.tmux.conf
-echo "set-option -g default-shell /usr/bin/zsh" > $HOME/.tmux.conf
+echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
 
 
 # step 3.4: change default shell to zsh
