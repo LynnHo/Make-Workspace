@@ -185,7 +185,7 @@ alias tn="tmuxn"
 alias ta="tmuxa"
 
 ### jump
-j(){ cd $1 }
+j(){ z $@ }
 _j(){ local dirs=($(zshz 2>&1 -t | tac | awk '{print $NF}')); _describe 'j' dirs }
 compdef _j j; zstyle ':completion:*:j:*' sort false
 
