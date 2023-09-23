@@ -15,5 +15,7 @@ dependencies:
   - fd-find
   - bat
   - pygments
+  - exa
+  - tldr
   - openssh
   - sshpass
