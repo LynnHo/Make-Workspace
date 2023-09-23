@@ -288,12 +288,12 @@ fi
         mv $HOME/.zshrc_tmp $HOME/.zshrc
         date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
         # temp
-        (timeout 10 wget -o- -O /tmp/tools.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
-         timeout 10 wget -o- -O /tmp/tools.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
-        conda env update --name tools --file /tmp/tools.yml
-        (timeout 10 wget -o- -O /tmp/lesspipe.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-         timeout 10 wget -o- -O /tmp/lesspipe.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
-        cp /tmp/lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
+        (timeout 10 wget -o- -O ~/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+         timeout 10 wget -o- -O ~/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
+        conda env update --name tools --file ~/.tools_tmp.yml; rm ~/.tools_tmp.yml
+        (timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+         timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+        mv ~/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh
         chmod +x $TOOL_HOME/bin/lesspipe.sh
     fi
 ) > "$HOME/.zshrc_update_log" 2>&1 &)
