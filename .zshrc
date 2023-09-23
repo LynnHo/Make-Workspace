@@ -294,5 +294,6 @@ fi
         (timeout 10 wget -o- -O /tmp/lesspipe.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
          timeout 10 wget -o- -O /tmp/lesspipe.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
         cp /tmp/lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
+        chmod +x $TOOL_HOME/bin/lesspipe.sh
     fi
 ) > "$HOME/.zshrc_update_log" 2>&1 &)
