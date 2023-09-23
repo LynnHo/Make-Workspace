@@ -4,7 +4,7 @@ fi
 
 
 # ==============================================================================
-# =                                    omz                                     =
+# =                                omz settings                                =
 # ==============================================================================
 
 # If you come from bash you might have to change your $PATH.
@@ -123,7 +123,7 @@ export EDITOR='vim'
 
 
 # ==============================================================================
-# =                                   common                                   =
+# =                               shell settings                               =
 # ==============================================================================
 
 ## HOMES
@@ -133,7 +133,7 @@ export TOOL_HOME="$ANACONDA_HOME/envs/tools"
 
 ## PATH and LD_LIBRARY_PATH
 export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
-alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
+
 
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
@@ -163,18 +163,25 @@ if [ -f "$ANACONDA_HOME/etc/profile.d/mamba.sh" ]; then
     . "$ANACONDA_HOME/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
-alias conda="mamba"
 
+
+# ==============================================================================
+# =                                   utils                                    =
+# ==============================================================================
+
+## conda
 ### conda activate
 act(){ conda activate "$1" }
-_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'act' conda_envs }
+_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'conda enviroments' conda_envs }
 compdef _act act
 deact(){ conda deactivate }
 
-### env alias
+### conda alias
+# type name to activate the env
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
 done
+alias conda="mamba"
 
 
 ## utils
@@ -217,6 +224,7 @@ CD(){
 ### others
 alias ccat="pygmentize -g -O style=monokai"
 alias cat="ccat"
+alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 
