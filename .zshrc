@@ -172,7 +172,7 @@ fi
 ## conda
 ### conda activate
 act(){ conda activate "$1" }
-_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'conda enviroments' conda_envs }
+_act(){ local conda_envs=($(cat ~/.conda/environments.txt)); _describe 'conda environments' conda_envs }
 compdef _act act
 deact(){ conda deactivate }
 
