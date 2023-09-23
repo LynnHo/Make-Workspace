@@ -146,6 +146,45 @@ zstyle ':completion:*:zshz:*' sort false
 source "$HOME/.fzf/shell/key-bindings.zsh"
 
 
+## fzf-tab
+### common preview
+zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
+export LESSOPEN="|$TOOL_HOME/bin/lesspipe.sh %s"
+zstyle ':fzf-tab:complete:*:*' fzf-preview '
+item=${(Q)realpath:-${(Q)word}};
+echo $item; file -bi $item; du -sh $item | cut -f1; echo;
+# ([[ -d $item ]] && lsd -lAh --color always --blocks permission,user,size,date,name --date "+%b %d %H:%M" --total-size $item) 2>/dev/null ||
+([[ -d $item ]] && exa -la --color always $item) 2>/dev/null ||
+([[ -d $item ]] && ls -lahG --color=always $item) ||
+(less $item)
+'
+# switch group using 'left' and 'right'
+zstyle ':fzf-tab:*' switch-group 'left' 'right'
+
+### process preview
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm,cmd -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --preview-window 'up:4'
+
+### command preview
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview '
+# (out=$(tldr -c "$word") 2>/dev/null && echo $out) ||
+(out=$(man "$word") 2>/dev/null && echo $out) ||
+(source $HOME/.zshrc; out=$(which "$word") && echo $out) ||
+(echo "${(P)word}")
+' # TODO: source here is not good
+
+### doc preview
+zstyle ':fzf-tab:complete:man:*' fzf-preview 'man $word'
+
+### variable preview
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+
+### disable preview
+zstyle ':fzf-tab:complete:zshz:*' fzf-preview ''
+
+
 ## conda
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
