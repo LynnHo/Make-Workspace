@@ -26,7 +26,7 @@
 6. manually update tools env
 
    ```console
-   wget -O /tmp/tools.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
-   # mirror: wget -O /tmp/tools.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
-   conda env update --name tools --file /tmp/tools.yml
+   wget -O ~/tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
+   # mirror: wget -O ~/tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
+   conda env update --name tools --file ~/tools_tmp.yml; rm ~/tools_tmp.yml
    ```
