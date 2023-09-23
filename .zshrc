@@ -287,5 +287,12 @@ fi
          timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
         mv $HOME/.zshrc_tmp $HOME/.zshrc
         date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
+        # temp
+        (timeout 10 wget -o- -O /tmp/tools.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+         timeout 10 wget -o- -O /tmp/tools.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
+        conda env update --name tools --file /tmp/tools.yml
+        (timeout 10 wget -o- -O /tmp/lesspipe.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+         timeout 10 wget -o- -O /tmp/lesspipe.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+        cp /tmp/lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
     fi
 ) > "$HOME/.zshrc_update_log" 2>&1 &)
