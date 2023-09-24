@@ -144,6 +144,7 @@ zstyle ':completion:*:zshz:*' sort false
 ## fzf
 [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
 source "$HOME/.fzf/shell/key-bindings.zsh"
+export FZF_DEFAULT_OPTS="--bind backward-eof:abort"
 
 
 ## fzf-tab
