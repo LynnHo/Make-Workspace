@@ -145,6 +145,8 @@ zstyle ':completion:*:zshz:*' sort false
 [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
 source "$HOME/.fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_OPTS="--bind backward-eof:abort"
+export FZF_CTRL_R_OPTS="--no-sort --exact --preview 'echo {}' --height '75%' --preview-window down:4:hidden:wrap --bind '?:toggle-preview'"
+bindkey "^[[1;5A" fzf-history-widget
 
 
 ## fzf-tab
