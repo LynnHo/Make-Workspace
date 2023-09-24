@@ -303,6 +303,9 @@ fi
              timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
             mv ~/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh
             chmod +x $TOOL_HOME/bin/lesspipe.sh
+
+            timeout 10 tldr -u || \
+            timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
             # ======================================
             # =                temp                =
             # ======================================
