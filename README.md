@@ -16,17 +16,25 @@
   
    + *do not edit `~/.zshrc`*
 
-5. manually update .zshrc (or it is automatically updated every day)
+5. manually update (.zhsrc is automatically updated every day)
 
     ```console
-    wget -O ~/.zshrc https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
-    # mirror: wget -O ~/.zshrc https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc
+    (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
+     timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
+    mv $HOME/.zshrc_tmp $HOME/.zshrc
+    
+    # ======================================
+    # =                temp                =
+    # ======================================
+    (timeout 10 wget -o- -O ~/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o- -O ~/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
+    conda env update --name tools --file ~/.tools_tmp.yml; rm ~/.tools_tmp.yml
+    
+    (timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+     timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+    mv ~/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh
+    chmod +x $TOOL_HOME/bin/lesspipe.sh
+    
+    timeout 10 tldr -u || \
+    timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
     ```
-
-6. manually update tools env
-
-   ```console
-   wget -O ~/tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
-   # mirror: wget -O ~/tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml
-   conda env update --name tools --file ~/tools_tmp.yml; rm ~/tools_tmp.yml
-   ```
