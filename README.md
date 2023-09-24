@@ -19,6 +19,9 @@
 5. manually update (.zhsrc is automatically updated every day)
 
     ```console
+    ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
+    TOOL_HOME=$ANACONDA_HOME/envs/tools
+
     (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
      timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
     mv $HOME/.zshrc_tmp $HOME/.zshrc
