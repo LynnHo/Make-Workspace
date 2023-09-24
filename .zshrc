@@ -148,19 +148,22 @@ export FZF_DEFAULT_OPTS="--bind backward-eof:abort"
 
 
 ## fzf-tab
+### switch group
+zstyle ':fzf-tab:*' switch-group 'left' 'right'
+
 ### common preview
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 export LESSOPEN="|$TOOL_HOME/bin/lesspipe.sh %s"
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}};
-echo $item; file -bi $item; du -sh $item | cut -f1; echo;
+(echo $item; file -bi $item; du -sh $item | cut -f1; echo;) 2>/dev/null
 # ([[ -d $item ]] && lsd -lAh --color always --blocks permission,user,size,date,name --date "+%b %d %H:%M" --total-size $item) 2>/dev/null ||
 ([[ -d $item ]] && exa -la --color always $item) 2>/dev/null ||
 ([[ -d $item ]] && ls -lahG --color=always $item) ||
-(less $item)
+(less $item) 2>/dev/null
 '
-# switch group using 'left' and 'right'
-zstyle ':fzf-tab:*' switch-group 'left' 'right'
+zstyle ':fzf-tab:complete:*:options' fzf-preview
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 
 ### process preview
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -170,8 +173,8 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --p
 
 ### command preview
 zstyle ':fzf-tab:complete:-command-:*' fzf-preview '
-# (out=$(tldr -c "$word") 2>/dev/null && echo $out) ||
-(out=$(man "$word") 2>/dev/null && echo $out) ||
+(out=$(timeout 0.2 tldr -c "$word") 2>/dev/null && (echo \[TLDR Page\]\\n; echo $out)) ||
+(out=$(man "$word") 2>/dev/null && (echo \[MAN Page\]\\n; echo $out)) ||
 (source $HOME/.zshrc; out=$(which "$word") && echo $out) ||
 (echo "${(P)word}")
 ' # TODO: source here is not good
@@ -183,7 +186,7 @@ zstyle ':fzf-tab:complete:man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 ### disable preview
-zstyle ':fzf-tab:complete:zshz:*' fzf-preview ''
+zstyle ':fzf-tab:complete:(zshz|tmux*):*' fzf-preview ''
 
 
 ## conda
