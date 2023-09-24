@@ -23,9 +23,6 @@
      timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
     mv $HOME/.zshrc_tmp $HOME/.zshrc
     
-    # ======================================
-    # =                temp                =
-    # ======================================
     (timeout 10 wget -o- -O ~/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
      timeout 10 wget -o- -O ~/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
     conda env update --name tools --file ~/.tools_tmp.yml; rm ~/.tools_tmp.yml
