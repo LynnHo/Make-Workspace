@@ -188,7 +188,7 @@ zstyle ':fzf-tab:complete:man:*' fzf-preview 'man $word'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 ### disable preview
-zstyle ':fzf-tab:complete:(zshz|tmux*):*' fzf-preview ''
+zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
 
 
 ## conda
