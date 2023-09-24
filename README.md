@@ -16,7 +16,7 @@
   
    + *do not edit `~/.zshrc`*
 
-5. manually update (.zhsrc is automatically updated every day)
+5. manually update (.zshrc is automatically updated every day)
 
     ```console
     ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
