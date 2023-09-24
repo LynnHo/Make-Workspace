@@ -63,6 +63,12 @@ rm -rf $HOME/.fzf
 git_clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 
 
+# step 2.3: install lesspipe
+timeout 10 wget -O $TOOL_HOME/bin/lesspipe.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+wget -O $TOOL_HOME/bin/lesspipe.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh)
+chmod +x $TOOL_HOME/bin/lesspipe.sh
+
+
 # step 3.1.1: install oh-my-zsh
 rm -rf $HOME/.oh-my-zsh
 git_clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
