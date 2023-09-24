@@ -108,4 +108,9 @@ echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
 chsh -s /usr/bin/zsh
 
 
+# step 4: optionals
+timeout 10 tldr -u || \
+timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+
+
 echo "Please re-login."
