@@ -237,11 +237,11 @@ alias tn="tmuxn"
 alias ta="tmuxa"
 
 ### git
-git_clone(){
+git_clone()(
     git clone $@ || \
     git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|') || \
     git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
-}
+)
 
 ### GPU
 alias gpu="nvitop"
@@ -260,11 +260,11 @@ for a in {0..7}; do
         done
     done
 done
-CD(){
+CD()(
     local device; local cmd
     { read device; read cmd; } <<< $(echo $@ | awk '{for(i=1; i<=NF; i++) {if($i ~ /^[0-9]+$/) {printf("%s%s", sep, $i); sep=","} else {rest = substr($0, index($0, $i)); break}} print "\n" rest}')
-    execmd "CUDA_VISIBLE_DEVICES='$device' $cmd"
-}
+    eval "CUDA_VISIBLE_DEVICES='$device' $cmd"
+)
 
 ### others
 alias ccat="pygmentize -g -O style=monokai"
