@@ -284,15 +284,16 @@ fi
 # =                            auto update workspace                           =
 # ==============================================================================
 
-update_workspace()(
+update_zshrc()(
     (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
      timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
     mv $HOME/.zshrc_tmp $HOME/.zshrc
     rm -f $HOME/.zshrc_tmp
+)
 
-    # ======================================
-    # =                temp                =
-    # ======================================
+update_workspace()(
+    update_zshrc
+
     (timeout 10 wget -o- -O ~/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
      timeout 10 wget -o- -O ~/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
     conda env update --name tools --file ~/.tools_tmp.yml
@@ -307,9 +308,6 @@ update_workspace()(
     timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
     echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
-    # ======================================
-    # =                temp                =
-    # ======================================
 )
 
 ( (
