@@ -19,6 +19,12 @@
 5. manually update (.zshrc is automatically updated every day)
 
     ```console
+    update_workspace
+    ```
+
+    or
+   
+    ```console
     ANACONDA_HOME=~/ProgramFiles/anaconda3
     TOOL_HOME=$ANACONDA_HOME/envs/tools
 
