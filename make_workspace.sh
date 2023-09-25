@@ -8,22 +8,20 @@ set -e
 # =                                   utils                                    =
 # ==============================================================================
 
-backup(){
-    local FILE_PATH=$1
-    local DATE_SUFFIX=$(date +%Y%m%d-%H%M%S)
-    local NEW_FILE_PATH="${FILE_PATH}.bk_${DATE_SUFFIX}"
-
+backup()(
+    FILE_PATH=$1
+    NEW_FILE_PATH="${FILE_PATH}.bk_$(date +%Y%m%d-%H%M%S)"
     if [ -e $FILE_PATH ]; then
         mv $FILE_PATH $NEW_FILE_PATH
         echo "$FILE_PATH exists, backup as $NEW_FILE_PATH"
     fi
 }
 
-git_clone(){
+git_clone()(
     git clone $@ || \
     git clone $(echo $@ | sed 's|https://github.com/|https://gitclone.com/github.com/|') || \
     git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
-}
+)
 
 
 # ==============================================================================
