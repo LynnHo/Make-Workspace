@@ -284,7 +284,7 @@ fi
 # =                            auto update workspace                           =
 # ==============================================================================
 
-update()(
+update_workspace()(
     (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
      timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
     mv $HOME/.zshrc_tmp $HOME/.zshrc
@@ -318,6 +318,6 @@ update()(
     if [ ! -f "$HOME/.zshrc_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $HOME/.zshrc_update_time)" +%s) + $(($UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
         date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
         sleep 10
-        update
+        update_workspace
     fi
 ) > "$HOME/.zshrc_update_log" 2>&1 &)
