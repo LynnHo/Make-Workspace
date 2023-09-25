@@ -284,37 +284,40 @@ fi
 # =                            auto update workspace                           =
 # ==============================================================================
 
+update()(
+    (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
+     timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
+    mv $HOME/.zshrc_tmp $HOME/.zshrc
+    rm -f $HOME/.zshrc_tmp
+
+    # ======================================
+    # =                temp                =
+    # ======================================
+    (timeout 10 wget -o- -O ~/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o- -O ~/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
+    conda env update --name tools --file ~/.tools_tmp.yml
+    rm -f ~/.tools_tmp.yml
+
+    (timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+     timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+    (mv ~/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
+    rm -f ~/.lesspipe_tmp.sh
+
+    timeout 10 tldr -u || \
+    timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+
+    echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
+    # ======================================
+    # =                temp                =
+    # ======================================
+)
+
 ( (
     set -x
     UPDATE_INTERVAL=1 # days
     if [ ! -f "$HOME/.zshrc_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $HOME/.zshrc_update_time)" +%s) + $(($UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
         date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
-
         sleep 10
-        (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
-         timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
-        mv $HOME/.zshrc_tmp $HOME/.zshrc
-        rm -f $HOME/.zshrc_tmp
-        
-        # ======================================
-        # =                temp                =
-        # ======================================
-        (timeout 10 wget -o- -O ~/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
-         timeout 10 wget -o- -O ~/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
-        conda env update --name tools --file ~/.tools_tmp.yml
-        rm -f ~/.tools_tmp.yml
-
-        (timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-         timeout 10 wget -o- -O ~/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
-        (mv ~/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
-        rm -f ~/.lesspipe_tmp.sh
-
-        timeout 10 tldr -u || \
-        timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
-
-        echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
-        # ======================================
-        # =                temp                =
-        # ======================================
+        update
     fi
 ) > "$HOME/.zshrc_update_log" 2>&1 &)
