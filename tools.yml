@@ -16,6 +16,8 @@ dependencies:
   - bat
   - pygments
   - exa
+  - git-delta
   - tldr
+  - curl
   - openssh
   - sshpass
