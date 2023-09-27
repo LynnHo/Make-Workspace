@@ -85,6 +85,9 @@ plugins=(
   colored-man-pages
   extract
   last-working-dir
+  safe-paste
+  timer
+  universalarchive
   z
 
   conda-zsh-completion
