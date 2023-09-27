@@ -15,7 +15,7 @@ backup()(
         mv $FILE_PATH $NEW_FILE_PATH
         echo "$FILE_PATH exists, backup as $NEW_FILE_PATH"
     fi
-}
+)
 
 git_clone()(
     git clone $@ || \
