@@ -41,6 +41,7 @@ bash ./miniconda.sh -b -p $ANACONDA_HOME
 
 
 # step 1.2: install mamba
+cd $ANACONDA_HOME/lib; ln -s libarchive.so libarchive.so.13; cd -
 $ANACONDA_HOME/bin/conda install -y -c conda-forge mamba
 
 
@@ -107,8 +108,8 @@ chsh -s /usr/bin/zsh
 
 
 # step 4: optionals
-timeout 10 tldr -u || \
-timeout 10 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+timeout 10 $TOOL_HOME/bin/tldr -u || \
+timeout 10 $TOOL_HOME/bin/tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
 echo "Please re-login."
