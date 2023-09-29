@@ -19,5 +19,5 @@
 5. manually update (.zshrc is automatically updated every day)
 
     ```console
-    update_workspace
+    update_workspace; rzshrc
     ```
