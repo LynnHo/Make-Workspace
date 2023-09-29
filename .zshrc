@@ -141,7 +141,7 @@ export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
 
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
-alias rzshrc="omz reload"
+alias rzshrc="exec zsh"
 zstyle ':completion:*:zshz:*' sort false
 
 
