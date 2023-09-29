@@ -93,7 +93,7 @@ plugins=(
   conda-zsh-completion
   zsh-autosuggestions
   zsh-syntax-highlighting
-  # zsh-history-substring-search # must be set after zsh-syntax-highlighting
+  zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -196,8 +196,10 @@ zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
 
 
 ## zsh-history-substring-search
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+if zle -la | grep -q "^history-substring-search-up$"; then
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+fi
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=white,bold'
 HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="I"
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE="true"
