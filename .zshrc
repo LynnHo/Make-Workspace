@@ -93,7 +93,7 @@ plugins=(
   conda-zsh-completion
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-history-substring-search # must be set after zsh-syntax-highlighting
+  # zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
