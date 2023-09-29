@@ -108,8 +108,8 @@ chsh -s /usr/bin/zsh
 
 
 # step 4: optionals
-timeout 10 $TOOL_HOME/bin/tldr -u || \
-timeout 10 $TOOL_HOME/bin/tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+timeout 60 $TOOL_HOME/bin/tldr -u || \
+timeout 60 $TOOL_HOME/bin/tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
 echo "Please re-login."
