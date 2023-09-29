@@ -309,7 +309,7 @@ update_workspace()(
 
     (timeout 10 wget -o- -O $HOME/update_workspace_tmp.sh https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/update_workspace.sh || \
      timeout 10 wget -o- -O $HOME/update_workspace_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/update_workspace.sh) && \
-    bash update_workspace.sh
+    bash update_workspace_tmp.sh
     rm -f $HOME/update_workspace_tmp.sh
 )
 
