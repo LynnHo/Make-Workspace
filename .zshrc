@@ -141,8 +141,9 @@ export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
 
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
-alias rzshrc="exec zsh"
 zstyle ':completion:*:zshz:*' sort false
+_execstatus()( if [[ $? -eq 0 ]]; then mark="%F{green}\u2714%f"; else mark="%F{red}\u2718%f"; fi; print -P "$(printf '%*s' $((COLUMNS-2)))${mark}" )
+add-zsh-hook precmd _execstatus
 
 
 ## fzf
@@ -287,6 +288,7 @@ alias cat="ccat"
 alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
+alias rzshrc="exec zsh"
 
 
 ## customized utils
