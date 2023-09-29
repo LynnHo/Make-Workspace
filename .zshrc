@@ -289,6 +289,7 @@ alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 alias rzshrc="exec zsh"
+alias udws="update_zshrc; source ~/.zshrc 2>/dev/null; update_workspace; rzshrc"
 
 
 ## customized utils
