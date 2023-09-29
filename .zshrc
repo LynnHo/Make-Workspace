@@ -93,6 +93,7 @@ plugins=(
   conda-zsh-completion
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -192,6 +193,15 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 
 ### disable preview
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
+
+
+## zsh-history-substring-search
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="I"
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE="true"
+HISTORY_SUBSTRING_SEARCH_FUZZY="true"
 
 
 ## conda
@@ -311,6 +321,8 @@ update_workspace()(
     timeout 60 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
     echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
+
+    git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 )
 
 ( (
