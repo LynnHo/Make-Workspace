@@ -53,23 +53,23 @@ $ANACONDA_HOME/bin/mamba env create -f tools.yml
 backup $HOME/.vimrc
 
 rm -rf $HOME/.vim_runtime
-cp -r ./.vim_runtime $HOME/.vim_runtime
+cp -r ./stable/.vim_runtime $HOME/.vim_runtime
 sh $HOME/.vim_runtime/install_awesome_vimrc.sh
 
 
 # step 2.2: install fzf
 rm -rf $HOME/.fzf
-cp -r ./.fzf $HOME/.fzf
+cp -r ./stable/.fzf $HOME/.fzf
 
 
 # step 2.3: install lesspipe
-cp ./lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
+cp ./stable/lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
 chmod +x $TOOL_HOME/bin/lesspipe.sh
 
 
 # step 3.1: install oh-my-zsh
 rm -rf $HOME/.oh-my-zsh
-cp -r ./.oh-my-zsh $HOME/.oh-my-zsh
+cp -r ./stable/.oh-my-zsh $HOME/.oh-my-zsh
 
 # step 3.2: install .zshrc
 backup $HOME/.zshrc
