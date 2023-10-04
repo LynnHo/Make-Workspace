@@ -17,7 +17,8 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="eastwood"
+# ZSH_THEME="eastwood"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -304,6 +305,10 @@ if [ -f "$HOME/.userrc" ]; then
 fi
 
 
+## powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 # ==============================================================================
 # =                            auto update workspace                           =
 # ==============================================================================
@@ -337,6 +342,12 @@ update_workspace()(
     echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
 
     git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+
+    git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    (timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh || \
+     timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh) && \
+    mv $HOME/.p10k.zsh_tmp $HOME/.p10k.zsh
+    rm -f $HOME/.p10k.zsh_tmp
 )
 
 ( (
