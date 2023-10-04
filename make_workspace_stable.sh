@@ -70,6 +70,8 @@ chmod +x $TOOL_HOME/bin/lesspipe.sh
 # step 3.1: install oh-my-zsh
 rm -rf $HOME/.oh-my-zsh
 cp -r ./stable/.oh-my-zsh $HOME/.oh-my-zsh
+cp ./.p10k.zsh $HOME/.p10k.zsh
+
 
 # step 3.2: install .zshrc
 backup $HOME/.zshrc
