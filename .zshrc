@@ -308,6 +308,13 @@ fi
 # =                            auto update workspace                           =
 # ==============================================================================
 
+update_tools()(
+    (timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
+    conda env update --name tools --file $HOME/.tools_tmp.yml
+    rm -f $HOME/.tools_tmp.yml
+)
+
 update_zshrc()(
     (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
      timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
@@ -316,12 +323,8 @@ update_zshrc()(
 )
 
 update_workspace()(
+    update_tools
     update_zshrc
-
-    (timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
-     timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
-    conda env update --name tools --file $HOME/.tools_tmp.yml
-    rm -f $HOME/.tools_tmp.yml
 
     (timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
      timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
