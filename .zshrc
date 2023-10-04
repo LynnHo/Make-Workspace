@@ -142,7 +142,7 @@ export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
 zstyle ':completion:*:zshz:*' sort false
-_set_prompt(){ if [[ $? -eq 0 ]]; then mark='%F{green}>%f'; else mark='%F{red}>%f'; fi; PROMPT='${$(git_custom_status):+$(git_custom_status) }$fg[cyan]%}%~% %{$reset_color%} %B${mark}%b ' }
+_set_prompt(){ if [[ $? -eq 0 ]]; then mark='%F{green}>%f'; else mark='%F{red}>%f'; fi; PROMPT='${$(git_custom_status):+$(git_custom_status) }%{$fg[cyan]%}%~% %{$reset_color%} %B$mark%b ' }
 add-zsh-hook precmd _set_prompt
 
 
