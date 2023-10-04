@@ -7,7 +7,8 @@
     # mirror: git clone https://gitclone.com/github.com/LynnHo/Make-Workspace
     # mirror: git clone https://ghproxy.com/https://github.com/LynnHo/Make-Workspace
     cd Make-Workspace
-    bash make_workspace.sh
+    bash make_workspace_stable.sh
+    # bash make_workspace_latest.sh
     ```
 
 3. (optional) customization

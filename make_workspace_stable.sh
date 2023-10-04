@@ -53,50 +53,23 @@ $ANACONDA_HOME/bin/mamba env create -f tools.yml
 backup $HOME/.vimrc
 
 rm -rf $HOME/.vim_runtime
-git_clone --depth=1 https://github.com/amix/vimrc.git $HOME/.vim_runtime
+cp -r ./.vim_runtime $HOME/.vim_runtime
 sh $HOME/.vim_runtime/install_awesome_vimrc.sh
 
 
 # step 2.2: install fzf
 rm -rf $HOME/.fzf
-git_clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+cp -r ./.fzf $HOME/.fzf
 
 
 # step 2.3: install lesspipe
-timeout 10 wget -O $TOOL_HOME/bin/lesspipe.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-wget -O $TOOL_HOME/bin/lesspipe.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh
+cp ./lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
 chmod +x $TOOL_HOME/bin/lesspipe.sh
 
 
-# step 3.1.1: install oh-my-zsh
+# step 3.1: install oh-my-zsh
 rm -rf $HOME/.oh-my-zsh
-git_clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
-
-
-# step 3.1.2: install zsh-syntax-highlighting
-rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git_clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-
-# step 3.1.3: install zsh-autosuggestions
-rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git_clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-
-# step 3.1.4：install conda-zsh-completion
-rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
-git_clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
-
-
-# step 3.1.5: install fzf-tab
-rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
-git_clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
-
-
-# step 3.1.6: zsh-history-substring-search
-rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-
+cp -r ./.oh-my-zsh $HOME/.oh-my-zsh
 
 # step 3.2: install .zshrc
 backup $HOME/.zshrc
@@ -117,4 +90,4 @@ timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
-echo "Please re-login."
+exec $TOOL_HOME/bin/zsh 2>/dev/null || true
