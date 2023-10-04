@@ -117,4 +117,4 @@ timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
-exec $TOOL_HOME/bin/zsh 2>/dev/null || true
+exec $TOOL_HOME/bin/zsh 2>&1 >/dev/null || true
