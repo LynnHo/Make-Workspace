@@ -1,3 +1,11 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
 if ! [[ $(pwd) == $HOME* ]]; then
     export HOME=$(readlink -f "$HOME")
 fi
@@ -17,7 +25,6 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="eastwood"
 ZSH_THEME=$([[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]] && echo "powerlevel10k/powerlevel10k" || echo "eastwood")
 
 # Set list of themes to pick from when loading at random
@@ -87,7 +94,6 @@ plugins=(
   extract
   last-working-dir
   safe-paste
-  timer
   universalarchive
   z
 
@@ -143,8 +149,6 @@ export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
 zstyle ':completion:*:zshz:*' sort false
-_set_prompt(){ if [[ $? -eq 0 ]]; then sym='%F{green}>%f'; else sym='%F{red}>%f'; fi; gitst=$(git_custom_status); PROMPT='${${gitst}:+${gitst} }%{$fg[cyan]%}%~% %{$reset_color%} %B$sym%b ' }
-add-zsh-hook precmd _set_prompt
 
 
 ## fzf
