@@ -11,11 +11,6 @@ if ! [[ $(pwd) == $HOME* ]]; then
 fi
 
 
-if [[ $TERM == xterm ]]; then
-  export TERM='xterm-256color'
-fi
-
-
 # ==============================================================================
 # =                                omz settings                                =
 # ==============================================================================
@@ -149,6 +144,12 @@ export TOOL_HOME="$ANACONDA_HOME/envs/tools"
 
 ## PATH and LD_LIBRARY_PATH
 export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
+
+
+## TERM
+if [[ $TERM == xterm ]]; then
+  export TERM='xterm-256color'
+fi
 
 
 ## zsh
