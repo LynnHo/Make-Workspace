@@ -329,6 +329,11 @@ update_zshrc()(
      timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
     mv $HOME/.zshrc_tmp $HOME/.zshrc
     rm -f $HOME/.zshrc_tmp
+
+    (timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh || \
+     timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh) && \
+    mv $HOME/.p10k.zsh_tmp $HOME/.p10k.zsh
+    rm -f $HOME/.p10k.zsh_tmp
 )
 
 update_workspace()(
@@ -348,10 +353,6 @@ update_workspace()(
     git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 
     git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    (timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh || \
-     timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh) && \
-    mv $HOME/.p10k.zsh_tmp $HOME/.p10k.zsh
-    rm -f $HOME/.p10k.zsh_tmp
 )
 
 ( (
