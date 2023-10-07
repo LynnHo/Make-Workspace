@@ -19,5 +19,4 @@ dependencies:
   - git-delta
   - tldr
   - curl
-  - openssh
   - sshpass
