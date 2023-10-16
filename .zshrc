@@ -337,8 +337,8 @@ update_zshrc()(
 
     (timeout 10 wget -o- -O $HOME/my_configs.vim_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/my_configs.vim || \
      timeout 10 wget -o- -O $HOME/my_configs.vim_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/my_configs.vim) && \
-    mv $HOME/my_configs.vim_tmp $HOME/.p10k.zsh
-    rm -f $HOME/my_configs.vim_tmp $HOME/.vim_runtime/my_configs.vim
+    mv $HOME/my_configs.vim_tmp $HOME/.vim_runtime/my_configs.vim
+    rm -f $HOME/my_configs.vim_tmp
 )
 
 update_workspace()(
