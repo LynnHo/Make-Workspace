@@ -55,6 +55,8 @@ backup $HOME/.vimrc
 rm -rf $HOME/.vim_runtime
 git_clone --depth=1 https://github.com/amix/vimrc.git $HOME/.vim_runtime
 sh $HOME/.vim_runtime/install_awesome_vimrc.sh
+rm -f $HOME/.vim_runtime/my_configs.vim
+cp ./my_configs.vim $HOME/.vim_runtime/my_configs.vim
 
 
 # step 2.2: install fzf
