@@ -360,6 +360,7 @@ update_all()(
     mv $HOME/.zshrc_update_log $WS/.ws_update_log
 )
 
+mkdir -p $WS
 ( (
     set -x
     UPDATE_INTERVAL=1 # days
