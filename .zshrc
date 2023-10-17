@@ -355,9 +355,8 @@ update_all()(
 
     git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-    mkdir -p $WS
-    mv $HOME/.zshrc_update_time $WS/.ws_update_time
-    mv $HOME/.zshrc_update_log $WS/.ws_update_log
+    rm -f $HOME/.zshrc_update_time
+    rm -f $HOME/.zshrc_update_log
 )
 
 mkdir -p $WS
