@@ -256,6 +256,10 @@ for env in $(ls "$ANACONDA_HOME/envs"); do
 done
 alias conda="mamba"
 
+### package source
+alias set_package_source_aliyun="bash $WS/set_package_source_aliyun.sh"
+alias reset_package_source="rm -f ~/.condarc ~/.pip/pip.conf"
+
 
 ## utils
 ### tmux
@@ -304,7 +308,6 @@ killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r k
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 alias rzshrc="exec zsh"
 alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
-alias set_python_source_aliyun="bash $WS/set_python_source_aliyun.sh"
 
 
 ## customized utils
@@ -338,7 +341,7 @@ update_workspace()(
     mv Make-Workspace_tmp/.zshrc $HOME/.zshrc
     mv Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
     mv Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
-    rsync -av Make-Workspace_tmp/.ws/ $WS/
+    rsync -av --delete Make-Workspace_tmp/.ws/ $WS/
     rm -rf Make-Workspace_tmp
 
     timeout 60 tldr -u || \
