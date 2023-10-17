@@ -263,7 +263,7 @@ alias tmuxa="tmux a -t"
 alias tmuxk="tmux kill-session -t"
 alias tn="tmuxn"
 alias ta="tmuxa"
-alias tk="tmuxnk"
+alias tk="tmuxk"
 
 ### git
 git_clone()(
