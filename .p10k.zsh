@@ -32,11 +32,13 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
-    anaconda                # conda environment (https://conda.io/)
-    vcs                     # git status
+    context                 # user@hostname
     dir                     # current directory
     # =========================[ Line #2 ]=========================
     newline                 # \n
+    anaconda                # conda environment (https://conda.io/)
+    vcs_joined              # git status
+    command_execution_time  # duration of the last command
     prompt_char             # prompt symbol
   )
 
@@ -115,7 +117,6 @@
   #   # example               # example user-defined segment (see prompt_example function below)
   # )
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    command_execution_time  # duration of the last command
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
@@ -463,7 +464,7 @@
     # in this case.
     (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}-"
 
-    typeset -g my_git_format=$res
+    typeset -g my_git_format=%F{green}[%f$res%F{green}]%f
   }
   functions -M my_git_formatter 2>/dev/null
 
@@ -883,25 +884,27 @@
 
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=15
   # Context color in SSH without privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=7
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=15
   # Default context color (no privileges, no SSH).
-  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=7
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=15
+
+  CONTEXT=%F{blue}$USER@$(hostname -I | awk '{print $1}')%f
 
   # Context format when running with privileges: bold user@hostname.
   # typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%B%n@%m'
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%B$USER@$(hostname -I | awk '{print $1}')"
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%B$CONTEXT"
   # Context format when in SSH without privileges: user@hostname.
   # typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE="$USER@$(hostname -I | awk '{print $1}')"
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE="$CONTEXT"
   # Default context format (no privileges, no SSH): user@hostname.
   # typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n@%m'
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="$USER@$(hostname -I | awk '{print $1}')"
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="$CONTEXT"
 
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
-  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
+  # typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -949,7 +952,7 @@
   # The default value of POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION expands to $CONDA_PROMPT_MODIFIER
   # without the surrounding parentheses, or to the last path component of CONDA_PREFIX if the former
   # is empty.
-  typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='(${${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}:-${CONDA_PREFIX:t}})'
+  typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='[${${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}:-${CONDA_PREFIX:t}}]'
 
   # Custom icon.
   typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION=''
