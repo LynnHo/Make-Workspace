@@ -269,6 +269,7 @@ condaali()(
     [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.pip/pip.conf ]] || mv ~/.pip/pip.conf ~/.pip/pip.conf.bk
     set_package_source_aliyun
     conda $@
+    reset_package_source
     [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.pip/pip.conf.bk ]] || mv ~/.pip/pip.conf.bk ~/.pip/pip.conf
 )
 
