@@ -260,8 +260,10 @@ alias conda="mamba"
 ### tmux
 alias tmuxn="tmux new -s"
 alias tmuxa="tmux a -t"
+alias tmuxk="tmux kill-session -t"
 alias tn="tmuxn"
 alias ta="tmuxa"
+alias tk="tmuxnk"
 
 ### git
 git_clone()(
