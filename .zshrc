@@ -259,6 +259,12 @@ alias conda="mamba"
 ### package source
 alias set_package_source_aliyun="bash $WS/set_package_source_aliyun.sh"
 alias reset_package_source="rm -f ~/.condarc ~/.pip/pip.conf"
+condaali()( 
+    [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.pip/pip.conf ]] || mv ~/.pip/pip.conf ~/.pip/pip.conf.bk
+    set_package_source_aliyun
+    conda $@
+    [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.pip/pip.conf.bk ]] || mv ~/.pip/pip.conf.bk ~/.pip/pip.conf
+)
 
 
 ## utils
