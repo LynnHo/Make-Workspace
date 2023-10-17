@@ -30,6 +30,7 @@ git_clone()(
 
 ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
 TOOL_HOME=$ANACONDA_HOME/envs/tools
+WS="$HOME/.ws"
 
 
 # step 1.1:install minconda
@@ -74,14 +75,23 @@ cp -r ./stable/.oh-my-zsh $HOME/.oh-my-zsh
 cp ./.p10k.zsh $HOME/.p10k.zsh
 
 
-# step 3.2: install .zshrc
+# step 3.2.1: install .zshrc
 backup $HOME/.zshrc
 cp ./.zshrc $HOME/.zshrc
 
 
-# step 3.3: set zsh in tmux
+# step 3.2.2: install .ws
+backup $WS
+cp -r ./.ws $WS
+
+
+# step 3.3.1: set zsh in tmux
 backup $HOME/.tmux.conf
 echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
+
+
+# step 3.3.2: suppress login message
+touch $HOME/.hushlogin
 
 
 # step 3.4: change default shell to zsh
