@@ -16,8 +16,8 @@ custom_channels:
   menpo: http://mirrors.aliyun.com/anaconda/cloud
   pytorch: http://mirrors.aliyun.com/anaconda/cloud
   simpleitk: http://mirrors.aliyun.com/anaconda/cloud' > ~/.condarc
-conda clean -i
-mamba clean -i
+conda clean -i -y
+mamba clean -i -y
 
 # pip
 mkdir -p ~/.pip

@@ -264,7 +264,7 @@ alias envremove="conda remove --all --name"
 
 ### package source
 alias set_package_source_aliyun="bash $WS/set_package_source_aliyun.sh"
-alias reset_package_source="rm -f ~/.condarc ~/.pip/pip.conf"
+alias reset_package_source="rm -f ~/.condarc ~/.pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y; mamba clean -i -y"
 condaali()(
     [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.pip/pip.conf ]] || mv ~/.pip/pip.conf ~/.pip/pip.conf.bk
     set_package_source_aliyun
