@@ -140,6 +140,7 @@ export EDITOR='vim'
 ## HOMES
 export ANACONDA_HOME="$HOME/ProgramFiles/anaconda3"
 export TOOL_HOME="$ANACONDA_HOME/envs/tools"
+export WS="$HOME/.ws"
 
 
 ## PATH and LD_LIBRARY_PATH
@@ -302,7 +303,7 @@ alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 alias rzshrc="exec zsh"
-alias udws="update_zshrc; source ~/.zshrc 2>/dev/null; update_workspace; rzshrc"
+alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
 
 
 ## customized utils
@@ -324,33 +325,25 @@ update_tools()(
      timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
     conda env update --name tools --file $HOME/.tools_tmp.yml
     rm -f $HOME/.tools_tmp.yml
-)
-
-update_zshrc()(
-    (timeout 10 wget -o- -O $HOME/.zshrc_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc || \
-     timeout 10 wget -o- -O $HOME/.zshrc_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.zshrc) && \
-    mv $HOME/.zshrc_tmp $HOME/.zshrc
-    rm -f $HOME/.zshrc_tmp
-
-    (timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh || \
-     timeout 10 wget -o- -O $HOME/.p10k.zsh_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/.p10k.zsh) && \
-    mv $HOME/.p10k.zsh_tmp $HOME/.p10k.zsh
-    rm -f $HOME/.p10k.zsh_tmp
-
-    (timeout 10 wget -o- -O $HOME/my_configs.vim_tmp https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/my_configs.vim || \
-     timeout 10 wget -o- -O $HOME/my_configs.vim_tmp https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/my_configs.vim) && \
-    mv $HOME/my_configs.vim_tmp $HOME/.vim_runtime/my_configs.vim
-    rm -f $HOME/my_configs.vim_tmp
-)
-
-update_workspace()(
-    update_tools
-    update_zshrc
 
     (timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
      timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
     (mv $HOME/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
     rm -f $HOME/.lesspipe_tmp.sh
+)
+
+update_workspace()(
+    git_clone --depth 1 https://github.com/LynnHo/Make-Workspace Make-Workspace_tmp
+    mv Make-Workspace_tmp/.zshrc $HOME/.zshrc
+    mv Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
+    mv Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
+    rsync -av Make-Workspace_tmp/.ws/ $WS/
+    rm -rf Make-Workspace_tmp
+)
+
+update_all()(
+    update_tools
+    update_workspace
 
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
@@ -360,14 +353,18 @@ update_workspace()(
     git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 
     git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+    mkdir -p $WS
+    mv $HOME/.zshrc_update_time $WS/.ws_update_time
+    mv $HOME/.zshrc_update_log $WS/.ws_update_log
 )
 
 ( (
     set -x
     UPDATE_INTERVAL=1 # days
-    if [ ! -f "$HOME/.zshrc_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $HOME/.zshrc_update_time)" +%s) + $(($UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
-        date "+%Y-%m-%d %H:%M:%S" >> "$HOME/.zshrc_update_time"
+    if [ ! -f "$WS/.ws_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $WS/.ws_update_time)" +%s) + $(($UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
+        date "+%Y-%m-%d %H:%M:%S" >> "$WS/.ws_update_time"
         sleep 10
-        update_workspace
+        update_all
     fi
-) > "$HOME/.zshrc_update_log" 2>&1 &)
+) > "$WS/.ws_update_log" 2>&1 &)
