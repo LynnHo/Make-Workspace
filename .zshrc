@@ -343,12 +343,12 @@ update_tools()(
 )
 
 update_workspace()(
-    git_clone --depth 1 https://github.com/LynnHo/Make-Workspace Make-Workspace_tmp
-    mv Make-Workspace_tmp/.zshrc $HOME/.zshrc
-    mv Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
-    mv Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
-    rsync -av --delete Make-Workspace_tmp/.ws/ $WS/
-    rm -rf Make-Workspace_tmp
+    git_clone --depth 1 https://github.com/LynnHo/Make-Workspace $HOME/.Make-Workspace_tmp
+    mv $HOME/.Make-Workspace_tmp/.zshrc $HOME/.zshrc
+    mv $HOME/.Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
+    mv $HOME/.Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
+    rsync -av --delete $HOME/.Make-Workspace_tmp/.ws/ $WS/
+    rm -rf $HOME/.Make-Workspace_tmp
 
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
