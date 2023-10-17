@@ -238,6 +238,10 @@ fi
 # <<< conda initialize <<<
 
 
+## powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 # ==============================================================================
 # =                                   utils                                    =
 # ==============================================================================
@@ -255,11 +259,13 @@ for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
 done
 alias conda="mamba"
+alias envcreatef="conda env create -f"
+alias envremove="conda remove --all --name"
 
 ### package source
 alias set_package_source_aliyun="bash $WS/set_package_source_aliyun.sh"
 alias reset_package_source="rm -f ~/.condarc ~/.pip/pip.conf"
-condaali()( 
+condaali()(
     [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.pip/pip.conf ]] || mv ~/.pip/pip.conf ~/.pip/pip.conf.bk
     set_package_source_aliyun
     conda $@
@@ -319,10 +325,6 @@ alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
 if [ -f "$HOME/.userrc" ]; then
     source "$HOME/.userrc"
 fi
-
-
-## powerlevel10k
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 # ==============================================================================
