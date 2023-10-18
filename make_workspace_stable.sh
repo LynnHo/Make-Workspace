@@ -35,14 +35,14 @@ WS=$HOME/.ws
 # step 1.1:install minconda
 backup $ANACONDA_HOME
 
-wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
+wget -c https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh -O ./miniconda.sh
 bash ./miniconda.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
 
 
 # step 1.2: install mamba
 cd $ANACONDA_HOME/lib; ln -s libarchive.so libarchive.so.13; cd -
-$ANACONDA_HOME/bin/conda install -y -c conda-forge -c nodefaults mamba
+$ANACONDA_HOME/bin/conda install -y -c conda-forge mamba
 
 
 # step 1.3: install tools
