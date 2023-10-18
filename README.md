@@ -14,7 +14,7 @@
 
    + create `~/.userrc` and set your own utils (alias, functions, variables, etc.)
   
-   + *do not edit `~/.zshrc`, `~/.vimrc`, `~/.p10k.zsh`, `~/.ws`*
+   + *do not edit `~/.zshrc`*
 
 5. manually update (.zshrc is automatically updated every day)
 
