@@ -118,7 +118,6 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
-export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -156,6 +155,15 @@ fi
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
 zstyle ':completion:*:zshz:*' sort false
+
+
+## vim
+if type nvim > /dev/null 2>&1; then
+    alias vim="nvim -u ~/.vimrc"
+    export EDITOR='nvim  -u ~/.vimrc'
+else
+    export EDITOR='vim'
+fi
 
 
 ## fzf
