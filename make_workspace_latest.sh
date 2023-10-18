@@ -42,7 +42,7 @@ bash ./miniconda.sh -b -p $ANACONDA_HOME
 
 # step 1.2: install mamba
 cd $ANACONDA_HOME/lib; ln -s libarchive.so libarchive.so.13; cd -
-$ANACONDA_HOME/bin/conda install -y -c conda-forge -c nodefaults mamba
+$ANACONDA_HOME/bin/conda install -y -c conda-forge mamba
 
 
 # step 1.3: install tools
