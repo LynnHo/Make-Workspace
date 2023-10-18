@@ -29,7 +29,7 @@ git_clone()(
 
 ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
 TOOL_HOME=$ANACONDA_HOME/envs/tools
-WS="$HOME/.ws"
+WS=$HOME/.ws
 
 
 # step 1.1:install minconda
