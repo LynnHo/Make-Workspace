@@ -332,6 +332,7 @@ alias cat="ccat"
 alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
+freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
 alias rzshrc="exec zsh"
 alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
 
