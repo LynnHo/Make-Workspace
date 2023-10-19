@@ -8,7 +8,6 @@ dependencies:
   - zsh
   - tmux
   - vim
-  - fzf
   - bpytop
   - htop
   - nvitop # - gpustat
@@ -19,4 +18,5 @@ dependencies:
   - git-delta
   - tldr
   - curl
+  - speedtest-cli
   - sshpass

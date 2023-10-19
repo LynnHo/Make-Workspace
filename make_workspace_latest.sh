@@ -49,14 +49,20 @@ $ANACONDA_HOME/bin/mamba env create -f tools.yml
 backup $HOME/.vimrc
 
 rm -rf $HOME/.vim_runtime
-git_clone --depth=1 https://github.com/amix/vimrc.git $HOME/.vim_runtime
+git_clone https://github.com/amix/vimrc.git $HOME/.vim_runtime
 sh $HOME/.vim_runtime/install_awesome_vimrc.sh
 cp ./my_configs.vim $HOME/.vim_runtime/my_configs.vim
 
 
 # step 2.2: install fzf
 rm -rf $HOME/.fzf
-git_clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+git_clone https://github.com/junegunn/fzf.git $HOME/.fzf
+cd $HOME/.fzf
+version=$(git tag -l | sort -V | tail -n 1)
+timeout 60 wget -O - https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/ || \
+wget -O - https://ghproxy.com/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/
+chmod +x $TOOL_HOME/bin/fzf
+cd -
 
 
 # step 2.3: install lesspipe
@@ -97,7 +103,7 @@ git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM
 
 # step 3.1.7: install powerlevel10k
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git_clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 cp ./.p10k.zsh $HOME/.p10k.zsh
 
 
