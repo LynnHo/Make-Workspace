@@ -159,15 +159,16 @@ zstyle ':completion:*:zshz:*' sort false
 
 ## vim
 if type nvim > /dev/null 2>&1; then
-    alias vim="nvim -u ~/.vimrc"
-    export EDITOR='nvim  -u ~/.vimrc'
+    alias nvim="nvim -u ~/.vimrc"
+    alias vim="nvim"
+    export EDITOR="nvim -u ~/.vimrc"
 else
-    export EDITOR='vim'
+    export EDITOR="vim"
 fi
 
 
 ## fzf
-[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+source "$HOME/.fzf/shell/completion.zsh"
 source "$HOME/.fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_OPTS="--bind backward-eof:abort"
 export FZF_CTRL_R_OPTS="--no-sort --exact --preview 'echo {}' --height '75%' --preview-window down:4:hidden:wrap --bind '?:toggle-preview'"
