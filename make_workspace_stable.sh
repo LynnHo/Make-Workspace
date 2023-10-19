@@ -31,6 +31,8 @@ ANACONDA_HOME=$HOME/ProgramFiles/anaconda3
 TOOL_HOME=$ANACONDA_HOME/envs/tools
 WS=$HOME/.ws
 
+tar xvzf stable.tar.gz
+
 
 # step 1.1:install miniforge
 backup $ANACONDA_HOME
