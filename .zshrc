@@ -146,6 +146,11 @@ export WS="$HOME/.ws"
 export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
 
 
+## WORKSPACE
+AUTO_UPDATE_WORKSPACE="true"
+AUTO_UPDATE_INTERVAL=1 # days
+
+
 ## TERM
 if [[ $TERM == xterm ]]; then
   export TERM='xterm-256color'
@@ -378,16 +383,16 @@ update_all()(
     touch $HOME/.hushlogin
 )
 
-
-(
-    mkdir -p $WS
+if [ "$AUTO_UPDATE_WORKSPACE" = true ]; then
     (
-        set -x
-        UPDATE_INTERVAL=1 # days
-        if [ ! -f "$WS/.ws_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $WS/.ws_update_time)" +%s) + $(($UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
-            date "+%Y-%m-%d %H:%M:%S" >> "$WS/.ws_update_time"
-            sleep 10
-            update_all
-        fi
-    ) > "$WS/.ws_update_log" 2>&1 &
-)
+        mkdir -p $WS
+        (
+            set -x
+            if [ ! -f "$WS/.ws_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $WS/.ws_update_time)" +%s) + $(($AUTO_UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
+                date "+%Y-%m-%d %H:%M:%S" >> "$WS/.ws_update_time"
+                sleep 10
+                update_all
+            fi
+        ) > "$WS/.ws_update_log" 2>&1 &
+    )
+fi
