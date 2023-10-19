@@ -32,20 +32,15 @@ TOOL_HOME=$ANACONDA_HOME/envs/tools
 WS=$HOME/.ws
 
 
-# step 1.1:install minconda
+# step 1.1:install miniforge
 backup $ANACONDA_HOME
 
-wget -c https://repo.anaconda.com/miniconda/Miniconda3-py311_23.5.2-0-Linux-x86_64.sh -O ./miniconda.sh
-bash ./miniconda.sh -b -p $ANACONDA_HOME
+wget -c https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh
+bash ./miniforge.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
 
 
-# step 1.2: install mamba
-cd $ANACONDA_HOME/lib; ln -s libarchive.so libarchive.so.13; cd -
-$ANACONDA_HOME/bin/conda install -y -c conda-forge mamba=1.5.1
-
-
-# step 1.3: install tools
+# step 1.2: install tools
 $ANACONDA_HOME/bin/mamba env create -f tools.yml
 
 
