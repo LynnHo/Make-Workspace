@@ -35,7 +35,8 @@ WS=$HOME/.ws
 # step 1.1:install miniforge
 backup $ANACONDA_HOME
 
-wget -c https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh
+timeout 60 wget -c https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
+wget -c https://ghproxy.com/https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh
 bash ./miniforge.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
 
