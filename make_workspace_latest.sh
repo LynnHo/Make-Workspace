@@ -49,14 +49,14 @@ $ANACONDA_HOME/bin/mamba env create -f tools.yml
 backup $HOME/.vimrc
 
 rm -rf $HOME/.vim_runtime
-git_clone https://github.com/amix/vimrc.git $HOME/.vim_runtime
+git_clone --depth=1 https://github.com/amix/vimrc.git $HOME/.vim_runtime
 sh $HOME/.vim_runtime/install_awesome_vimrc.sh
 cp ./my_configs.vim $HOME/.vim_runtime/my_configs.vim
 
 
 # step 2.2: install fzf
 rm -rf $HOME/.fzf
-git_clone https://github.com/junegunn/fzf.git $HOME/.fzf
+git_clone --depth=1 https://github.com/junegunn/fzf.git $HOME/.fzf
 cd $HOME/.fzf
 version=$(git tag -l | sort -V | tail -n 1)
 timeout 60 wget -O - https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/ || \
@@ -73,37 +73,37 @@ chmod +x $TOOL_HOME/bin/lesspipe.sh
 
 # step 3.1.1: install oh-my-zsh
 rm -rf $HOME/.oh-my-zsh
-git_clone https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
+git_clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git $HOME/.oh-my-zsh
 
 
 # step 3.1.2: install zsh-syntax-highlighting
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git_clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git_clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 
 # step 3.1.3: install zsh-autosuggestions
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git_clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git_clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
 # step 3.1.4：install conda-zsh-completion
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
-git_clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+git_clone --depth=1 https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
 
 
 # step 3.1.5: install fzf-tab
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
-git_clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
+git_clone --depth=1 https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
 
 
 # step 3.1.6: install zsh-history-substring-search
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+git_clone --depth=1 https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 
 
 # step 3.1.7: install powerlevel10k
 rm -rf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-git_clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 cp ./.p10k.zsh $HOME/.p10k.zsh
 
 
