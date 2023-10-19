@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-# conda
+# conda: conda-forge as default
 echo 'channels:
-  - defaults
+  - conda-forge
 show_channel_urls: true
 default_channels:
   - http://mirrors.aliyun.com/anaconda/pkgs/main
