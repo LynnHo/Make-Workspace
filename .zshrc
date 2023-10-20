@@ -163,13 +163,14 @@ zstyle ':completion:*:zshz:*' sort false
 
 
 ## vim
-if type nvim > /dev/null 2>&1; then
-    alias nvim="nvim -u ~/.vimrc"
-    alias vim="nvim"
-    export EDITOR="nvim -u ~/.vimrc"
-else
-    export EDITOR="vim"
-fi
+# if type nvim > /dev/null 2>&1; then
+#     alias nvim="nvim -u ~/.vimrc"
+#     alias vim="nvim"
+#     export EDITOR="nvim -u ~/.vimrc"
+# else
+#     export EDITOR="vim"
+# fi
+export EDITOR="vim"
 
 
 ## fzf
