@@ -1,7 +1,6 @@
 name: tools
 channels:
   - conda-forge
-  - nodefaults
 dependencies:
   - python=3
   - pip
@@ -20,3 +19,5 @@ dependencies:
   - curl
   - speedtest-cli
   - sshpass
+  - openssh
+  - pv
