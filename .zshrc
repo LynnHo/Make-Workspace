@@ -299,10 +299,7 @@ alias ta="tmuxa"
 alias tk="tmuxk"
 
 ### git
-git_clone()(
-    git clone $@ || \
-    git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
-)
+git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|') )
 
 ### GPU
 alias gpu="nvitop"
