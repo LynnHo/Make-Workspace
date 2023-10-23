@@ -262,20 +262,20 @@ fi
 # ==============================================================================
 
 ## conda
+### conda alias
+alias conda="mamba"
+alias envcreatef="conda env create -f"
+alias envremove="conda remove --all --name"
+# type name to activate the env
+for env in $(ls "$ANACONDA_HOME/envs"); do
+    alias $env="conda activate $ANACONDA_HOME/envs/$env"
+done
+
 ### conda activate
 act(){ conda activate "$1" }
 _act(){ local conda_envs=($(cat $HOME/.conda/environments.txt)); _describe 'conda environments' conda_envs }
 compdef _act act
 deact(){ conda deactivate }
-
-### conda alias
-# type name to activate the env
-for env in $(ls "$ANACONDA_HOME/envs"); do
-    alias $env="conda activate $ANACONDA_HOME/envs/$env"
-done
-alias conda="mamba"
-alias envcreatef="conda env create -f"
-alias envremove="conda remove --all --name"
 
 ### package source
 alias set_package_source_aliyun="bash $WS/set_package_source_aliyun.sh"
