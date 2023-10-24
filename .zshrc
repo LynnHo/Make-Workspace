@@ -325,7 +325,9 @@ CD()(
 )
 
 ### others
-alias ccat="pygmentize -g -O style=monokai"
+alias ccat="bat -p -P"
+alias _cat="/bin/cat"
+alias cat="ccat"
 alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
