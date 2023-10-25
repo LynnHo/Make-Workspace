@@ -301,7 +301,8 @@ alias tk="tmuxk"
 ### git
 git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|') )
 
-### GPU
+### ML
+#### GPU
 alias gpu="nvitop"
 alias smi="watch -d -n 1 nvidia-smi"
 alias gkall="fuser -k /dev/nvidia*"
@@ -336,7 +337,7 @@ freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
 #### diff
 alias delta="delta -s"
 same()( result=$(diff -qr "$1" "$2") && echo "Same" || echo "Different\n---------\n$result" )
-md5()( ([ -f "$1" ] && md5sum "$1" | cut -d " " -f 1) || ([ -d "$1" ] && (cd "$1"; find . -type f -exec md5sum {} \; | while read -r line; do echo -n "$line" | md5sum; done | sort | md5sum | cut -d " " -f 1)) || (echo "$1 is not a file or directory" >&2; exit 1) )
+md5()( ([ -f "$1" ] && md5sum "$1" | cut -d " " -f 1) || ([ -d "$1" ] && (cd "$1"; find . -type f -exec md5sum {} \; | xargs -I {} sh -c 'echo -n "{}" | md5sum' | sort | md5sum | cut -d " " -f 1)) || (echo "$1 is not a file or directory" >&2; exit 1) )
 md5r()( ([ -d "$1" ] && (find "$1" -type f -exec md5sum {} \; | sort -k 2)) || (echo "$1 is not a directory" >&2; exit 1) )
 md5same()( [ "$(md5 "$1")" = "$(md5 "$2")" ] && echo "Same" || echo "Different" )
 md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2/@@")) && echo "Same" || echo "Different\n---------\n$(echo $result | grep "^[<>]")" )
