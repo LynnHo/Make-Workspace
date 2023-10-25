@@ -289,8 +289,7 @@ condaali()(
 )
 
 
-## utils
-### tmux
+## tmux
 alias tmuxn="tmux new -s"
 alias tmuxa="tmux a -t"
 alias tmuxk="tmux kill-session -t"
@@ -298,11 +297,41 @@ alias tn="tmuxn"
 alias ta="tmuxa"
 alias tk="tmuxk"
 
-### git
+
+## git
 git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|') )
 
-### ML
-#### GPU
+
+## diff
+alias delta="delta -s"
+same()( result=$(diff -qr "$1" "$2") && echo "Same" || echo "Different\n---------\n$result" )
+md5()( ([ -f "$1" ] && md5sum "$1" | cut -d " " -f 1) || ([ -d "$1" ] && (cd "$1"; find . -type f -exec md5sum {} \; | xargs -I {} sh -c 'echo -n "{}" | md5sum' | sort | md5sum | cut -d " " -f 1)) || (echo "$1 is not a file or directory" >&2; exit 1) )
+md5r()( ([ -d "$1" ] && (find "$1" -type f -exec md5sum {} \; | sort -k 2)) || (echo "$1 is not a directory" >&2; exit 1) )
+md5same()( [ "$(md5 "$1")" = "$(md5 "$2")" ] && echo "Same" || echo "Different" )
+md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2/@@")) && echo "Same" || echo "Different\n---------\n$(echo $result | grep "^[<>]")" )
+
+
+## system
+### cat
+alias ccat="bat -p -P"
+alias _cat="/bin/cat"
+alias cat="ccat"
+
+### process
+#### kill
+killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
+skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
+
+### network
+freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
+
+### infos
+alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; echo \[Mem\]; free -gh | grep 'Mem:' | awk '{print \$2}'"
+alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
+
+
+## ML
+### GPU
 alias gpu="nvitop"
 alias smi="watch -d -n 1 nvidia-smi"
 alias gkall="fuser -k /dev/nvidia*"
@@ -325,26 +354,12 @@ CD()(
     eval "CUDA_VISIBLE_DEVICES='$device' $cmd"
 )
 
-### others
-#### view
-alias ccat="bat -p -P"
-alias _cat="/bin/cat"
-alias cat="ccat"
-#### kill
-killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
-skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
-freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
-#### diff
-alias delta="delta -s"
-same()( result=$(diff -qr "$1" "$2") && echo "Same" || echo "Different\n---------\n$result" )
-md5()( ([ -f "$1" ] && md5sum "$1" | cut -d " " -f 1) || ([ -d "$1" ] && (cd "$1"; find . -type f -exec md5sum {} \; | xargs -I {} sh -c 'echo -n "{}" | md5sum' | sort | md5sum | cut -d " " -f 1)) || (echo "$1 is not a file or directory" >&2; exit 1) )
-md5r()( ([ -d "$1" ] && (find "$1" -type f -exec md5sum {} \; | sort -k 2)) || (echo "$1 is not a directory" >&2; exit 1) )
-md5same()( [ "$(md5 "$1")" = "$(md5 "$2")" ] && echo "Same" || echo "Different" )
-md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2/@@")) && echo "Same" || echo "Different\n---------\n$(echo $result | grep "^[<>]")" )
-#### others
+
+## others
+### calculation
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
-alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
-#### workspace
+
+### workspace
 alias rzshrc="exec zsh"
 alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
 
