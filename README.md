@@ -8,6 +8,7 @@
     cd Make-Workspace
     bash make_workspace_stable.sh
     # bash make_workspace_latest.sh
+    exec zsh
     ```
 
 3. (optional) customization
