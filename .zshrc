@@ -416,7 +416,9 @@ if [ "$AUTO_UPDATE_WORKSPACE" = true ]; then
             if [ ! -f "$WS/.ws_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $WS/.ws_update_time)" +%s) + $(($AUTO_UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
                 date "+%Y-%m-%d %H:%M:%S" >> "$WS/.ws_update_time"
                 sleep 10
-                udws
+                update_workspace
+                source ~/.zshrc
+                update_all
             fi
         ) > "$WS/.ws_update_log" 2>&1 &
     )
