@@ -403,9 +403,6 @@ update_all()(
     update_workspace
 
     # TODO@Lynn
-    echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
-    git_clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-    git_clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     rm -f $HOME/.zshrc_update_time
     rm -f $HOME/.zshrc_update_log
     touch $HOME/.hushlogin
@@ -419,7 +416,7 @@ if [ "$AUTO_UPDATE_WORKSPACE" = true ]; then
             if [ ! -f "$WS/.ws_update_time" ] || [ $(date +%s) -gt $(( $(date -d"$(tail -n 1 $WS/.ws_update_time)" +%s) + $(($AUTO_UPDATE_INTERVAL * 24 * 60 * 60)) )) ]; then
                 date "+%Y-%m-%d %H:%M:%S" >> "$WS/.ws_update_time"
                 sleep 10
-                update_all
+                udws
             fi
         ) > "$WS/.ws_update_log" 2>&1 &
     )
