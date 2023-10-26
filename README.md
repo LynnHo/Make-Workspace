@@ -17,7 +17,7 @@
   
    + *do not edit `~/.zshrc`*
 
-5. manually update (.zshrc is automatically updated every day)
+5. manually update (the workspace is automatically updated every day)
 
     ```console
     udws
