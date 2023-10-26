@@ -417,7 +417,7 @@ if [ "$AUTO_UPDATE_WORKSPACE" = true ]; then
                 date "+%Y-%m-%d %H:%M:%S" >> "$WS/.ws_update_time"
                 sleep 10
                 update_workspace
-                source ~/.zshrc
+                source ~/.zshrc > /dev/null 2>&1
                 update_all
             fi
         ) > "$WS/.ws_update_log" 2>&1 &
