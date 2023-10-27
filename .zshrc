@@ -137,7 +137,8 @@ source $ZSH/oh-my-zsh.sh
 # ==============================================================================
 
 ## HOMES
-export ANACONDA_HOME="$HOME/ProgramFiles/anaconda3"
+export SOFTWARE_HOME="$HOME/ProgramFiles"
+export ANACONDA_HOME="$SOFTWARE_HOME/anaconda3"
 export TOOL_HOME="$ANACONDA_HOME/envs/tools"
 export WS="$HOME/.ws"
 
@@ -324,6 +325,7 @@ skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xarg
 
 ### network
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
+alias proxy_off="unset http_proxy; unset https_proxy"
 
 ### infos
 alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; echo \[Mem\]; free -gh | grep 'Mem:' | awk '{print \$2}'"
