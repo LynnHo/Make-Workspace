@@ -15,6 +15,7 @@ dependencies:
   - exa
   - git-delta
   - tldr
+  - trash-cli
   - curl
   - speedtest-cli
   - sshpass
