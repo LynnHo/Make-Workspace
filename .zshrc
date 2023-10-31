@@ -324,7 +324,7 @@ skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xarg
 
 ### trash
 _parse_args()( for arg in "$@"; do if [[ $arg == -* ]] && [[ $arg != --* ]]; then echo ${arg:1} | fold -w1 | awk '{printf "-%s\n", $1}'; else echo $arg; fi; done )
-_rm()(
+trash()( # compatible with rm
     allowed_args="-f|-h|--help|--trash-dir|-v|--verbose|--version"
     new_args=""
     for arg in $(_parse_args "$@"); do
@@ -332,10 +332,8 @@ _rm()(
             new_args+="$arg "
         fi
     done
-    echo "rm $@ -> trash-put $new_args"
     bash -c "trash-put $new_args"
 )
-alias rm="_rm"
 
 ### network
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
