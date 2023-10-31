@@ -315,7 +315,6 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 ## system
 ### cat
 alias ccat="bat -p -P"
-alias _cat="/bin/cat"
 alias cat="ccat"
 
 ### process
