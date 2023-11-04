@@ -59,12 +59,8 @@ cp ./my_configs.vim $HOME/.vim_runtime/my_configs.vim
 # step 2.2: install fzf
 rm -rf $HOME/.fzf
 cp -r ./stable/.fzf $HOME/.fzf
-cd $HOME/.fzf
-version=$(git tag -l | sort -V | tail -n 1)
-timeout 60 wget -O - https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/ || \
-wget -O - https://ghproxy.com/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/
+cp ./stable/fzf $TOOL_HOME/bin/fzf
 chmod +x $TOOL_HOME/bin/fzf
-cd -
 
 
 # step 2.3: install lesspipe

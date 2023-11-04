@@ -13,6 +13,7 @@ cp -r $HOME/.vim_runtime ./stable/.vim_runtime
 # fzf
 rm -rf ./stable/.fzf
 cp -r $HOME/.fzf ./stable/.fzf
+cp $TOOL_HOME/bin/fzf ./stable/fzf
 
 # lesspipe
 cp $TOOL_HOME/bin/lesspipe.sh ./stable/lesspipe.sh
