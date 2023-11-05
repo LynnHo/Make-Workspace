@@ -390,7 +390,8 @@ fi
 
 update_tools()(
     (timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
-     timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml) && \
+     timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://ghproxy.com/https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://gitee.com/lynnho/Make-Workspace/raw/main/tools.yml) && \
     conda env update --name tools --file $HOME/.tools_tmp.yml
     rm -f $HOME/.tools_tmp.yml
 
@@ -401,7 +402,8 @@ update_tools()(
 )
 
 update_workspace()(
-    git_clone --depth 1 https://github.com/LynnHo/Make-Workspace $HOME/.Make-Workspace_tmp
+    git_clone --depth 1 https://github.com/LynnHo/Make-Workspace $HOME/.Make-Workspace_tmp || \
+    git clone --depth 1 https://gitee.com/lynnho/Make-Workspace.git $HOME/.Make-Workspace_tmp
     mv $HOME/.Make-Workspace_tmp/.zshrc $HOME/.zshrc
     mv $HOME/.Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
     mv $HOME/.Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
