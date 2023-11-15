@@ -21,3 +21,4 @@ dependencies:
   - sshpass
   - openssh
   - pv
+  - lftp
