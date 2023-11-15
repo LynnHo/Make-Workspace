@@ -418,6 +418,9 @@ update_all()(
     update_workspace
 
     # TODO@Lynn
+    echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
+    echo "set -g mouse on" >> $HOME/.tmux.conf
+
     rm -f $HOME/.zshrc_update_time
     rm -f $HOME/.zshrc_update_log
     touch $HOME/.hushlogin
