@@ -1,5 +1,5 @@
 # Make a Better Shell
-1. install zsh>=5.8 (e.g., `sudo apt install zsh` on Ubuntu 20.04)
+1. install zsh>=5.8 (e.g., `sudo apt install zsh` for Ubuntu 20.04)
 2. make the workspace
 
     ```console
