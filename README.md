@@ -11,9 +11,11 @@
     exec zsh
     ```
 
-    + if you failed to install zsh>=5.8 on your system, follow additional steps below
-        + `chsh -s $(which bash)`
-        + add `~/ProgramFiles/anaconda3/envs/tools/bin/zsh` to the end of `~/.bashrc`
+    *if you are struggling to install zsh>=5.8 on your system, follow additional steps below*
+
+    + `chsh -s $(which bash)`
+
+    + add `~/ProgramFiles/anaconda3/envs/tools/bin/zsh` to the end of `~/.bashrc`
 
 
 3. (optional) customization
