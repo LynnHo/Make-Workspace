@@ -1,5 +1,5 @@
 # Make a Better Shell
-1. install zsh (e.g., `sudo apt install zsh` on Ubuntu)
+1. install zsh>=5.8 (e.g., `sudo apt install zsh` on Ubuntu 20.04)
 2. make the workspace
 
     ```console
@@ -11,11 +11,16 @@
     exec zsh
     ```
 
+    + if you failed to install zsh>=5.8 on your system, follow additional steps below
+        + `chsh -s $(which bash)`
+        + add `~/ProgramFiles/anaconda3/envs/tools/bin/zsh` to the end of `~/.bashrc`
+
+
 3. (optional) customization
 
-   + create `~/.userrc` and set your own utils (alias, functions, variables, etc.)
+    + create `~/.userrc` and set your own utils (alias, functions, variables, etc.)
   
-   + *do not edit `~/.zshrc`*
+    + *do not edit `~/.zshrc`*
 
 5. manually update (the workspace is automatically updated every day)
 
