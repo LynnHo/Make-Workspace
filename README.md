@@ -15,7 +15,13 @@
 
     + `chsh -s $(which bash)`
 
-    + add `[ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ] && { ~/ProgramFiles/anaconda3/envs/tools/bin/zsh || true } && exit` to the end of `~/.bashrc`
+    + add the belows to the end of `~/.bashrc`
+
+        ```
+        if [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then
+            ~/ProgramFiles/anaconda3/envs/tools/bin/zsh; exit
+        fi
+        ```
 
 
 3. (optional) customization
