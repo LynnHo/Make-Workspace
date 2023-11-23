@@ -2,7 +2,7 @@
 1. install zsh>=5.8 (e.g., `sudo apt install zsh` for Ubuntu 20.04)
 2. make the workspace
 
-    ```bash
+    ```console
     git clone --depth 1 https://github.com/LynnHo/Make-Workspace
     # mirror: git clone --depth 1 https://gitee.com/LynnHo/Make-Workspace
     cd Make-Workspace
@@ -17,7 +17,7 @@
 
     + add the belows to the end of `~/.bashrc`
 
-        ```bash
+        ```console
         if [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then
             ~/ProgramFiles/anaconda3/envs/tools/bin/zsh; exit
         fi
