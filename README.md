@@ -17,7 +17,7 @@
 
     + add the belows to the end of `~/.bashrc`
 
-        ```console
+        ```bash
         if [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then
             ~/ProgramFiles/anaconda3/envs/tools/bin/zsh; exit
         fi
