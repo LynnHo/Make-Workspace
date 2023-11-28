@@ -45,7 +45,7 @@ bash ./miniforge.sh -b -p $ANACONDA_HOME
 
 
 # step 1.2: install tools
-$ANACONDA_HOME/bin/mamba env create -f tools.yml
+$ANACONDA_HOME/bin/mamba env create -f tools_stable.yml
 
 
 # step 2.1: install vimrc

@@ -400,6 +400,13 @@ update_tools()(
     rm -f $HOME/.lesspipe_tmp.sh
 )
 
+update_tools_stable()(
+    (timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml || \
+     timeout 10 wget -o- -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
+    conda env update --name tools --file $HOME/.tools_tmp.yml
+    rm -f $HOME/.tools_tmp.yml
+)
+
 update_workspace()(
     git clone --depth 1 https://github.com/LynnHo/Make-Workspace $HOME/.Make-Workspace_tmp || \
     git clone --depth 1 https://gitee.com/LynnHo/Make-Workspace.git $HOME/.Make-Workspace_tmp
@@ -414,7 +421,7 @@ update_workspace()(
 )
 
 update_all()(
-    update_tools
+    update_tools_stable
     update_workspace
 
     # TODO@Lynn
