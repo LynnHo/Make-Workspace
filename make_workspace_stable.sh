@@ -95,8 +95,16 @@ echo "set -g mouse on" >> $HOME/.tmux.conf
 touch $HOME/.hushlogin
 
 
-# step 3.4: change default shell to zsh
-chsh -s /usr/bin/zsh
+# step 3.4: change default shell to zsh if zsh version >= 5.8; otherwise add zsh to .bashrc
+min_zsh_version="5.8"
+if grep -q "/usr/bin/zsh" /etc/shells && zsh_version=$(/usr/bin/zsh --version | awk '{print $2}') && [ $(echo -e "$min_zsh_version\n$zsh_version" | sort -V | tail -n 1) = "$zsh_version" ]; then
+    chsh -s /usr/bin/zsh
+else
+    touch $HOME/.bashrc
+    grep -q "# >>> make worksapce >>>" $HOME/.bashrc || echo -e "\n# >>> make worksapce >>>\n# <<< make worksapce <<<" >> $HOME/.bashrc
+    content='if [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then\n    ~/ProgramFiles/anaconda3/envs/tools/bin/zsh; exit\nfi'
+    sed -i "/# >>> make worksapce >>>/,/# <<< make worksapce <<</c\\# >>> make worksapce >>>\n$content\n# <<< make worksapce <<<" $HOME/.bashrc
+fi
 
 
 # step 4: optionals
