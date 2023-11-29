@@ -1,13 +1,10 @@
 # Make a Better Shell
 
-1. install zsh>=5.8 on the system
+1. (optional) install zsh>=5.8 on the system
 
     + e.g., `sudo apt install zsh` for Ubuntu>=20.04 *(for <20.04, zsh>=5.8 can only be installed from source)*
 
     + check version: `zsh --version`
-
-    + *if you are struggling to install zsh>=5.8 on the system, don't worry, just follow the __additional steps__ below*
-
 
 2. make the workspace
 
@@ -17,21 +14,8 @@
     cd Make-Workspace
     bash make_workspace_stable.sh
     # bash make_workspace_latest.sh
-    exec zsh
+    exec ~/ProgramFiles/anaconda3/envs/tools/bin/zsh
     ```
-
-    *__additional steps__ (if you cannot install zsh>=5.8 on the system)*
-
-    + `chsh -s $(which bash)`
-
-    + add the belows to the end of `~/.bashrc`
-
-        ```bash
-        if [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then
-            ~/ProgramFiles/anaconda3/envs/tools/bin/zsh; exit
-        fi
-        ```
-
 
 3. (optional) customization
 
