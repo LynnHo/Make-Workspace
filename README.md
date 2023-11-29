@@ -6,7 +6,7 @@
 
     + check version: `zsh --version`
 
-    + *if you are struggling to install zsh>=5.8 on your system, don't worry, just follow the additional steps below*
+    + *if you are struggling to install zsh>=5.8 on your system, don't worry, just follow the __additional steps__ below*
 
 
 2. make the workspace
@@ -20,7 +20,7 @@
     exec zsh
     ```
 
-    *if you are struggling to install zsh>=5.8 on your system, follow additional steps below*
+    *__additional steps__ (if you cannot install zsh>=5.8 on your system)*
 
     + `chsh -s $(which bash)`
 
