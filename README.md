@@ -1,12 +1,12 @@
 # Make a Better Shell
 
-1. install zsh>=5.8
+1. install zsh>=5.8 on the system
 
     + e.g., `sudo apt install zsh` for Ubuntu>=20.04 *(for <20.04, zsh>=5.8 can only be installed from source)*
 
     + check version: `zsh --version`
 
-    + *if you are struggling to install zsh>=5.8 on your system, don't worry, just follow the __additional steps__ below*
+    + *if you are struggling to install zsh>=5.8 on the system, don't worry, just follow the __additional steps__ below*
 
 
 2. make the workspace
@@ -20,7 +20,7 @@
     exec zsh
     ```
 
-    *__additional steps__ (if you cannot install zsh>=5.8 on your system)*
+    *__additional steps__ (if you cannot install zsh>=5.8 on the system)*
 
     + `chsh -s $(which bash)`
 
