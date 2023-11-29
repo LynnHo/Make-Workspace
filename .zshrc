@@ -300,7 +300,7 @@ alias tk="tmuxk"
 
 
 ## git
-git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|') )
+git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|') )
 
 
 ## diff
@@ -395,7 +395,7 @@ update_tools()(
     rm -f $HOME/.tools_tmp.yml
 
     (timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-     timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+     timeout 10 wget -o- -O $HOME/.lesspipe_tmp.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
     (mv $HOME/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
     rm -f $HOME/.lesspipe_tmp.sh
 )
@@ -417,7 +417,7 @@ update_workspace()(
     rm -rf $HOME/.Make-Workspace_tmp
 
     timeout 60 tldr -u || \
-    timeout 60 tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+    timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 )
 
 update_all()(

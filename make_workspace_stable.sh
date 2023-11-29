@@ -19,7 +19,7 @@ backup()(
 
 git_clone()(
     git clone $@ || \
-    git clone $(echo $@ | sed 's|https://github.com/|https://ghproxy.com/https://github.com/|')
+    git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|')
 )
 
 
@@ -38,7 +38,7 @@ tar xvzf stable.tar.gz
 backup $ANACONDA_HOME
 
 # timeout 60 wget -c https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
-# timeout 60 wget -c https://ghproxy.com/https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
+# timeout 60 wget -c https://mirror.ghproxy.com/https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
 wget -c https://gitee.com/LynnHo/Make-Workspace/releases/download/0.2/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh
 bash ./miniforge.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
@@ -109,7 +109,7 @@ fi
 
 # step 4: optionals
 timeout 60 $TOOL_HOME/bin/tldr -u || \
-timeout 60 $TOOL_HOME/bin/tldr -u -s https://ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+timeout 60 $TOOL_HOME/bin/tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
 echo "Please re-login."
