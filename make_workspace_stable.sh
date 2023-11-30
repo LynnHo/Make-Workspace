@@ -102,7 +102,7 @@ if grep -q "/usr/bin/zsh" /etc/shells && zsh_version=$(/usr/bin/zsh --version | 
 else
     touch $HOME/.bashrc
     grep -q "# >>> make worksapce >>>" $HOME/.bashrc || echo -e "\n# >>> make worksapce >>>\n# <<< make worksapce <<<" >> $HOME/.bashrc
-    content='if [ ! "$TERM" = "dumb" ] && [ ! -z "$TERM" ] && [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then\n    export SHELL=~/ProgramFiles/anaconda3/envs/tools/bin/zsh\n    exec $SHELL\nfi'
+    content='if [ ! "$TERM" = "dumb" ] && [ ! -z "$TERM" ] && [ ! -z "$HISTCONTROL" ] && [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then\n    export SHELL=~/ProgramFiles/anaconda3/envs/tools/bin/zsh\n    exec $SHELL\nfi'
     sed -i "/# >>> make worksapce >>>/,/# <<< make worksapce <<</c\\# >>> make worksapce >>>\n$content\n# <<< make worksapce <<<" $HOME/.bashrc
 fi
 
