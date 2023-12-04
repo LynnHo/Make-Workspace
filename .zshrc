@@ -254,6 +254,13 @@ fi
 # <<< conda initialize <<<
 
 
+## ls
+eval $(dircolors $WS/.dir_colors)
+if [ -n "$LS_COLORS" ]; then
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
+
+
 ## powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -314,7 +321,6 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 
 ## system
 ### ls
-eval $(dircolors $WS/.dir_colors)
 alias ls="exa --color=auto"
 alias la="ls -lah"
 
