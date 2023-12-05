@@ -144,4 +144,5 @@ timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
-echo "Please re-login."
+# step 5: replace the current shell with zsh
+exec ~/ProgramFiles/anaconda3/envs/tools/bin/zsh
