@@ -130,7 +130,7 @@ touch $HOME/.hushlogin
 # step 3.4: change default shell to zsh if zsh version >= 5.8; otherwise add zsh to .bashrc
 min_zsh_version="5.8"
 if grep -q "/usr/bin/zsh" /etc/shells && zsh_version=$(/usr/bin/zsh --version | awk '{print $2}') && [ $(echo -e "$min_zsh_version\n$zsh_version" | sort -V | tail -n 1) = "$zsh_version" ]; then
-    chsh -s /usr/bin/zsh
+    for i in {1..3}; do chsh -s /usr/bin/zsh && break; done
 else
     touch $HOME/.bashrc
     grep -q "# >>> make worksapce >>>" $HOME/.bashrc || echo -e "\n# >>> make worksapce >>>\n# <<< make worksapce <<<" >> $HOME/.bashrc
