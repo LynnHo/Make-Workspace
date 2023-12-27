@@ -322,7 +322,7 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 ## system
 ### ls
 alias ls="exa --color=auto"
-alias la="ls -la"
+alias la="ls -lah"
 
 ### cat
 alias ccat="bat -p -P"
