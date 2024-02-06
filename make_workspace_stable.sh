@@ -96,6 +96,7 @@ touch $HOME/.hushlogin
 
 
 # step 3.3.3: set 'will cite' for parallel
+mkdir -p $HOME/.parallel
 touch $HOME/.parallel/will-cite
 
 
