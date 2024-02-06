@@ -16,6 +16,7 @@ dependencies:
   - git-delta
   - tldr
   - trash-cli
+  - parallel
   - curl
   - speedtest-cli
   - sshpass
