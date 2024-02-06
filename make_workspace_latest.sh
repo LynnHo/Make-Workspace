@@ -127,6 +127,10 @@ echo "set -g mouse on" >> $HOME/.tmux.conf
 touch $HOME/.hushlogin
 
 
+# step 3.3.3: set 'will cite' for parallel
+touch $HOME/.parallel/will-cite
+
+
 # step 3.4: change default shell to zsh if zsh version >= 5.8; otherwise add zsh to .bashrc
 min_zsh_version="5.8"
 if grep -q "/usr/bin/zsh" /etc/shells && zsh_version=$(/usr/bin/zsh --version | awk '{print $2}') && [ $(echo -e "$min_zsh_version\n$zsh_version" | sort -V | tail -n 1) = "$zsh_version" ]; then
