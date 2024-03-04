@@ -223,6 +223,9 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 ### disable preview
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
 
+### fix bugs
+zstyle ':fzf-tab:*' fzf-bindings 'tab:down+clear-selection' # TODO: not good
+
 
 ## zsh-history-substring-search
 if zle -la | grep -q "^history-substring-search-up$"; then
