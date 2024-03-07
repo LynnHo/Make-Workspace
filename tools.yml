@@ -17,6 +17,7 @@ dependencies:
   - tldr
   - trash-cli
   - parallel
+  - p7zip
   - curl
   - speedtest-cli
   - sshpass
