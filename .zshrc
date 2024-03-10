@@ -332,6 +332,11 @@ alias ccat="bat -p -P"
 alias cat="ccat"
 
 ### process
+#### usage
+usgc()( ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,command --sort=-%cpu )
+usgm()( ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,command --sort=-%mem )
+USGC()( ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort -k2,2nr ) | column -t )
+USGM()( ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort -k3,3nr ) | column -t )
 #### kill
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
