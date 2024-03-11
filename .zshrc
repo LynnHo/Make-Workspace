@@ -322,10 +322,18 @@ alias cat="ccat"
 
 ### process
 #### usage
-usgc()( ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,command --sort=-%cpu )
-usgm()( ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,command --sort=-%mem )
-USGC()( ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort -k2,2nr ) | column -t )
-USGM()( ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort -k3,3nr ) | column -t )
+usg()(
+    while getopts "cm" opt; do case "$opt" in c) sort_opt="-%cpu";; m) sort_opt="-%mem";; *) return 1;; esac; done; shift $((OPTIND-1))
+    ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,command --sort=${sort_opt:--%cpu}
+)
+usga()(
+    while getopts "cm" opt; do case "$opt" in c) sort_opt="-k2,2nr";; m) sort_opt="-k3,3nr";; *) return 1;; esac; done; shift $((OPTIND-1))
+    ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort ${sort_opt:--k2,2nr} ) | column -t
+)
+alias usgc="usg -c"
+alias usgm="usg -m"
+alias usgac="usga -c"
+alias usgam="usga -m"
 #### kill
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
