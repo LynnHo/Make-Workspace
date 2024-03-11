@@ -185,7 +185,6 @@ zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}};
 (echo $item; file -bi $item; du -sh $item | cut -f1; echo;) 2>/dev/null
-# ([[ -d $item ]] && lsd -lAh --color always --blocks permission,user,size,date,name --date "+%b %d %H:%M" --total-size $item) 2>/dev/null ||
 ([[ -d $item ]] && exa -la --color always $item) 2>/dev/null ||
 ([[ -d $item ]] && ls -lahG --color=always $item) ||
 (less $item) 2>/dev/null
