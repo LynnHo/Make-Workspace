@@ -217,7 +217,7 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
 
 ### fix bugs
-zstyle ':fzf-tab:*' fzf-bindings 'tab:down+clear-selection' # TODO: not good
+zstyle ':fzf-tab:*' fzf-bindings 'tab:down+clear-selection' # unexpected multi-selection. # TODO: find a better solution
 
 
 ## zsh-history-substring-search
