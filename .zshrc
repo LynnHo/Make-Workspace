@@ -199,15 +199,12 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[p
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --preview-window 'up:4'
 
 ### command preview
-zstyle ':fzf-tab:complete:(-command-|where*|which|type):*' fzf-preview '
+zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-preview '
 (out=$(timeout 0.2 tldr -c "$word") 2>/dev/null && (echo \[TLDR Page\]\\n; echo $out)) ||
 (out=$(man "$word") 2>/dev/null && (echo \[MAN Page\]\\n; echo $out)) ||
 (source $HOME/.zshrc; out=$(which "$word") && echo $out) ||
 (echo "${(P)word}")
 ' # TODO: source here is not good
-
-### doc preview
-zstyle ':fzf-tab:complete:man:*' fzf-preview 'man $word'
 
 ### variable preview
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
