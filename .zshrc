@@ -180,8 +180,8 @@ bindkey "^[[1;5A" fzf-history-widget
 zstyle ':fzf-tab:*' switch-group 'left' 'right'
 
 ### common preview
-zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 export LESSOPEN="|$TOOL_HOME/bin/lesspipe.sh %s"
+zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}};
 (echo $item; file -bi $item; du -sh $item | cut -f1; echo;) 2>/dev/null
