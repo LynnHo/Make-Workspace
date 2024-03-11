@@ -207,7 +207,7 @@ zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-previ
 ' # TODO: source here is not good
 
 ### variable preview
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 ### disable preview
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
