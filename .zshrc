@@ -331,11 +331,10 @@ killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r k
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
 
 ### trash
-_parse_args()( for arg in "$@"; do if [[ $arg == -* ]] && [[ $arg != --* ]]; then echo ${arg:1} | fold -w1 | awk '{printf "-%s\n", $1}'; else echo $arg; fi; done )
 trash()( # compatible with rm
     allowed_args="-f|-h|--help|--trash-dir|-v|--verbose|--version"
     new_args=""
-    for arg in $(_parse_args "$@"); do
+    for arg in $(for arg in "$@"; do if [[ $arg == -* ]] && [[ $arg != --* ]]; then echo ${arg:1} | fold -w1 | awk '{printf "-%s\n", $1}'; else echo $arg; fi; done); do
         if [[ $arg != -* ]] || [[ "|$allowed_args|" == *"|$arg|"* ]]; then
             new_args+="$arg "
         fi
