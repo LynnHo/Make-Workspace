@@ -323,7 +323,7 @@ alias cat="ccat"
 ### process
 #### usage
 usg()(
-    while getopts "cm" opt; do case "$opt" in c) sort_opt="-%cpu";; m) sort_opt="-%mem";; *) return 1;; esac; done; shift $((OPTIND-1))
+    while getopts "cmt" opt; do case "$opt" in c) sort_opt="-%cpu";; m) sort_opt="-%mem";; t) sort_opt="-etime";; *) return 1;; esac; done; shift $((OPTIND-1))
     ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,etime,command --sort=${sort_opt:--%cpu}
 )
 usga()(
@@ -332,6 +332,7 @@ usga()(
 )
 alias usgc="usg -c"
 alias usgm="usg -m"
+alias usgt="usg -t"
 alias usgac="usga -c"
 alias usgam="usga -m"
 #### kill
