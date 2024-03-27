@@ -4,11 +4,24 @@ channels:
 dependencies:
   - python=3
   - pip
+
+  # core
   - zsh
-  - tmux
+
+  # basic
+  - cmake
+  - lua
   - vim
-  - bpytop
+  - parallel
+  - p7zip
+  - curl
+  - git
+  - git-lfs
+
+  # tools
+  - tmux
   - htop
+  - bpytop
   - nvitop # - gpustat
   - fd-find
   - bat
@@ -16,11 +29,7 @@ dependencies:
   - git-delta
   - tldr
   - trash-cli
-  - parallel
-  - p7zip
-  - curl
-  - speedtest-cli
   - sshpass
-  - openssh
-  - pv
   - lftp
+  - speedtest-cli
+  - pv
