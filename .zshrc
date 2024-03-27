@@ -103,6 +103,8 @@ plugins=(
   zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
+ZSH_DISABLE_COMPFIX="true"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
