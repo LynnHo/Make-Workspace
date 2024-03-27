@@ -10,7 +10,6 @@ dependencies:
 
   # basic
   - cmake
-  - lua
   - vim
   - parallel
   - p7zip
