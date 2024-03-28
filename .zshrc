@@ -274,8 +274,9 @@ for env in $(ls "$ANACONDA_HOME/envs"); do
 done
 
 ### conda activate
+((mkdir -p $HOME/.conda; conda env list | grep "/.*" | awk '{print $NF}' > $HOME/.conda/.environments.txt) &)
 act(){ conda activate "$1" }
-_act(){ local conda_envs=($(cat $HOME/.conda/environments.txt)); _describe 'conda environments' conda_envs }
+_act(){ local conda_envs=($(cat $HOME/.conda/{environments.txt,.environments.txt})); _describe 'conda environments' conda_envs }
 compdef _act act
 deact(){ conda deactivate }
 
