@@ -103,8 +103,6 @@ plugins=(
   zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
-ZSH_DISABLE_COMPFIX="true"
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -352,6 +350,7 @@ trash()( # compatible with rm
     done
     bash -c "trash-put $new_args"
 )
+qrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -av --delete "$temp_dir/" "$1"; rmdir "$temp_dir"; rmdir "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
 
 ### network
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
