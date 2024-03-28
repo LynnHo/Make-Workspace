@@ -339,7 +339,8 @@ alias usgam="usga -m"
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
 
-### trash
+### remove
+qrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -av --delete "$temp_dir/" "$1"; rmdir "$temp_dir"; rmdir "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
 trash()( # compatible with rm
     allowed_args="-f|-h|--help|--trash-dir|-v|--verbose|--version"
     new_args=""
@@ -350,7 +351,6 @@ trash()( # compatible with rm
     done
     bash -c "trash-put $new_args"
 )
-qrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -av --delete "$temp_dir/" "$1"; rmdir "$temp_dir"; rmdir "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
 
 ### network
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
