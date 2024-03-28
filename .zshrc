@@ -91,6 +91,7 @@ plugins=(
   fzf-tab
 
   colored-man-pages
+  command-not-found
   extract
   last-working-dir
   safe-paste
@@ -358,7 +359,9 @@ alias proxy_off="unset http_proxy; unset https_proxy"
 
 ### infos
 alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; echo \[Mem\]; free -gh | grep 'Mem:' | awk '{print \$2}'"
-alias ep="echo ${PATH} | sed -e $'s/:/\\\n/g'"
+seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
+alias path="seppaths $PATH"
+alias ldlpath="seppaths $LD_LIBRARY_PATH"
 
 
 ## ML
