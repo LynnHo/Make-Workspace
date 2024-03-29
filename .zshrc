@@ -146,7 +146,7 @@ export WS="$HOME/.ws"
 
 
 ## PATH and LD_LIBRARY_PATH
-export PATH="$ANACONDA_HOME/bin:$TOOL_HOME/bin:$PATH"
+export PATH="$TOOL_HOME/bin:$PATH"
 
 
 ## WORKSPACE
