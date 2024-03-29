@@ -145,7 +145,7 @@ export TOOL_HOME="$ANACONDA_HOME/envs/tools"
 export WS="$HOME/.ws"
 
 
-## PATH and LD_LIBRARY_PATH
+## PATHs
 export PATH="$TOOL_HOME/bin:$PATH"
 
 
