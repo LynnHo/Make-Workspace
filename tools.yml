@@ -19,6 +19,7 @@ dependencies:
 
   # tools
   - tmux
+  - ipdb
   - htop
   - bpytop
   - nvitop # - gpustat
