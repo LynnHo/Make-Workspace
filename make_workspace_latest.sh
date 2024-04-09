@@ -133,10 +133,14 @@ touch $HOME/.parallel/will-cite
 
 
 # step 3.4: change default shell to zsh if zsh version >= 5.8; otherwise add zsh to .bashrc
+is_init_in_bashrc=1
 min_zsh_version="5.8"
 if grep -q "/usr/bin/zsh" /etc/shells && zsh_version=$(/usr/bin/zsh --version | awk '{print $2}') && [ $(echo -e "$min_zsh_version\n$zsh_version" | sort -V | tail -n 1) = "$zsh_version" ]; then
-    for i in {1..3}; do chsh -s /usr/bin/zsh && break; done
-else
+    echo "* change default shell to /usr/bin/zsh"
+    for i in {1..3}; do chsh -s /usr/bin/zsh && is_init_in_bashrc=0 && break; done
+fi
+if [ $is_init_in_bashrc -eq 1 ]; then
+    echo "* initialize workspace in $HOME/.bashrc"
     touch $HOME/.bashrc
     grep -q "# >>> make worksapce >>>" $HOME/.bashrc || echo -e "\n# >>> make worksapce >>>\n# <<< make worksapce <<<" >> $HOME/.bashrc
     content='if [ ! "$TERM" = "dumb" ] && [ ! -z "$TERM" ] && [ ! -z "$HISTCONTROL" ] && [ -f ~/ProgramFiles/anaconda3/envs/tools/bin/zsh ]; then\n    export SHELL=~/ProgramFiles/anaconda3/envs/tools/bin/zsh\n    exec $SHELL\nfi'
