@@ -20,6 +20,7 @@ dependencies:
   - bat=0.24.0
   - exa=0.10.1
   - git-delta=0.16.5
+  - gh=2.49.2
   - tldr=3.2.0
   - trash-cli=0.23.11.10
   - sshpass=1.06
