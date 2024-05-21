@@ -26,6 +26,7 @@ dependencies:
   - bat
   - exa
   - git-delta
+  - gh
   - tldr
   - trash-cli
   - sshpass
