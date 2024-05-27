@@ -246,6 +246,7 @@ if [ -f "$ANACONDA_HOME/etc/profile.d/mamba.sh" ]; then
     . "$ANACONDA_HOME/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+mamba deactivate # avoid prompt not refreshed (e.g., in tmux)
 
 
 ## ls
