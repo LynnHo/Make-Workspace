@@ -27,6 +27,7 @@ dependencies:
   - exa
   - eza
   - dust
+  - dnachun::duf
   - git-delta
   - gh
   - tldr
