@@ -25,6 +25,7 @@ dependencies:
   - fd-find
   - bat
   - exa
+  - eza
   - dust
   - git-delta
   - gh
