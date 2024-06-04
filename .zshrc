@@ -317,7 +317,11 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 
 ## system
 ### ls
-alias ls="exa --color=auto"
+if command -v eza >/dev/null 2>&1; then
+    alias ls="eza --color=auto"
+elif command -v exa >/dev/null 2>&1; then
+    alias ls="exa --color=auto"
+fi
 alias la="ls -lah"
 
 ### cat
