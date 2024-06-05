@@ -24,8 +24,7 @@ dependencies:
   - nvitop # - gpustat
   - fd-find
   - bat
-  - exa
-  - eza
+  - eza # - exa
   - dust
   - dnachun::duf
   - git-delta
