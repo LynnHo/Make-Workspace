@@ -329,6 +329,8 @@ alias ccat="bat -p -P"
 alias cat="ccat"
 
 ### process
+#### top
+alias btop="bpytop"
 #### usage
 usg()(
     while getopts "cmt" opt; do case "$opt" in c) sort_opt="-%cpu";; m) sort_opt="-%mem";; t) sort_opt="-etime";; *) return 1;; esac; done; shift $((OPTIND-1))
