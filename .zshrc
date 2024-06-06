@@ -297,11 +297,9 @@ condaali()(
 alias tmuxn="tmux new -s"
 alias tmuxa="tmux a -t"
 alias tmuxk="tmux kill-session -t"
-alias tmuxc="tmux capture-pane -S - -E - -t"
 alias tn="tmuxn"
 alias ta="tmuxa"
 alias tk="tmuxk"
-alias tc="tmuxc"
 
 
 ## git
