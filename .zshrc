@@ -444,6 +444,7 @@ update_workspace()(
     mv $HOME/.Make-Workspace_tmp/.zshrc $HOME/.zshrc
     mv $HOME/.Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
     mv $HOME/.Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
+    mv $HOME/.Make-Workspace_tmp/.tmux.conf $HOME/.tmux.conf
     rsync -av $HOME/.Make-Workspace_tmp/.ws/ $WS/
     rm -rf $HOME/.Make-Workspace_tmp
 

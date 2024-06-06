@@ -87,8 +87,7 @@ cp -r ./.ws $WS
 
 # step 3.3.1: set zsh in tmux
 backup $HOME/.tmux.conf
-echo "set-option -g default-command $TOOL_HOME/bin/zsh" > $HOME/.tmux.conf
-echo "set -g mouse on" >> $HOME/.tmux.conf
+cp ./.tmux.conf $HOME/.tmux.conf
 
 
 # step 3.3.2: suppress login message
