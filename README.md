@@ -1,6 +1,6 @@
 # Make a Better Shell
 
-1. (optional) install zsh>=5.8 on the system
+1. (optional) install zsh>=5.8
 
     + e.g., `sudo apt install zsh` for Ubuntu>=20.04 *(for <20.04, zsh>=5.8 can only be installed from source)*
 
