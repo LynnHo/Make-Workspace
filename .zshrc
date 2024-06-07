@@ -334,7 +334,7 @@ alias btop="bpytop"
 #### usage
 usg()(
     while getopts "cmt" opt; do case "$opt" in c) sort_opt="-%cpu";; m) sort_opt="-%mem";; t) sort_opt="-etime";; *) return 1;; esac; done; shift $((OPTIND-1))
-    ps -u ${1:-$USER} -o pid,user:15,%cpu,%mem,etime,command --sort=${sort_opt:--%cpu}
+    ps -u ${1:-$USER} -o $'%%\b\033[37m' -o user:16 -o $'%%\b\033[1;31m ' -o %cpu:8 -o $'%%\b\033[1;32m ' -o %mem:8 -o $'%%\b\033[1;34m ' -o etime:12 -o $'%%\b\033[1;35m ' -o pid:8 -o $'%%\b\033[0m ' -o command --sort=${sort_opt:--%cpu} ww
 )
 usga()(
     while getopts "cm" opt; do case "$opt" in c) sort_opt="-k2,2nr";; m) sort_opt="-k3,3nr";; *) return 1;; esac; done; shift $((OPTIND-1))
