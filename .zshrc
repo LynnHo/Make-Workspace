@@ -282,14 +282,14 @@ compdef _act act
 deact(){ conda deactivate }
 
 ### package source
-alias set_package_source_aliyun="bash $WS/set_package_source_aliyun.sh"
-alias reset_package_source="rm -f ~/.condarc ~/.pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y; mamba clean -i -y"
-condaali()(
-    [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.pip/pip.conf ]] || mv ~/.pip/pip.conf ~/.pip/pip.conf.bk
-    set_package_source_aliyun
+alias set_package_source_tsinghua="bash $WS/set_package_source_tsinghua.sh"
+alias reset_package_source="rm -f ~/.condarc ~/.config/pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y; mamba clean -i -y"
+condatsh()(
+    [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.config/pip/pip.conf ]] || mv ~/.config/pip/pip.conf ~/.config/pip/pip.conf.bk
+    set_package_source_tsinghua
     conda $@
     reset_package_source
-    [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.pip/pip.conf.bk ]] || mv ~/.pip/pip.conf.bk ~/.pip/pip.conf
+    [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.config/pip/pip.conf.bk ]] || mv ~/.config/pip/pip.conf.bk ~/.config/pip/pip.conf
 )
 
 
