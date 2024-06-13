@@ -370,8 +370,8 @@ alias proxy_off="unset http_proxy; unset https_proxy; unset all_proxy; unset HTT
 ### infos
 alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; echo \[Mem\]; free -gh | grep 'Mem:' | awk '{print \$2}'; echo; echo \[DISK\]; duf"
 seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
-alias path="seppaths $PATH"
-alias ldlpath="seppaths $LD_LIBRARY_PATH"
+alias path='seppaths $PATH'
+alias ldlpath='seppaths $LD_LIBRARY_PATH'
 alias spwd="echo \$USER@\$(hostname -I | awk '{print \$1}'):\$(pwd)"
 
 
