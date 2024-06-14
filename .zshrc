@@ -105,6 +105,9 @@ plugins=(
   zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
+export ZSH_CACHE_DIR="$ZSH/cache"
+export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -450,6 +453,9 @@ update_workspace()(
 
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+
+    # todo @lynn
+    rm -rf $HOME/.zcompdump*
 )
 
 update_all()(
