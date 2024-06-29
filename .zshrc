@@ -422,20 +422,20 @@ fi
 # ==============================================================================
 
 update_tools()(
-    (timeout 10 wget -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml 2>&1 || \
-     timeout 10 wget -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml 2>&1) && \
+    (timeout 10 wget -o - -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o - -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
     conda env update --name tools --file $HOME/.tools_tmp.yml
     rm -f $HOME/.tools_tmp.yml
 
-    (timeout 10 wget -O $HOME/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh 2>&1 || \
-     timeout 10 wget -O $HOME/.lesspipe_tmp.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh 2>&1) && \
+    (timeout 10 wget -o - -O $HOME/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+     timeout 10 wget -o - -O $HOME/.lesspipe_tmp.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
     (mv $HOME/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
     rm -f $HOME/.lesspipe_tmp.sh
 )
 
 update_tools_stable()(
-    (timeout 10 wget -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml 2>&1 || \
-     timeout 10 wget -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml 2>&1) && \
+    (timeout 10 wget -o - -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml || \
+     timeout 10 wget -o - -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
     conda env update --name tools --file $HOME/.tools_tmp.yml
     rm -f $HOME/.tools_tmp.yml
 )
