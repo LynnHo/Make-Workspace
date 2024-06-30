@@ -375,7 +375,8 @@ alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; e
 seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
 alias path='seppaths $PATH'
 alias ldlpath='seppaths $LD_LIBRARY_PATH'
-alias spwd='echo $USER@${$(echo $SSH_CONNECTION | awk '\''{print $3}'\''):-$(hostname -I | awk '\''{print $1}'\'')}:$(pwd)'
+alias spwd='echo SPWD: $USER@${$(echo $SSH_CONNECTION | awk '\''{print $3}'\''):-$(hostname -I | awk '\''{print $1}'\'')}:$(pwd); echo PORT: ${$(echo $SSH_CONNECTION | awk '\''{print $4}'\''):-22}'
+
 
 ## ML
 ### GPU
