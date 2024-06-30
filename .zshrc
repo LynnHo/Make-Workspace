@@ -175,12 +175,15 @@ export EDITOR="vim"
 ## fzf
 source "$HOME/.fzf/shell/completion.zsh"
 source "$HOME/.fzf/shell/key-bindings.zsh"
-export FZF_DEFAULT_OPTS="--bind backward-eof:abort"
+export FZF_DEFAULT_OPTS="-m --bind backward-eof:abort --bind ctrl-space:toggle"
 export FZF_CTRL_R_OPTS="--no-sort --exact --preview 'echo {}' --height '75%' --preview-window down:4:hidden:wrap --bind '?:toggle-preview'"
 bindkey "^[[1;5A" fzf-history-widget
 
 
 ## fzf-tab
+### key bindings
+zstyle ':fzf-tab:*' fzf-bindings 'tab:down+clear-selection' # unexpected multi-selection. # TODO: find a better solution
+
 ### switch group
 zstyle ':fzf-tab:*' switch-group 'left' 'right'
 
@@ -216,9 +219,6 @@ zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*'
 
 ### disable preview
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
-
-### fix bugs
-zstyle ':fzf-tab:*' fzf-bindings 'tab:down+clear-selection' # unexpected multi-selection. # TODO: find a better solution
 
 
 ## zsh-history-substring-search
