@@ -175,7 +175,7 @@ export EDITOR="vim"
 ## fzf
 source "$HOME/.fzf/shell/completion.zsh"
 source "$HOME/.fzf/shell/key-bindings.zsh"
-export FZF_DEFAULT_OPTS="-m --bind backward-eof:abort --bind ctrl-space:toggle"
+export FZF_DEFAULT_OPTS="-m --bind backward-eof:abort --bind ctrl-space:toggle --bind tab:down+clear-selection"
 export FZF_CTRL_R_OPTS="--no-sort --exact --preview 'echo {}' --height '75%' --preview-window down:4:hidden:wrap --bind '?:toggle-preview'"
 bindkey "^[[1;5A" fzf-history-widget
 
