@@ -16,7 +16,7 @@ fi
 
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CACHE_DIR="$ZSH/cache"
-export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${HOST}-${ZSH_VERSION}"
 
 ZSH_THEME=$([[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]] && echo "powerlevel10k/powerlevel10k" || echo "eastwood")
 CASE_SENSITIVE="true"
@@ -362,6 +362,7 @@ update_workspace()(
 
     # todo @lynn: 2024.08.31
     rm -rf $HOME/.zcompdump*
+    rm -rf $ZSH_CACHE_DIR/.zcompdump--*
 )
 
 update_all()(
