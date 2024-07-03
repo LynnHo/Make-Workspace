@@ -229,7 +229,7 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 if command -v eza >/dev/null 2>&1; then
     alias ls="eza --color=auto"
 elif command -v exa >/dev/null 2>&1; then
-    alias ls="exa --color=auto"
+    alias ls="exa --color=auto" # todo @lynn: 2024.08.31
 fi
 alias la="ls -lah"
 
@@ -360,7 +360,7 @@ update_workspace()(
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
-    # todo @lynn
+    # todo @lynn: 2024.08.31
     rm -rf $HOME/.zcompdump*
 )
 
