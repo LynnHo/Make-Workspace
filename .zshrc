@@ -16,6 +16,8 @@ fi
 # ==============================================================================
 
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_CACHE_DIR="$ZSH/cache"
+export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
 
 ZSH_THEME=$([[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]] && echo "powerlevel10k/powerlevel10k" || echo "eastwood")
 CASE_SENSITIVE="true"
@@ -38,9 +40,6 @@ plugins=(
   zsh-syntax-highlighting
   zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
-
-export ZSH_CACHE_DIR="$ZSH/cache"
-export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
 
 source $ZSH/oh-my-zsh.sh
 
