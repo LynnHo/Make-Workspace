@@ -35,3 +35,4 @@ dependencies:
   - lftp
   - speedtest-cli
   - pv
+  - dnachun::viu
