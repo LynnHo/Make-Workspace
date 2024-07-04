@@ -29,3 +29,4 @@ dependencies:
   - lftp=4.9.2
   - speedtest-cli=2.1.3
   - pv=1.6.6
+  - dnachun::viu=1.5.0
