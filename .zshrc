@@ -116,10 +116,15 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --p
 
 ### command preview
 zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-preview '
-(out=$(timeout 0.2 tldr -c "$word") && (echo \[TLDR Page\]\\n-----------\\n$out)) 2>/dev/null ||
-(out=$(man "$word") && (echo \[MAN Page\]\\n----------\\n$out)) 2>/dev/null ||
-(source $HOME/.zshrc; out=$(which "$word") && echo $out) 2>/dev/null ||
+clear
+page=$(
+(out=$(timeout 0.2 tldr -c "$word") && echo \[TLDR Page\]\\n-----------\\n$out) ||
+(out=$(man "$word") && echo \[MAN Page\]\\n----------\\n$out)
+) 2>/dev/null && echo \[INFO\]\\n------\\n\\n\\n$page
+info=$(
+(source $HOME/.zshrc; out=$(which "$word") && echo $out) ||
 (echo "${(P)word}")
+) 2>/dev/null && clear && echo \[INFO\]\\n------\\n$info\\n\\n$page
 ' # TODO: source here is not good
 
 ### variable preview
