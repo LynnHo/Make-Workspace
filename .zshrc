@@ -98,10 +98,12 @@ export LESSOPEN="|$TOOL_HOME/bin/lesspipe.sh %s"
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}};
-(echo $item; file -bi $item; du -sh $item | cut -f1; echo;) 2>/dev/null
-([[ -d $item ]] && exa -la --color always $item) 2>/dev/null ||
-([[ -d $item ]] && ls -lahG --color=always $item) ||
-(less $item) 2>/dev/null
+(echo \[ITEM\] $item; echo \[INFO\] $(file -b $item); echo \[SIZE\] $(du -sh $item | cut -f1);) 2>/dev/null
+view=$(
+[[ -d $item ]] && exa -la --color always $item ||
+viu -w 64 $item ||
+less $item
+) 2>/dev/null && echo \\n\[VIEW\]\\n------\\n$view
 '
 zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
