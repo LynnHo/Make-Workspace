@@ -9,6 +9,7 @@ dependencies:
   - vim=9.0.2059
   - parallel=20240122
   - p7zip=16.02
+  - libunrar=7.0.9
   - curl=8.6.0
   - git=2.44.0
   - git-lfs=3.5.1
