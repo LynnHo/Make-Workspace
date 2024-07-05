@@ -118,7 +118,7 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --p
 zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-preview '
 clear
 page=$(
-(out=$(timeout 0.2 tldr -c "$word") && echo \[TLDR Page\]\\n-----------\\n$out) ||
+(out=$(timeout 0.2 tldr "$word") && echo \[TLDR Page\]\\n-----------\\n$out) ||
 (out=$(man "$word") && echo \[MAN Page\]\\n----------\\n$out)
 ) 2>/dev/null && echo \[INFO\]\\n------\\n\\n\\n$page
 info=$(
