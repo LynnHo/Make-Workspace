@@ -13,6 +13,7 @@ dependencies:
   - vim
   - parallel
   - p7zip
+  - libunrar
   - curl
   - git
   - git-lfs
