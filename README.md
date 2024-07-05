@@ -22,4 +22,4 @@
   
     + *do not edit `~/.zshrc`*
 
-5. manually update (or automatically update every day): `udws`
+5. manually update (automatically update every day by default): `udws`
