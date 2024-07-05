@@ -94,8 +94,7 @@ zstyle ':fzf-tab:*' fzf-bindings 'tab:down+clear-selection' # unexpected multi-s
 zstyle ':fzf-tab:*' switch-group 'left' 'right'
 
 ### common preview
-chmod +x "$WS/.lessopen"
-export LESSOPEN="|$WS/.lessopen %s"
+export LESSOPEN="|bash $WS/.lessopen %s"
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}};
