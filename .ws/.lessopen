@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if [[ $(file --mime-type -b "$1") == text/* ]] || [[ ! -s "$1" ]]; then
-    bat -p --color always "$@"
-else
-    $TOOL_HOME/bin/lesspipe.sh "$@"
-fi
+([[ -d "$1" ]] && exa -lah --color always "$@") || \
+([[ $(file --mime-type -b "$1") == text/* ]] && bat -p --color always "$@") || \
+(viu "$@") 2>/dev/null || \
+($TOOL_HOME/bin/lesspipe.sh "$@")
