@@ -104,7 +104,7 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}};
 (echo \[ITEM\] $item; echo \[INFO\] $(file -b $item); echo \[SIZE\] $(du -sh $item | cut -f1);) 2>/dev/null
 view=$(
-viu -w 64 $item ||
+[[ ! -d $item ]] && viu -w 64 $item ||
 less $item
 ) 2>/dev/null && echo \\n\[VIEW\]\\n------\\n$view
 '
