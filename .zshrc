@@ -124,7 +124,7 @@ clear
 page=$(
 (out=$(timeout 0.2 tldr "$word") && echo \[TLDR Page\]\\n----------- && echo $out | bat -p -P --color always -l yaml) ||
 (out=$(man "$word") && echo \[MAN Page\]\\n---------- && echo $out | bat -p -P --color always -l man)
-) 2>/dev/null && echo \[INFO\]\\n------\\n\\n\\n$page
+) 2>/dev/null && echo \[INFO\]\\n------\\n...\\n\\n$page
 info=$(
 (source $HOME/.zshrc; out=$(which "$word") && echo $out) ||
 (echo "${(P)word}")
