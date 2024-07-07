@@ -101,13 +101,12 @@ zstyle ':fzf-tab:*' switch-group 'left' 'right'
 ### common preview
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
-item=${(Q)realpath:-${(Q)word}};
+item=${(Q)realpath:-${(Q)word}}
 info=$(echo \[ITEM\] $item; echo \[INFO\] $(file -b $item)) 2>/dev/null && echo $info
 size=$(timeout 0.1 du -sh $item | cut -f1) 2>/dev/null && (echo \[SIZE\] ${size:-...})
 view=$([[ ! -d $item ]] && timeout 0.1 viu -w 64 $item || timeout 0.1 less $item) 2>/dev/null && ([[ ! -z $view ]] && echo \\n\[VIEW\]\\n------\\n$view || echo \\n\[VIEW\] ...)
 size=$(du -sh $item | cut -f1) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; [[ ! -z $view ]] && echo \\n\[VIEW\]\\n------\\n$view || echo \\n\[VIEW\] ...)
 view=$([[ ! -d $item ]] && viu -w 64 $item || less $item) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; echo \\n\[VIEW\]\\n------; echo $view)
-) 2>/dev/null && echo \\n\[VIEW\]\\n------\\n$view
 '
 zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
@@ -125,10 +124,7 @@ page=$(
 (out=$(timeout 0.2 tldr "$word") && echo \[TLDR Page\]\\n----------- && echo $out | bat -p -P --color always -l yaml) ||
 (out=$(man "$word") && echo \[MAN Page\]\\n---------- && echo $out | bat -p -P --color always -l man)
 ) 2>/dev/null && echo \[INFO\]\\n------\\n...\\n\\n$page
-info=$(
-(source $HOME/.zshrc; out=$(which "$word") && echo $out) ||
-(echo "${(P)word}")
-) 2>/dev/null && clear && echo \[INFO\]\\n------\\n$info\\n\\n$page
+info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && clear && echo \[INFO\]\\n------\\n$info\\n\\n$page
 ' # TODO: source here is not good
 
 ### variable preview
