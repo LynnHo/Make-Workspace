@@ -102,10 +102,11 @@ zstyle ':fzf-tab:*' switch-group 'left' 'right'
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
 item=${(Q)realpath:-${(Q)word}}
-info=$(echo \[ITEM\] $item; echo \[INFO\] $(file -b $item)) 2>/dev/null && echo $info
-size=$(timeout 0.1 du -sh $item | cut -f1) 2>/dev/null && (echo \[SIZE\] ${size:-...})
-view=$([[ ! -d $item ]] && timeout 0.1 viu -w 64 $item || timeout 0.1 less $item) 2>/dev/null && ([[ ! -z $view ]] && echo \\n\[VIEW\]\\n------\\n$view || echo \\n\[VIEW\] ...)
-size=$(du -sh $item | cut -f1) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; [[ ! -z $view ]] && echo \\n\[VIEW\]\\n------\\n$view || echo \\n\[VIEW\] ...)
+info=$(echo \[ITEM\] $item; echo \[INFO\] $(file -b $item)) 2>/dev/null
+size=$(timeout 0.1 du -sh $(readlink -f $item) | cut -f1) 2>/dev/null
+view=$([[ ! -d $item ]] && timeout 0.1 viu -w 64 $item || timeout 0.1 less $item) 2>/dev/null
+echo $info; echo \[SIZE\] ${size:-...}; echo \\n\[VIEW\]\\n------\\n${view:-...}
+size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; echo \\n\[VIEW\]\\n------\\n${view:-...})
 view=$([[ ! -d $item ]] && viu -w 64 $item || less $item) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; echo \\n\[VIEW\]\\n------; echo $view)
 '
 zstyle ':fzf-tab:complete:*:options' fzf-preview
