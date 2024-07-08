@@ -101,13 +101,14 @@ zstyle ':fzf-tab:*' switch-group 'left' 'right'
 ### common preview
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
+hl(){ echo -ne "\033[0;36m$1\033[0m"; }
 item=${(Q)realpath:-${(Q)word}}
-info=$(echo \[ITEM\] $item; echo \[INFO\] $(file -b $item)) 2>/dev/null
+info=$(echo $(hl \[ITEM\]) $item; echo $(hl \[INFO\]) $(file -b $item)) 2>/dev/null
 size=$(timeout 0.1 du -sh $(readlink -f $item) | cut -f1) 2>/dev/null
 view=$([[ ! -d $item ]] && timeout 0.1 viu -w 64 $item || timeout 0.1 less $item) 2>/dev/null
-echo $info; echo \[SIZE\] ${size:-...}; echo \\n\[VIEW\]\\n------\\n${view:-...}
-size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; echo \\n\[VIEW\]\\n------\\n${view:-...})
-view=$([[ ! -d $item ]] && viu -w 64 $item || less $item) 2>/dev/null && (clear; echo $info; echo \[SIZE\] $size; echo \\n\[VIEW\]\\n------; echo $view)
+echo $info; echo $(hl \[SIZE\]) ${size:-...}; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...}
+size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...})
+view=$([[ ! -d $item ]] && viu -w 64 $item || less $item) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------); echo $view)
 '
 zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
@@ -120,12 +121,13 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --p
 
 ### command preview
 zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-preview '
+hl(){ echo -ne "\033[0;36m$1\033[0m"; }
 clear
 page=$(
-(out=$(timeout 0.2 tldr "$word") && echo \[TLDR Page\]\\n----------- && echo $out | bat -p -P --color always -l yaml) ||
-(out=$(man "$word") && echo \[MAN Page\]\\n---------- && echo $out | bat -p -P --color always -l man)
-) 2>/dev/null && echo \[INFO\]\\n------\\n...\\n\\n$page
-info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && clear && echo \[INFO\]\\n------\\n$info\\n\\n$page
+(out=$(timeout 0.2 tldr "$word") && echo $(hl \[TLDR Page\])\\n----------- && echo $out | bat -p -P --color always -l yaml) ||
+(out=$(man "$word") && echo $(hl \[MAN Page\])\\n---------- && echo $out | bat -p -P --color always -l man)
+) 2>/dev/null && echo $(hl \[INFO\])\\n------\\n...\\n\\n$page
+info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && clear && echo $(hl \[INFO\])\\n------\\n$info\\n\\n$page
 ' # TODO: source here is not good
 
 ### variable preview
