@@ -101,7 +101,7 @@ zstyle ':fzf-tab:*' switch-group 'left' 'right'
 ### common preview
 zstyle ':fzf-tab:complete:*:*'  fzf-flags --height '95%' --preview-window 'right:50%:wrap'
 zstyle ':fzf-tab:complete:*:*' fzf-preview '
-hl(){ echo -ne "\033[0;36m$1\033[0m"; }
+hl(){ echo -ne "\033[0;36m$@\033[0m"; }
 item=${(Q)realpath:-${(Q)word}}
 info=$(echo $(hl \[ITEM\]) $item; echo $(hl \[INFO\]) $(file -b $item)) 2>/dev/null
 size=$(timeout 0.1 du -sh $(readlink -f $item) | cut -f1) 2>/dev/null
@@ -121,7 +121,7 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --p
 
 ### command preview
 zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-preview '
-hl(){ echo -ne "\033[0;36m$1\033[0m"; }
+hl(){ echo -ne "\033[0;36m$@\033[0m"; }
 clear
 page=$(
 (out=$(timeout 0.2 tldr "$word") && echo $(hl \[TLDR Page\])\\n----------- && echo $out | bat -p -P --color always -l yaml) ||
