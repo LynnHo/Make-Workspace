@@ -124,10 +124,10 @@ zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-previ
 hl(){ echo -ne "\033[0;36m$@\033[0m"; }
 clear
 page=$(
-(out=$(timeout 0.2 tldr "$word") && echo $(hl \[TLDR Page\])\\n----------- && echo $out | bat -p -P --color always -l yaml) ||
-(out=$(man "$word") && echo $(hl \[MAN Page\])\\n---------- && echo $out | bat -p -P --color always -l man)
-) 2>/dev/null && echo $(hl \[INFO\])\\n------\\n...\\n\\n$page
-info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && clear && echo $(hl \[INFO\])\\n------\\n$info\\n\\n$page
+(out=$(timeout 0.2 tldr "$word") && echo $(hl \[TLDR Page\])\\n$(hl -----------) && echo $out | bat -p -P --color always -l yaml) ||
+(out=$(man "$word") && echo $(hl \[MAN Page\])\\n$(hl ----------) && echo $out | bat -p -P --color always -l man)
+) 2>/dev/null && echo $(hl \[INFO\])\\n$(hl ------)\\n...\\n\\n$page
+info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && clear && echo $(hl \[INFO\])\\n$(hl ------)\\n$info\\n\\n$page
 ' # TODO: source here is not good
 
 ### variable preview
