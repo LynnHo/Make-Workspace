@@ -237,9 +237,9 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 ## system
 ### ls
 if command -v eza >/dev/null 2>&1; then
-    alias ls="eza --color=auto"
+    alias ls="eza -b --color=auto"
 elif command -v exa >/dev/null 2>&1; then
-    alias ls="exa --color=auto" # todo @lynn: 2024.08.31
+    alias ls="exa -b --color=auto" # todo @lynn: 2024.08.31
 fi
 alias la="ls -lah"
 
