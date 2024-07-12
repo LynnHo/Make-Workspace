@@ -238,8 +238,6 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 ### ls
 if command -v eza >/dev/null 2>&1; then
     alias ls="eza -b --color=auto"
-elif command -v exa >/dev/null 2>&1; then
-    alias ls="exa -b --color=auto" # todo @lynn: 2024.08.31
 fi
 alias la="ls -lah"
 
@@ -292,6 +290,9 @@ seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
 alias path='seppaths $PATH'
 alias ldlpath='seppaths $LD_LIBRARY_PATH'
 alias spwd='echo SPWD: $USER@${$(echo $SSH_CONNECTION | awk '\''{print $3}'\''):-$(hostname -I | awk '\''{print $1}'\'')}:$(pwd); echo PORT: ${$(echo $SSH_CONNECTION | awk '\''{print $4}'\''):-"22 (maybe)"}; echo LINK: $(readlink -f $(pwd))'
+
+### others
+alias clc="clear -x"
 
 
 ## ML
