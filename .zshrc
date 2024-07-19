@@ -214,9 +214,13 @@ condatsh()(
 
 ## tmux
 alias tmuxn="tmux new -s"
+alias tmuxh="func()( tmux new -s \$1 \; split-window -h \; select-pane -t 0; ); func"
+alias tmuxv="func()( tmux new -s \$1 \; split-window -v \; select-pane -t 0; ); func"
 alias tmuxa="tmux a -t"
 alias tmuxk="tmux kill-session -t"
 alias tn="tmuxn"
+alias th="tmuxh"
+alias tv="tmuxv"
 alias ta="tmuxa"
 alias tk="tmuxk"
 
