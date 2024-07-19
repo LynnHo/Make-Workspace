@@ -70,7 +70,7 @@ fi
 
 
 ## zsh
-ZSH_THEME_TERM_TITLE_IDLE="$USER@$(hostname -I | awk '{print $1}')"
+ZSH_THEME_TERM_TITLE_IDLE="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
 zstyle ':completion:*:zshz:*' sort false
 
 
