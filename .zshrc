@@ -184,19 +184,20 @@ fi
 # ==============================================================================
 
 ## conda
-### conda environment list
+### conda alias
+alias conda="mamba"
+
+### conda environments
 ( (mkdir -p $HOME/.conda; cd $HOME/.conda; act_list=$((conda env list | awk '{print $NF}'; cat .environments.txt) | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"' | sort | uniq); echo $act_list > .environments.txt) &)
+alias envls="cat $HOME/.conda/{environments.txt,.environments.txt} | xargs -I {} bash -c '[[ -d \"{}\" ]] && readlink -f \"{}\"' | sort | uniq"
+alias envcr="conda env create"
+alias envrm="conda remove --all --name"
 
 ### conda activate
 act(){ mkdir -p $HOME/.conda; lwd=$(pwd); cd $HOME/.conda; conda activate "$1" && act_list=$((echo "$1"; cat .environments.txt) | sort | uniq) && echo $act_list > .environments.txt || (echo remove "$1" from act list; sed -i "\@^$1\$@d" {environments.txt,.environments.txt}); cd $lwd }
-_act(){ local conda_envs=($(cat $HOME/.conda/{environments.txt,.environments.txt} | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"')); _describe 'conda environments' conda_envs }
+_act(){ local conda_envs=($(envls)); _describe 'conda environments' conda_envs }
 compdef _act act
 deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
-
-### conda alias
-alias conda="mamba"
-alias envcreatef="conda env create -f"
-alias envremove="conda remove --all --name"
 # type name to activate the env
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
