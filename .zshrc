@@ -344,33 +344,33 @@ fi
 # ==============================================================================
 
 update_tools()(
-    (timeout 10 wget -o /dev/stdout -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
-     timeout 10 wget -o /dev/stdout -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
-    conda env update --name tools --file $HOME/.tools_tmp.yml
-    rm -f $HOME/.tools_tmp.yml
+    (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
+    conda env update --name tools --file $WS/.tools_tmp.yml
+    rm -f $WS/.tools_tmp.yml
 
-    (timeout 10 wget -o /dev/stdout -O $HOME/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-     timeout 10 wget -o /dev/stdout -O $HOME/.lesspipe_tmp.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
-    (mv $HOME/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
-    rm -f $HOME/.lesspipe_tmp.sh
+    (timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
+     timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+    (mv $WS/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
+    rm -f $WS/.lesspipe_tmp.sh
 )
 
 update_tools_stable()(
-    (timeout 10 wget -o /dev/stdout -O $HOME/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml || \
-     timeout 10 wget -o /dev/stdout -O $HOME/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
-    conda env update --name tools --file $HOME/.tools_tmp.yml
-    rm -f $HOME/.tools_tmp.yml
+    (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml || \
+     timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
+    conda env update --name tools --file $WS/.tools_tmp.yml
+    rm -f $WS/.tools_tmp.yml
 )
 
 update_workspace()(
-    git clone --depth 1 https://github.com/LynnHo/Make-Workspace $HOME/.Make-Workspace_tmp || \
-    git clone --depth 1 https://gitee.com/LynnHo/Make-Workspace.git $HOME/.Make-Workspace_tmp
-    mv $HOME/.Make-Workspace_tmp/.zshrc $HOME/.zshrc
-    mv $HOME/.Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
-    mv $HOME/.Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
-    mv $HOME/.Make-Workspace_tmp/.tmux.conf $HOME/.tmux.conf
-    rsync -av $HOME/.Make-Workspace_tmp/.ws/ $WS/
-    rm -rf $HOME/.Make-Workspace_tmp
+    git clone --depth 1 https://github.com/LynnHo/Make-Workspace $WS/.Make-Workspace_tmp || \
+    git clone --depth 1 https://gitee.com/LynnHo/Make-Workspace.git $WS/.Make-Workspace_tmp
+    mv $WS/.Make-Workspace_tmp/.zshrc $HOME/.zshrc
+    mv $WS/.Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
+    mv $WS/.Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
+    mv $WS/.Make-Workspace_tmp/.tmux.conf $HOME/.tmux.conf
+    rsync -av $WS/.Make-Workspace_tmp/.ws/ $WS/
+    rm -rf $WS/.Make-Workspace_tmp
 
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
