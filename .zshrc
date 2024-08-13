@@ -331,6 +331,15 @@ CD()(
 ### calculation
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 
+### execute
+loop_until_success(){
+    while ! eval "$@"; do
+        echo -e "Failed, retry...\n"
+        sleep 1
+    done
+    echo "Succeed"
+}
+
 ### workspace
 alias rzshrc="exec zsh"
 alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
