@@ -261,14 +261,36 @@ usg()(
     ps -u ${1:-$USER} -o $'%%\b\033[37m' -o user:16 -o $'%%\b\033[1;31m ' -o %cpu:8 -o $'%%\b\033[1;32m ' -o %mem:8 -o $'%%\b\033[1;34m ' -o etime:12 -o $'%%\b\033[1;35m ' -o pid:8 -o $'%%\b\033[0m ' -o command --sort=${sort_opt:--%cpu} ww
 )
 usga()(
-    while getopts "cm" opt; do case "$opt" in c) sort_opt="-k2,2nr";; m) sort_opt="-k3,3nr";; *) return 1;; esac; done; shift $((OPTIND-1))
-    ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort ${sort_opt:--k2,2nr} ) | column -t
+    while getopts "cm" opt; do case "$opt" in c) sort_opt="-k2,2nr -k3,3nr";; m) sort_opt="-k3,3nr -k2,2nr";; *) return 1;; esac; done; shift $((OPTIND-1))
+    ( echo -e "USER\t%CPU\t%MEM"; ps -eo user:20,%cpu,%mem | awk 'NR>1 {cpu[$1]+=$2; mem[$1]+=$3} END {for (user in cpu) printf "%-20s %5.2f\t%5.2f\n", user, cpu[user], mem[user]}' | sort $(echo ${sort_opt:--k2,2nr -k3,3nr}) ) | column -t
 )
 alias usgc="usg -c"
 alias usgm="usg -m"
 alias usgt="usg -t"
 alias usgac="usga -c"
 alias usgam="usga -m"
+ioa()(
+    while getopts "rw" opt; do case "$opt" in r) sort_opt="-k2,2nr -k3,3nr";; w) sort_opt="-k3,3nr -k2,2nr";; *) return 1;; esac; done; shift $((OPTIND-1))
+    sudo echo -e "Wait 10 seconds ...\n"
+    avg_io=$(sudo timeout 10.9 pidstat -d 1 -h | tail -n +2 | grep -v -E '(^$|# Time.*UID.*)' | awk '
+    {
+        cmd = "getent passwd " $2 " | cut -d: -f1"
+        cmd | getline username
+        close(cmd)
+        read[username] += $4
+        write[username] += $5
+    }
+    END {
+        for (user in read) {
+            avg_read = read[user] / 10 / 1000
+            avg_write = write[user] / 10 / 1000
+            print user, avg_read, avg_write
+        }
+    }' | sort $(echo ${sort_opt:--k2,2nr -k3,3nr}))
+    (echo "USER READ WRITE (MB/s)"; echo $avg_io) | column -t
+)
+alias ioar="ioa -r"
+alias ioaw="ioa -w"
 #### kill
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
