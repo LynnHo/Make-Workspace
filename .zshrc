@@ -135,8 +135,8 @@ zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*'
 
 ### git preview
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
-zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git log --color=always $word'
-zstyle ':fzf-tab:complete:git-help:*' fzf-preview 'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-log:(options|argument-1|*)' fzf-preview 'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:(options|argument-1|*)' fzf-preview 'git help $word | bat -plman --color=always'
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview '
     case "$group" in
     "commit tag") git show --color=always $word ;;
