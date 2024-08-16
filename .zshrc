@@ -263,6 +263,8 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 ### ls
 if command -v eza >/dev/null 2>&1; then
     alias ls="eza -b --color=auto"
+    alias lt="ls -lah --tree"
+    alias lt2="lt --level=2"
 fi
 alias la="ls -lah"
 
