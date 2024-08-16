@@ -110,8 +110,6 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '
     size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...})
     view=$([[ ! -d $item ]] && viu -w 64 $item || less $item) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------); echo $view)
 '
-zstyle ':fzf-tab:complete:*:options' fzf-preview
-zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 
 ### process preview
 zstyle ':completion:*:descriptions' format '[%d]'
