@@ -23,21 +23,21 @@ CASE_SENSITIVE="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
-  fzf-tab
+    fzf-tab
 
-  colored-man-pages
-  command-not-found
-  extract
-  last-working-dir
-  safe-paste
-  sudo
-  universalarchive
-  z
+    colored-man-pages
+    command-not-found
+    extract
+    last-working-dir
+    safe-paste
+    sudo
+    universalarchive
+    z
 
-  conda-zsh-completion
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-history-substring-search # must be set after zsh-syntax-highlighting
+    conda-zsh-completion
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-history-substring-search # must be set after zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
