@@ -108,7 +108,7 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '
     view=$([[ ! -d $item ]] && timeout 0.1 viu -w 64 $item || timeout 0.1 less $item) 2>/dev/null
     echo $info; echo $(hl \[SIZE\]) ${size:-...}; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...}
     size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...})
-    view=$([[ ! -d $item ]] && viu -w 64 $item || less $item) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------); echo $view)
+    view=$([[ ! -d $item ]] && viu -w 64 $item || timeout 3 less $item) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------); echo $view)
 '
 zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
