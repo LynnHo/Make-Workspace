@@ -1,6 +1,6 @@
 #!/bin/bash
 
-([[ -d "$1" ]] && exa -lahb --color always "$@") || \
+([[ -d "$1" ]] && eza -lahb --color always "$@") || \
 ([[ $(file --mime-type -b "$1") == text/* ]] && bat -p --color always "$@") || \
 (viu "$@") 2>/dev/null || \
 ($TOOL_HOME/bin/lesspipe.sh "$@")
