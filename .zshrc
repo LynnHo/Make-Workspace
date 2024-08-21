@@ -134,19 +134,19 @@ zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-previ
 zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 ### git preview
-zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta --syntax-theme="Monokai Extended Light"'
 zstyle ':fzf-tab:complete:git-log:(options|argument-1|*)' fzf-preview 'git log --color=always $word'
 zstyle ':fzf-tab:complete:git-help:(options|argument-1|*)' fzf-preview 'git help $word | bat -plman --color=always'
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview '
     case "$group" in
     "commit tag") git show --color=always $word ;;
-    *) git show --color=always $word | delta ;;
+    *) git show --color=always $word | delta --syntax-theme="Monokai Extended Light" ;;
     esac
 '
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview '
     case "$group" in
-    "modified file") git diff $word | delta ;;
-    "recent commit object name") git show --color=always $word | delta ;;
+    "modified file") git diff $word | delta --syntax-theme="Monokai Extended Light" ;;
+    "recent commit object name") git show --color=always $word | delta --syntax-theme="Monokai Extended Light" ;;
     *) git log --color=always $word ;;
     esac
 '
@@ -251,7 +251,7 @@ git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|ht
 
 
 ## diff
-alias delta="delta -s"
+alias delta='delta -s --syntax-theme="Monokai Extended Light"'
 same()( result=$(diff -qr "$1" "$2") && echo "Same" || echo "Different\n---------\n$result" )
 md5()( ([ -f "$1" ] && md5sum "$1" | cut -d " " -f 1) || ([ -d "$1" ] && (cd "$1"; find . -type f -exec md5sum {} \; | xargs -I {} sh -c 'echo -n "{}" | md5sum' | sort | md5sum | cut -d " " -f 1)) || (echo "$1 is not a file or directory" >&2; exit 1) )
 md5r()( ([ -d "$1" ] && (find "$1" -type f -exec md5sum {} \; | sort -k 2)) || (echo "$1 is not a directory" >&2; exit 1) )
