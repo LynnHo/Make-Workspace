@@ -26,6 +26,7 @@ plugins=(
     fzf-tab
 
     alias-finder
+    aliases
     colored-man-pages
     command-not-found
     extract
@@ -185,7 +186,7 @@ zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-previ
 zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 ### git preview
-zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta --syntax-theme="Monokai Extended Light"'
+zstyle ':fzf-tab:complete:(git-add|git-diff|git-restore|gdd):*' fzf-preview 'git diff $word | delta --syntax-theme="Monokai Extended Light"'
 zstyle ':fzf-tab:complete:git-log:(options|argument-1|*)' fzf-preview 'git log --color=always $word'
 zstyle ':fzf-tab:complete:git-help:(options|argument-1|*)' fzf-preview 'git help $word | bat -plman --color=always'
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview '
@@ -260,6 +261,8 @@ alias tk="tmuxk"
 
 
 ## git
+gdd()( git diff $@ | delta )
+compdef _git gdd; compdef _git-diff gdd=git-diff
 git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|') )
 
 
