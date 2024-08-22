@@ -25,9 +25,11 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(
     fzf-tab
 
+    alias-finder
     colored-man-pages
     command-not-found
     extract
+    git
     last-working-dir
     safe-paste
     sudo
@@ -155,7 +157,19 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview '
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
 
 
-## zsh-history-substring-search
+## omz plugins
+
+### alias-finder
+zstyle ':omz:plugins:alias-finder' autoload yes
+zstyle ':omz:plugins:alias-finder' cheaper yes
+_alias_finder_original=$(functions alias-finder)
+eval "function _alias_finder_original ${_alias_finder_original#alias-finder}"
+function alias-finder {
+    result=$(_alias_finder_original "$@")
+    [[ ! -z "$result" ]] && (echo "===== Alias Tip ↓ ====" ; echo $result | bat -p -P -l .bash_aliases; echo -e "===== Alias Tip ↑ ====\n" )
+}
+
+### zsh-history-substring-search
 if zle -la | grep -q "^history-substring-search-up$"; then
     bindkey "$terminfo[kcuu1]" history-substring-search-up
     bindkey "$terminfo[kcud1]" history-substring-search-down
