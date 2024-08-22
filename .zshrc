@@ -262,7 +262,7 @@ alias tk="tmuxk"
 
 ## git
 gdd()( git diff $@ | delta )
-compdef _git gdd; compdef _git-diff gdd=git-diff
+compdef _git-diff gdd=git-diff; compdef _git gdd
 git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|') )
 
 
