@@ -261,7 +261,7 @@ alias tk="tmuxk"
 
 
 ## git
-gdd()( git diff $@ | delta )
+gdd()( git diff $@ | delta -s --syntax-theme="Monokai Extended Light" )
 compdef _git-diff gdd=git-diff; compdef _git gdd
 git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|') )
 
