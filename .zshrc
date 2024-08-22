@@ -85,6 +85,55 @@ export LESSQUIET="true"
 export LESSOPEN="|bash $WS/.lessopen %s"
 
 
+## ls
+eval $(dircolors $WS/.dir_colors)
+if [ -n "$LS_COLORS" ]; then
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
+
+
+## omz plugins
+### alias-finder
+zstyle ':omz:plugins:alias-finder' autoload yes
+zstyle ':omz:plugins:alias-finder' cheaper yes
+_alias_finder_original=$(functions alias-finder)
+eval "function _alias_finder_original ${_alias_finder_original#alias-finder}"
+function alias-finder {
+    result=$(_alias_finder_original "$@")
+    [[ ! -z "$result" ]] && (echo "===== Alias Tip ↓ ====" ; echo $result | bat -p -P -l .bash_aliases; echo -e "===== Alias Tip ↑ ====\n" )
+}
+
+### zsh-history-substring-search
+if zle -la | grep -q "^history-substring-search-up$"; then
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+fi
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="I"
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE="true"
+HISTORY_SUBSTRING_SEARCH_FUZZY="true"
+
+
+## conda
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$ANACONDA_HOME/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$ANACONDA_HOME/etc/profile.d/conda.sh" ]; then
+        . "$ANACONDA_HOME/etc/profile.d/conda.sh"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "$ANACONDA_HOME/etc/profile.d/mamba.sh" ]; then
+    . "$ANACONDA_HOME/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+for i in $(seq ${CONDA_SHLVL}); do mamba deactivate; done # avoid prompt not refreshed (e.g., in tmux)
+
+
 ## fzf
 source "$HOME/.fzf/shell/completion.zsh"
 source "$HOME/.fzf/shell/key-bindings.zsh"
@@ -155,56 +204,6 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview '
 
 ### disable preview
 zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
-
-
-## omz plugins
-
-### alias-finder
-zstyle ':omz:plugins:alias-finder' autoload yes
-zstyle ':omz:plugins:alias-finder' cheaper yes
-_alias_finder_original=$(functions alias-finder)
-eval "function _alias_finder_original ${_alias_finder_original#alias-finder}"
-function alias-finder {
-    result=$(_alias_finder_original "$@")
-    [[ ! -z "$result" ]] && (echo "===== Alias Tip ↓ ====" ; echo $result | bat -p -P -l .bash_aliases; echo -e "===== Alias Tip ↑ ====\n" )
-}
-
-### zsh-history-substring-search
-if zle -la | grep -q "^history-substring-search-up$"; then
-    bindkey "$terminfo[kcuu1]" history-substring-search-up
-    bindkey "$terminfo[kcud1]" history-substring-search-down
-fi
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=blue,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="I"
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE="true"
-HISTORY_SUBSTRING_SEARCH_FUZZY="true"
-
-
-## conda
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$ANACONDA_HOME/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$ANACONDA_HOME/etc/profile.d/conda.sh" ]; then
-        . "$ANACONDA_HOME/etc/profile.d/conda.sh"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "$ANACONDA_HOME/etc/profile.d/mamba.sh" ]; then
-    . "$ANACONDA_HOME/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-for i in $(seq ${CONDA_SHLVL}); do mamba deactivate; done # avoid prompt not refreshed (e.g., in tmux)
-
-
-## ls
-eval $(dircolors $WS/.dir_colors)
-if [ -n "$LS_COLORS" ]; then
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-fi
 
 
 ## powerlevel10k
