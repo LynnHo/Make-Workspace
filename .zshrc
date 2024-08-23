@@ -100,8 +100,8 @@ zstyle ':omz:plugins:alias-finder' cheaper yes
 _alias_finder_original=$(functions alias-finder)
 eval "function _alias_finder_original ${_alias_finder_original#alias-finder}"
 alias-finder() {
-    result=$(_alias_finder_original "$@")
-    [[ ! -z "$result" ]] && (echo "===== Alias Tips ↓ ====" ; echo $result | bat -p -P -l .bash_aliases; echo -e "===== Alias Tips ↑ ====\n" )
+    tips=$(cmd="$@"; _alias_finder_original ${cmd:0:100})
+    [[ ! -z "$tips" ]] && (echo "===== Alias Tips ↓ ====" | bat -p -P -l yaml; echo $tips | bat -p -P -l .bash_aliases; echo -e "===== Alias Tips ↑ ====\n" | bat -p -P -l yaml)
 }
 
 ### zsh-history-substring-search
