@@ -237,15 +237,26 @@ for env in $(ls "$ANACONDA_HOME/envs"); do
 done
 
 ### package source
-alias set_package_source_tsinghua="bash $WS/set_package_source_tsinghua.sh"
-alias reset_package_source="rm -f ~/.condarc ~/.config/pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y; mamba clean -i -y"
-condatsh()(
+alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf'
+alias set_package_source="bash $WS/set_package_source.sh"
+alias set_package_source_aliyun="set_package_source aliyun; show_package_source"
+alias set_package_source_tsinghua="set_package_source tsinghua; show_package_source"
+alias reset_package_source="rm -f ~/.condarc ~/.config/pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y -q; mamba clean -i -y -q"
+conda_with_package_source()(
+    set -e
+    cleanup()(
+        [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.config/pip/pip.conf.bk ]] || mv ~/.config/pip/pip.conf.bk ~/.config/pip/pip.conf
+        $ANACONDA_HOME/bin/conda clean -i -y -q; mamba clean -i -y -q
+    )
+    trap cleanup INT
     [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.config/pip/pip.conf ]] || mv ~/.config/pip/pip.conf ~/.config/pip/pip.conf.bk
-    set_package_source_tsinghua
+    set_package_source $1
+    shift
     conda $@
-    reset_package_source
-    [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.config/pip/pip.conf.bk ]] || mv ~/.config/pip/pip.conf.bk ~/.config/pip/pip.conf
+    cleanup
 )
+alias condatsh="conda_with_package_source tsinghua"
+alias condaali="conda_with_package_source aliyun"
 
 
 ## tmux
