@@ -192,13 +192,13 @@ zstyle ':fzf-tab:complete:(git-add|git-restore|git-diff|gdd):*' fzf-preview 'git
 zstyle ':fzf-tab:complete:git-show:*' fzf-preview '
     case "$group" in
     "commit tag") git show --color=always $word ;;
-    *) git show --color=always $word | delta --syntax-theme="Monokai Extended Light" ;;
+    *) git show --color=always $word | delta -s --syntax-theme="Monokai Extended Light" -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS} ;;
     esac
 '
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview '
     case "$group" in
     "modified file") git diff $word | delta --syntax-theme="Monokai Extended Light" ;;
-    "recent commit object name") git show --color=always $word | delta -s --syntax-theme="Monokai Extended Light" -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS} ;;
+    "recent commit object name") git show --color=always $word | delta --syntax-theme="Monokai Extended Light" ;;
     *) git log --color=always $word ;;
     esac
 '
