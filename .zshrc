@@ -457,10 +457,6 @@ update_workspace()(
 
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
-
-    # todo @lynn: 2024.08.31
-    rm -rf $HOME/.zcompdump*
-    rm -rf $ZSH_CACHE_DIR/.zcompdump--*
 )
 
 update_all()(
