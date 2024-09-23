@@ -18,6 +18,7 @@ dependencies:
   - bpytop=1.0.68
   - nvitop=1.3.1
   - fd-find=8.5.3
+  - bioconda::rename=1.601
   - bat=0.24.0
   - eza=0.18.16
   - dust=1.0.0
