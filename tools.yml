@@ -24,6 +24,7 @@ dependencies:
   - bpytop
   - nvitop # - gpustat
   - fd-find
+  - bioconda::rename
   - bat
   - eza # - exa
   - dust
