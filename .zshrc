@@ -74,6 +74,7 @@ fi
 
 ## zsh
 ZSH_THEME_TERM_TITLE_IDLE="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
+setopt globdots # show hiddens
 zstyle ':completion:*:zshz:*' sort false
 
 
