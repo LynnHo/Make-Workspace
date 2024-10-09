@@ -28,7 +28,7 @@ dependencies:
   - bat
   - eza # - exa
   - dust
-  - dnachun::duf
+  - duf
   - git-delta
   - gh
   - tldr
