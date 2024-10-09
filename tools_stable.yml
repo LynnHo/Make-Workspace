@@ -22,7 +22,7 @@ dependencies:
   - bat=0.24.0
   - eza=0.18.16
   - dust=1.0.0
-  - dnachun::duf=0.8.1
+  - duf=0.8.1
   - git-delta=0.16.5
   - gh=2.49.2
   - tldr=3.2.0
