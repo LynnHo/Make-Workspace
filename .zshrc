@@ -324,11 +324,11 @@ ioa()(
     sudo echo -e "Wait 10 seconds ...\n"
     avg_io=$(sudo timeout 10.9 pidstat -d 1 -h | tail -n +2 | grep -v -E '(^$|# Time.*UID.*)' | awk '
     {
-        cmd = "getent passwd " $2 " | cut -d: -f1"
+        cmd = "getent passwd " $(NF-6) " | cut -d: -f1"
         cmd | getline username
         close(cmd)
-        read[username] += $4
-        write[username] += $5
+        read[username] += $(NF-4)
+        write[username] += $(NF-3)
     }
     END {
         for (user in read) {
