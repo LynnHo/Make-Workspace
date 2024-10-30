@@ -11,6 +11,7 @@ dependencies:
   - p7zip=16.02
   - libunrar=7.0.9
   - curl=8.6.0
+  - rsync=3.3.0
   - git=2.44.0
   - git-lfs=3.5.1
   - tmux=3.4
