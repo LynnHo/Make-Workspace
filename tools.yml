@@ -15,6 +15,7 @@ dependencies:
   - p7zip
   - libunrar
   - curl
+  - rsync
   - git
   - git-lfs
 
