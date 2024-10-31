@@ -377,7 +377,6 @@ hl()(
         echo "Usage: ... | hl pattern [color]"; echo
         echo "E.g.1: echo Hello World! | hl World"
         echo "E.g.2: cat file | hl hello green"
-
     else
         pattern="$1" color="${2:-red}"
         case "$color" in green) highlight=$'\033[1;32m';; yellow) highlight=$'\033[1;33m';; blue) highlight=$'\033[1;34m';; magenta) highlight=$'\033[1;35m';; cyan) highlight=$'\033[1;36m';; *) highlight=$'\033[1;31m';; esac;
