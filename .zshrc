@@ -372,18 +372,6 @@ alias spwd='echo SPWD: $USER@${$(echo $SSH_CONNECTION | awk '\''{print $3}'\''):
 
 ### others
 alias clc="clear -x"
-hl()(
-    if [ -t 0 ]; then
-        echo "Usage: ... | hl pattern [color]"; echo
-        echo "E.g.1: echo Hello World! | hl World"
-        echo "E.g.2: cat file | hl hello green"
-    else
-        pattern="$1" color="${2:-red}"
-        case "$color" in green) highlight=$'\033[1;32m';; yellow) highlight=$'\033[1;33m';; blue) highlight=$'\033[1;34m';; magenta) highlight=$'\033[1;35m';; cyan) highlight=$'\033[1;36m';; *) highlight=$'\033[1;31m';; esac;
-        normal=$'\033[0m'
-        sed "s/$pattern/${highlight}&${normal}/g"
-    fi
-)
 
 
 ## ML
@@ -412,10 +400,7 @@ CD()(
 
 
 ## others
-### calculation
-alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
-
-### execute
+### execution
 loop_until_success(){
     while ! eval "$@"; do
         echo -e "Failed, retry...\n"
@@ -423,6 +408,23 @@ loop_until_success(){
     done
     echo "Succeed"
 }
+
+### display
+hl()(
+    if [ -t 0 ]; then
+        echo "Usage: ... | hl pattern [color]"; echo
+        echo "E.g.1: echo Hello World! | hl World"
+        echo "E.g.2: cat file | hl hello green"
+    else
+        pattern="$1" color="${2:-red}"
+        case "$color" in green) highlight=$'\033[1;32m';; yellow) highlight=$'\033[1;33m';; blue) highlight=$'\033[1;34m';; magenta) highlight=$'\033[1;35m';; cyan) highlight=$'\033[1;36m';; *) highlight=$'\033[1;31m';; esac;
+        normal=$'\033[0m'
+        sed "s/$pattern/${highlight}&${normal}/g"
+    fi
+)
+
+### calculation
+alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 
 ### workspace
 alias rzshrc="exec zsh"
