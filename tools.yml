@@ -18,6 +18,7 @@ dependencies:
   - rsync
   - git
   - git-lfs
+  - huggingface_hub
 
   # tools
   - tmux
