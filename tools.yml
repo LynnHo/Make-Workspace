@@ -18,7 +18,6 @@ dependencies:
   - rsync
   - git
   - git-lfs
-  - huggingface_hub
 
   # tools
   - tmux
@@ -33,6 +32,7 @@ dependencies:
   - duf
   - git-delta
   - gh
+  - huggingface_hub
   - tldr
   - trash-cli
   - sshpass
