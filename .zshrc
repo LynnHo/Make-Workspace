@@ -135,7 +135,7 @@ fi
 # <<< conda initialize <<<
 for i in $(seq ${CONDA_SHLVL}); do mamba deactivate; done # avoid prompt not refreshed (e.g., in tmux)
 
-set_conda_timeout{
+set_conda_timeout(){
     conda config --set remote_connect_timeout_secs 60
     conda config --set remote_read_timeout_secs 120
     export PIP_TIMEOUT=120
@@ -246,7 +246,7 @@ done
 
 ### package source
 alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf'
-set_package_source{ bash $WS/set_package_source.sh $1; set_conda_timeout }
+set_package_source(){ bash $WS/set_package_source.sh $1; set_conda_timeout }
 alias set_package_source_aliyun="set_package_source aliyun; show_package_source"
 alias set_package_source_tsinghua="set_package_source tsinghua; show_package_source"
 alias reset_package_source="rm -f ~/.condarc ~/.config/pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y -q; mamba clean -i -y -q; set_conda_timeout; show_package_source"
