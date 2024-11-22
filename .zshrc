@@ -245,7 +245,7 @@ for env in $(ls "$ANACONDA_HOME/envs"); do
 done
 
 ### package source
-alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf'
+alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc 2>/dev/null; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf 2>/dev/null'
 set_package_source(){ bash $WS/set_package_source.sh $1; set_conda_timeout }
 alias set_package_source_aliyun="set_package_source aliyun; show_package_source"
 alias set_package_source_tsinghua="set_package_source tsinghua; show_package_source"
