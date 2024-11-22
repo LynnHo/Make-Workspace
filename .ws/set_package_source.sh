@@ -3,7 +3,8 @@ set -e
 
 if [ "$1" == "aliyun" ]; then
     # conda: conda-forge as default
-    echo 'channels:
+    echo << EOF > ~/.condarc
+channels:
   - conda-forge
 show_channel_urls: true
 default_channels:
@@ -16,18 +17,22 @@ custom_channels:
   bioconda: http://mirrors.aliyun.com/anaconda/cloud
   menpo: http://mirrors.aliyun.com/anaconda/cloud
   pytorch: http://mirrors.aliyun.com/anaconda/cloud
-  simpleitk: http://mirrors.aliyun.com/anaconda/cloud' > ~/.condarc
+  simpleitk: http://mirrors.aliyun.com/anaconda/cloud
+EOF
 
     # pip
     mkdir -p ~/.config/pip
-    echo '[global]
+    echo << EOF > ~/.config/pip/pip.conf
+[global]
 index-url = http://mirrors.aliyun.com/pypi/simple/
 [install]
-trusted-host=mirrors.aliyun.com' > ~/.config/pip/pip.conf
+trusted-host=mirrors.aliyun.com
+EOF
 
 elif [ "$1" == "tsinghua" ]; then
     # conda: conda-forge as default
-    echo 'channels:
+    echo << EOF > ~/.condarc
+channels:
   - conda-forge
 show_channel_urls: true
 default_channels:
@@ -42,13 +47,15 @@ custom_channels:
   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/' > ~/.condarc
+  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
+EOF
 
     # pip
     mkdir -p ~/.config/pip
-    echo '[global]
+    echo <<EOF > ~/.config/pip/pip.conf
+[global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
-' > ~/.config/pip/pip.conf
+EOF
 
 else
     echo "Usage: $0 {aliyun|tsinghua}"
