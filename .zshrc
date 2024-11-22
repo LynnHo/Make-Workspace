@@ -473,6 +473,10 @@ update_workspace()(
 
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+
+    # @lynn
+    rm -f $WS/set_package_source_aliyun.sh
+    rm -f $WS/set_package_source_tsinghua.sh
 )
 
 update_all()(
