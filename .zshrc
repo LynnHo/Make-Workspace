@@ -135,6 +135,13 @@ fi
 # <<< conda initialize <<<
 for i in $(seq ${CONDA_SHLVL}); do mamba deactivate; done # avoid prompt not refreshed (e.g., in tmux)
 
+set_conda_timeout{
+    conda config --set remote_connect_timeout_secs 60
+    conda config --set remote_read_timeout_secs 120
+    export PIP_TIMEOUT=120
+}
+set_conda_timeout
+
 
 ## fzf
 source "$HOME/.fzf/shell/completion.zsh"
@@ -239,15 +246,16 @@ done
 
 ### package source
 alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf'
-alias set_package_source="bash $WS/set_package_source.sh"
+set_package_source{ bash $WS/set_package_source.sh $1; set_conda_timeout }
 alias set_package_source_aliyun="set_package_source aliyun; show_package_source"
 alias set_package_source_tsinghua="set_package_source tsinghua; show_package_source"
-alias reset_package_source="rm -f ~/.condarc ~/.config/pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y -q; mamba clean -i -y -q"
+alias reset_package_source="rm -f ~/.condarc ~/.config/pip/pip.conf; $ANACONDA_HOME/bin/conda clean -i -y -q; mamba clean -i -y -q; set_conda_timeout; show_package_source"
 conda_with_package_source()(
     set -e
     cleanup()(
         [[ ! -f ~/.condarc.bk ]] || mv ~/.condarc.bk ~/.condarc; [[ ! -f ~/.config/pip/pip.conf.bk ]] || mv ~/.config/pip/pip.conf.bk ~/.config/pip/pip.conf
         $ANACONDA_HOME/bin/conda clean -i -y -q; mamba clean -i -y -q
+        set_conda_timeout
     )
     trap cleanup INT
     [[ ! -f ~/.condarc ]] || mv ~/.condarc ~/.condarc.bk; [[ ! -f ~/.config/pip/pip.conf ]] || mv ~/.config/pip/pip.conf ~/.config/pip/pip.conf.bk
