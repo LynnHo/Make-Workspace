@@ -3,7 +3,7 @@ set -e
 
 if [ "$1" == "aliyun" ]; then
     # conda: conda-forge as default
-    echo << EOF > ~/.condarc
+    cat << EOF > ~/.condarc
 channels:
   - conda-forge
 show_channel_urls: true
@@ -22,7 +22,7 @@ EOF
 
     # pip
     mkdir -p ~/.config/pip
-    echo << EOF > ~/.config/pip/pip.conf
+    cat << EOF > ~/.config/pip/pip.conf
 [global]
 index-url = http://mirrors.aliyun.com/pypi/simple/
 [install]
@@ -31,7 +31,7 @@ EOF
 
 elif [ "$1" == "tsinghua" ]; then
     # conda: conda-forge as default
-    echo << EOF > ~/.condarc
+    cat << EOF > ~/.condarc
 channels:
   - conda-forge
 show_channel_urls: true
@@ -52,7 +52,7 @@ EOF
 
     # pip
     mkdir -p ~/.config/pip
-    echo <<EOF > ~/.config/pip/pip.conf
+    cat <<EOF > ~/.config/pip/pip.conf
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 EOF
