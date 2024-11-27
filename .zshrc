@@ -243,6 +243,8 @@ deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
 done
+chpwd(){ [[ ! -f .conda_env ]] || conda activate $(head -n 1 .conda_env | awk '{print $1}') }
+chpwd
 
 ### package source
 alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc 2>/dev/null; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf 2>/dev/null'
