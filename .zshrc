@@ -143,7 +143,7 @@ set_conda_timeout(){
 }
 set_conda_timeout
 
-chpwd(){ [[ ! -f .conda_env ]] || conda activate $(head -n 1 .conda_env | awk '{print $1}') }
+chpwd(){ [[ ! -f .conda_env ]] || {deact && local env=$(head -n 1 .conda_env | awk '{print $1}') && conda activate $env 2>/dev/null} || echo "Failed to activate \"$env\", check \"./.conda_env\"" }
 chpwd
 
 
