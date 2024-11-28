@@ -143,6 +143,8 @@ set_conda_timeout(){
 }
 set_conda_timeout
 
+deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
+
 chpwd(){ [[ ! -f .conda_env ]] || {local env=$(head -n 1 .conda_env | awk '{print $1}'); [[ "$env" == "$CONDA_DEFAULT_ENV" || "$env" == "$CONDA_PREFIX" ]] || {deact; conda activate $env 2>/dev/null} } || echo "Failed to activate \"$env\", check \"./.conda_env\"" }
 chpwd
 
@@ -242,7 +244,6 @@ alias envrm="conda remove --all --name"
 act(){ mkdir -p $HOME/.conda; lwd=$(pwd); cd $HOME/.conda; conda activate "$1" && act_list=$((echo "$1"; cat .environments.txt) | sort | uniq) && echo $act_list > .environments.txt || (echo remove "$1" from act list; sed -i "\@^$1\$@d" {environments.txt,.environments.txt}); cd $lwd }
 _act(){ local conda_envs=($(envls)); _describe 'conda environments' conda_envs }
 compdef _act act
-deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
 # type name to activate the env
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
