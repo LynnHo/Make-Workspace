@@ -64,6 +64,7 @@ export PATH="$TOOL_HOME/bin:$PATH"
 ## WORKSPACE
 AUTO_UPDATE_WORKSPACE="true"
 AUTO_UPDATE_INTERVAL=1 # days
+GITHUB_PROXY="https://ghp.ci"
 
 
 ## TERM
@@ -287,7 +288,7 @@ alias tk="tmuxk"
 ## git
 gdd()( git diff $@ | delta -s --syntax-theme="Monokai Extended Light" )
 compdef _git-diff gdd=git-diff; compdef _git gdd
-git_clone()( git clone $@ || git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|') )
+git_clone()( git clone $@ || git clone $(echo $@ | sed "s|https://github.com/|$GITHUB_PROXY/https://github.com/|") )
 
 
 ## diff
@@ -460,7 +461,7 @@ update_tools()(
     rm -f $WS/.tools_tmp.yml
 
     (timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-     timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
+     timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh $GITHUB_PROXY/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
     (mv $WS/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
     rm -f $WS/.lesspipe_tmp.sh
 )
@@ -483,7 +484,7 @@ update_workspace()(
     rm -rf $WS/.Make-Workspace_tmp
 
     timeout 60 tldr -u || \
-    timeout 60 tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+    timeout 60 tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
     # @lynn
     rm -f $WS/set_package_source_aliyun.sh

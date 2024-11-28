@@ -8,6 +8,8 @@ set -e
 # =                                   utils                                    =
 # ==============================================================================
 
+GITHUB_PROXY="https://ghp.ci"
+
 backup()(
     FILE_PATH=$1
     NEW_FILE_PATH="${FILE_PATH}.bk_$(date +%Y%m%d-%H%M%S)"
@@ -19,7 +21,7 @@ backup()(
 
 git_clone()(
     git clone $@ || \
-    git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|')
+    git clone $(echo $@ | sed "s|https://github.com/|$GITHUB_PROXY/https://github.com/|")
 )
 
 
@@ -36,7 +38,7 @@ WS=$HOME/.ws
 backup $ANACONDA_HOME
 
 timeout 60 wget -c https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O ./miniforge.sh || \
-wget -c https://mirror.ghproxy.com/https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O ./miniforge.sh
+wget -c $GITHUB_PROXY/https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O ./miniforge.sh
 bash ./miniforge.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
 
@@ -60,14 +62,14 @@ git_clone https://github.com/junegunn/fzf.git $HOME/.fzf
 cd $HOME/.fzf
 version=$(git tag -l | sort -V | tail -n 1)
 timeout 60 wget -O - https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/ || \
-wget -O - https://mirror.ghproxy.com/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/
+wget -O - $GITHUB_PROXY/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/
 chmod +x $TOOL_HOME/bin/fzf
 cd -
 
 
 # step 2.3: install lesspipe
 timeout 10 wget -O $TOOL_HOME/bin/lesspipe.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
-wget -O $TOOL_HOME/bin/lesspipe.sh https://mirror.ghproxy.com/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh
+wget -O $TOOL_HOME/bin/lesspipe.sh $GITHUB_PROXY/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh
 chmod +x $TOOL_HOME/bin/lesspipe.sh
 
 
@@ -149,7 +151,7 @@ fi
 
 # step 4: optionals
 timeout 60 $TOOL_HOME/bin/tldr -u || \
-timeout 60 $TOOL_HOME/bin/tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
 # step 5: replace the current shell with zsh

@@ -8,6 +8,8 @@ set -e
 # =                                   utils                                    =
 # ==============================================================================
 
+GITHUB_PROXY="https://ghp.ci"
+
 backup()(
     FILE_PATH=$1
     NEW_FILE_PATH="${FILE_PATH}.bk_$(date +%Y%m%d-%H%M%S)"
@@ -19,7 +21,7 @@ backup()(
 
 git_clone()(
     git clone $@ || \
-    git clone $(echo $@ | sed 's|https://github.com/|https://mirror.ghproxy.com/https://github.com/|')
+    git clone $(echo $@ | sed "s|https://github.com/|$GITHUB_PROXY/https://github.com/|")
 )
 
 
@@ -38,7 +40,7 @@ tar xvzf stable.tar.gz
 backup $ANACONDA_HOME
 
 # timeout 60 wget -c https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
-# timeout 60 wget -c https://mirror.ghproxy.com/https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
+# timeout 60 wget -c $GITHUB_PROXY/https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
 wget -c https://gitee.com/LynnHo/Make-Workspace/releases/download/0.2/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh
 bash ./miniforge.sh -b -p $ANACONDA_HOME
 . $ANACONDA_HOME/bin/activate
@@ -117,7 +119,7 @@ fi
 
 # step 4: optionals
 timeout 60 $TOOL_HOME/bin/tldr -u || \
-timeout 60 $TOOL_HOME/bin/tldr -u -s https://mirror.ghproxy.com/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 
 
 # step 5: replace the current shell with zsh
