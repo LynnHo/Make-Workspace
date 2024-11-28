@@ -235,7 +235,7 @@ chpwd
 alias conda="mamba"
 
 ### conda environments
-( (mkdir -p $HOME/.conda; cd $HOME/.conda; act_list=$((conda env list | awk '{print $NF}'; cat .environments.txt) | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"' | sort | uniq); echo $act_list > .environments.txt) &)
+( (mkdir -p $HOME/.conda; cd $HOME/.conda; act_list=$((conda env list | awk '{print $NF}'; cat .environments.txt 2>/dev/null) | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"' | sort | uniq); echo $act_list > .environments.txt) &)
 envls()( cat $HOME/.conda/{environments.txt,.environments.txt} | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"' | sort | uniq )
 alias envcr="conda env create"
 alias envrm="conda remove --all --name"
