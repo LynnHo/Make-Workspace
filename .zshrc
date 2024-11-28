@@ -117,38 +117,6 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE="true"
 HISTORY_SUBSTRING_SEARCH_FUZZY="true"
 
 
-## conda
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$ANACONDA_HOME/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$ANACONDA_HOME/etc/profile.d/conda.sh" ]; then
-        . "$ANACONDA_HOME/etc/profile.d/conda.sh"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "$ANACONDA_HOME/etc/profile.d/mamba.sh" ]; then
-    . "$ANACONDA_HOME/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-for i in $(seq ${CONDA_SHLVL}); do mamba deactivate; done # avoid prompt not refreshed (e.g., in tmux)
-
-set_conda_timeout(){
-    conda config --set remote_connect_timeout_secs 60
-    conda config --set remote_read_timeout_secs 120
-    export PIP_TIMEOUT=120
-}
-set_conda_timeout
-
-deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
-
-chpwd(){ [[ ! -f .conda_env ]] || {local env=$(head -n 1 .conda_env | awk '{print $1}'); [[ "$env" == "$CONDA_DEFAULT_ENV" || "$env" == "$CONDA_PREFIX" ]] || {deact; conda activate $env 2>/dev/null} } || echo "Failed to activate \"$env\", check \"./.conda_env\"" }
-chpwd
-
-
 ## fzf
 source "$HOME/.fzf/shell/completion.zsh"
 source "$HOME/.fzf/shell/key-bindings.zsh"
@@ -224,6 +192,38 @@ zstyle ':fzf-tab:complete:(zshz|tmux*|conda|mamba|act):*' fzf-preview ''
 
 ## powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+## conda
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$ANACONDA_HOME/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$ANACONDA_HOME/etc/profile.d/conda.sh" ]; then
+        . "$ANACONDA_HOME/etc/profile.d/conda.sh"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "$ANACONDA_HOME/etc/profile.d/mamba.sh" ]; then
+    . "$ANACONDA_HOME/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+for i in $(seq ${CONDA_SHLVL}); do mamba deactivate; done # avoid prompt not refreshed (e.g., in tmux)
+
+set_conda_timeout(){
+    conda config --set remote_connect_timeout_secs 60
+    conda config --set remote_read_timeout_secs 120
+    export PIP_TIMEOUT=120
+}
+set_conda_timeout
+
+deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
+
+chpwd(){ [[ ! -f .conda_env ]] || {local env=$(head -n 1 .conda_env | awk '{print $1}'); [[ "$env" == "$CONDA_DEFAULT_ENV" || "$env" == "$CONDA_PREFIX" ]] || {deact; conda activate $env 2>/dev/null} } || echo "Failed to activate \"$env\", check \"./.conda_env\"" }
+chpwd
 
 
 # ==============================================================================
