@@ -33,6 +33,7 @@ dependencies:
   - git-delta
   - gh
   - huggingface_hub
+  - aria2
   - tldr
   - trash-cli
   - sshpass
