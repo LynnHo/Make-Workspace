@@ -359,9 +359,9 @@ killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r k
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
 
 ### files
-alias rcp="rsync -avz --progress -h"
-rrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -av --delete "$temp_dir/" "$1"; rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
-srrm()( if [ -f "$1" ] || [ -h "$1" ]; then sudo rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); sudo rsync -av --delete "$temp_dir/" "$1"; sudo rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
+alias rcp="rsync -aP -h"
+rrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -aP --delete "$temp_dir/" "$1"; rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
+srrm()( if [ -f "$1" ] || [ -h "$1" ]; then sudo rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); sudo rsync -aP --delete "$temp_dir/" "$1"; sudo rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
 trash()( # compatible with rm
     allowed_args="-f|-h|--help|--trash-dir|-v|--verbose|--version"
     new_args=""
