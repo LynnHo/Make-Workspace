@@ -39,5 +39,6 @@ dependencies:
   - sshpass
   - lftp
   - speedtest-cli
+  - rvalieris::xfennec-progress
   - pv
   - viu
