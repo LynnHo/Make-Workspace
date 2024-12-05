@@ -62,8 +62,11 @@ export PATH="$TOOL_HOME/bin:$PATH"
 
 
 ## WORKSPACE
+chmod -R 700 $WS
 AUTO_UPDATE_WORKSPACE="true"
 AUTO_UPDATE_INTERVAL=1 # days
+MAIL="$WS/mail.py"
+MAIL_DEFAULT_SUBJECT="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
 GITHUB_PROXY="https://ghp.ci"
 
 
@@ -413,9 +416,16 @@ CD()(
 )
 
 
+## mail
+sendme()( python $MAIL --subject "${1:-$MAIL_DEFAULT_SUBJECT}" --body "$2" )
+sendto()( python $MAIL --receiver_email "$1" --subject "${2:-$MAIL_DEFAULT_SUBJECT}" --body "$3" )
+sendafter()( echo "sendme after: $*"; echo "========== Start =========="; eval "$@"; cmd_status=$?; [ $cmd_status -eq 0 ] && sendme "$MAIL_DEFAULT_SUBJECT: Command Succeeded" "Command succeeded: $*" || sendme "$MAIL_DEFAULT_SUBJECT: Command Failed" "Command failed: $*"; return $cmd_status )
+
+
 ## others
 ### execution
 loop_until_success(){
+    echo "loop_until_success: $*"; echo "========== Start ==========";
     while ! eval "$@"; do
         echo -e "Failed, retry...\n"
         sleep 1
