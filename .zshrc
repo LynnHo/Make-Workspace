@@ -65,8 +65,9 @@ export PATH="$TOOL_HOME/bin:$PATH"
 chmod -R 700 $WS
 AUTO_UPDATE_WORKSPACE="true"
 AUTO_UPDATE_INTERVAL=1 # days
+USERHOST="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
 MAIL="$WS/mail.py"
-MAIL_DEFAULT_SUBJECT="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
+MAIL_DEFAULT_SUBJECT="$USERHOST"
 GITHUB_PROXY="https://ghp.ci"
 
 
@@ -77,7 +78,7 @@ fi
 
 
 ## zsh
-ZSH_THEME_TERM_TITLE_IDLE="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
+ZSH_THEME_TERM_TITLE_IDLE="$USERHOST"
 # setopt globdots # show hiddens
 zstyle ':completion:*:zshz:*' sort false
 
