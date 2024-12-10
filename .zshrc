@@ -224,9 +224,7 @@ set_conda_timeout(){
 }
 set_conda_timeout
 
-deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
-
-chpwd(){ [[ ! -f .conda_env ]] || {local env=$(head -n 1 .conda_env | awk '{print $1}'); [[ "$env" == "$CONDA_DEFAULT_ENV" || "$env" == "$CONDA_PREFIX" ]] || {deact; conda activate $env 2>/dev/null} } || echo "Failed to activate \"$env\", check \"./.conda_env\"" }
+chpwd(){ [[ ! -f .conda_env ]] || {local env=$(head -n 1 .conda_env | awk '{print $1}'); [[ "$env" == "$CONDA_DEFAULT_ENV" || "$env" == "$CONDA_PREFIX" ]] || {for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done; conda activate $env 2>/dev/null} } || echo "Failed to activate \"$env\", check \"./.conda_env\"" }
 chpwd
 
 
@@ -252,6 +250,7 @@ compdef _act act
 for env in $(ls "$ANACONDA_HOME/envs"); do
     alias $env="conda activate $ANACONDA_HOME/envs/$env"
 done
+deact(){ for i in $(seq ${CONDA_SHLVL}); do conda deactivate; done }
 
 ### package source
 alias show_package_source='echo "===== ~/.condarc ====="; cat ~/.condarc 2>/dev/null; echo; echo "===== ~/.config/pip/pip.conf ====="; cat ~/.config/pip/pip.conf 2>/dev/null'
