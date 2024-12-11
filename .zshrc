@@ -385,7 +385,17 @@ alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; e
 seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
 alias path='seppaths $PATH'
 alias ldlpath='seppaths $LD_LIBRARY_PATH'
-alias spwd='echo SPWD: ${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '\''{print $3}'\''):-$(hostname -I | awk '\''{print $1}'\'')}:$(pwd); echo PORT: ${$(echo $SSH_CONNECTION | awk '\''{print $4}'\''):-"22 (maybe)"}; echo LINK: $(readlink -f $(pwd))'
+spwd()(
+    pwd_=$(pwd)${1:+/$1}
+    spwd_=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}:$pwd_
+    port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
+    link=$(readlink -f $pwd_)
+    echo "SCP : scp -P $port -r $spwd_ ./"
+    echo "RCP : rsync -aP -h -e \"ssh -p $port\" $spwd_ ./"
+    echo "SPWD: $spwd_"
+    echo "PORT: $port"
+    [[ -L $pwd_ ]] && echo "LINK: $pwd_ -> $link"
+)
 
 ### others
 alias clc="clear -x"
