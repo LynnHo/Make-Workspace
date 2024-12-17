@@ -387,7 +387,7 @@ seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
 alias path='seppaths $PATH'
 alias ldlpath='seppaths $LD_LIBRARY_PATH'
 spwd()(
-    pwd_=$(pwd)${1:+/$1}
+    pwd_=$(realpath -s "${1:-$(pwd)}")
     spwd_=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}:$pwd_
     port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
     link=$(readlink -f $pwd_)
