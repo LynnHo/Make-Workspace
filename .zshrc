@@ -380,6 +380,7 @@ trash()( # compatible with rm
 ### network
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
 alias proxy_off="unset http_proxy; unset https_proxy; unset all_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; unset ALL_PROXY"
+alias sfs="sshfs -f -o follow_symlinks,ServerAliveInterval=30,ServerAliveCountMax=3,StrictHostKeyChecking=no,UserKnownHostsFile=/dev/null"
 
 ### infos
 alias sys="echo \[CPU\]; lscpu | grep '^Model name.*\|^CPU(s):.*' | cat; echo; echo \[Mem\]; free -gh | grep 'Mem:' | awk '{print \$2}'; echo; echo \[DISK\]; duf"
