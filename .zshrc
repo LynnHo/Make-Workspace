@@ -427,6 +427,9 @@ CD()(
     eval "CUDA_VISIBLE_DEVICES='$device' $cmd"
 )
 
+### HF
+alias hfd="HF_ENDPOINT=https://hf-mirror.com hfd"
+
 
 ## mail
 sendme()( python $MAIL_API --subject "${1:-$MAIL_DEFAULT_SUBJECT}" --body "$2" )
@@ -487,6 +490,10 @@ update_tools()(
      timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh $GITHUB_PROXY/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
     (mv $WS/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
     rm -f $WS/.lesspipe_tmp.sh
+
+    timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh
+    (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh; chmod +x $TOOL_HOME/bin/hfd.sh)
+    rm -f $WS/.hfd_tmp.sh
 )
 
 update_tools_stable()(
@@ -494,6 +501,10 @@ update_tools_stable()(
      timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
     conda env update --name tools --file $WS/.tools_tmp.yml
     rm -f $WS/.tools_tmp.yml
+
+    timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh
+    (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh; chmod +x $TOOL_HOME/bin/hfd.sh)
+    rm -f $WS/.hfd_tmp.sh
 )
 
 update_workspace()(
