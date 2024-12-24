@@ -428,7 +428,7 @@ CD()(
 )
 
 ### HF
-alias hfd="HF_ENDPOINT=https://hf-mirror.com hfd"
+alias hfd="HF_ENDPOINT=https://hf-mirror.com hfd.sh"
 
 
 ## mail
