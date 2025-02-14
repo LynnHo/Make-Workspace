@@ -376,6 +376,7 @@ trash()( # compatible with rm
     done
     bash -c "trash-put $new_args"
 )
+alias fdimg="fd -u -e jpeg -e jpg -e png -e bmp -e tiff -e tif -e webp"
 
 ### network
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
