@@ -357,6 +357,7 @@ ioa()(
 )
 alias ioar="ioa -r"
 alias ioaw="ioa -w"
+alias net="nethogs"
 #### kill
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
