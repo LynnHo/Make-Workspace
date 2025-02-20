@@ -357,7 +357,6 @@ ioa()(
 )
 alias ioar="ioa -r"
 alias ioaw="ioa -w"
-alias net="nethogs"
 #### kill
 killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r kill -9 )
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
@@ -380,6 +379,8 @@ trash()( # compatible with rm
 alias fdimg="fd -u -e jpeg -e jpg -e png -e bmp -e tiff -e tif -e webp"
 
 ### network
+alias net="nethogs"
+alias ipt="iptraf-ng -i all"
 freeport()( sudo kill -9 $(sudo lsof -i:$1 | awk 'NR>1 {print $2}' | uniq) )
 alias proxy_off="unset http_proxy; unset https_proxy; unset all_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; unset ALL_PROXY"
 alias sfs="sshfs -f -o allow_other,default_permissions,umask=0022,follow_symlinks,ServerAliveInterval=30,ServerAliveCountMax=3,StrictHostKeyChecking=no,UserKnownHostsFile=/dev/null"
