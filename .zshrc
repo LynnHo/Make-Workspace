@@ -306,6 +306,9 @@ md5rsame()( result=$(diff <(md5r "$1" | sed "s@ $1/@@") <(md5r "$2" | sed "s@ $2
 
 
 ## system
+### sh
+alias sh="bash"
+
 ### ls
 if command -v eza >/dev/null 2>&1; then
     alias ls="eza -b --color=auto"
