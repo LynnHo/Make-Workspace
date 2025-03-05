@@ -394,6 +394,10 @@ seppaths()( echo $1 | sed -e $'s/:/\\\n/g' )
 alias path='seppaths $PATH'
 alias ldlpath='seppaths $LD_LIBRARY_PATH'
 spwd()(
+    if [ ! -e "${1:-$(pwd)}" ]; then
+        echo "\"${1:-$(pwd)}\": No such file or directory" >&2
+        return 2
+    fi
     pwd_=$(realpath -s "${1:-$(pwd)}")
     spwd_=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}:$pwd_
     port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
@@ -402,7 +406,7 @@ spwd()(
     echo "RCP : rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
     echo "SPWD: $spwd_"
     echo "PORT: $port"
-    [[ -L $pwd_ ]] && echo "LINK: $pwd_ -> $link"
+    [[ -L $pwd_ ]] && echo "LINK: $pwd_ -> $link" || true
 )
 
 ### others
