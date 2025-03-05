@@ -398,8 +398,8 @@ spwd()(
     spwd_=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}:$pwd_
     port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
     link=$(readlink -f $pwd_)
-    echo "SCP : scp -P $port -r $spwd_ ./"
-    echo "RCP : rsync -aP -h -e \"ssh -p $port\" $spwd_ ./"
+    echo "SCP : scp -P $port -r \"$spwd_\" ./"
+    echo "RCP : rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
     echo "SPWD: $spwd_"
     echo "PORT: $port"
     [[ -L $pwd_ ]] && echo "LINK: $pwd_ -> $link"
