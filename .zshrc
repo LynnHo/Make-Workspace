@@ -403,14 +403,16 @@ spwd()(
     port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
     link=$(readlink -f $pwd_)
     echo "SCP : scp -P $port -r \"$spwd_\" ./"
-    echo "RCP : rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
+    echo "SRCP: rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
+    echo "RCP : rsync -aP -h \"$pwd_\" ./"
     echo "SPWD: $spwd_"
     echo "PORT: $port"
     [[ -L $pwd_ ]] && echo "LINK: $pwd_ -> $link" || true
 )
 
 ### others
-alias clc="clear -x"
+alias clr="clear"
+alias clx="clear -x"
 
 
 ## ML
