@@ -413,6 +413,7 @@ spwd()(
 ### others
 alias clr="clear"
 alias clx="clear -x"
+bindkey '^X' clear-screen
 
 
 ## ML
