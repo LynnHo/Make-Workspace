@@ -34,6 +34,7 @@ dependencies:
   - gh
   - huggingface_hub
   - aria2
+  - jq
   - tldr
   - trash-cli
   - sshpass
