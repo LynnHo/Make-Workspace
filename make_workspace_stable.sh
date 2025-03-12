@@ -71,6 +71,11 @@ cp ./stable/lesspipe.sh $TOOL_HOME/bin/lesspipe.sh
 chmod +x $TOOL_HOME/bin/lesspipe.sh
 
 
+# step 2.4: install hfd
+wget -O $TOOL_HOME/bin/hfd.sh https://hf-mirror.com/hfd/hfd.sh
+chmod +x $TOOL_HOME/bin/hfd.sh
+
+
 # step 3.1: install oh-my-zsh
 rm -rf $HOME/.oh-my-zsh
 cp -r ./stable/.oh-my-zsh $HOME/.oh-my-zsh
