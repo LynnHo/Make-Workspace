@@ -28,6 +28,7 @@ dependencies:
   - gh=2.49.2
   - huggingface_hub
   - aria2=1.37.0
+  - jq=1.7.1
   - tldr=3.2.0
   - trash-cli=0.23.11.10
   - sshpass=1.06
