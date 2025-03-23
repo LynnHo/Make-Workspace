@@ -8,7 +8,7 @@ set -e
 # =                                   utils                                    =
 # ==============================================================================
 
-GITHUB_PROXY="https://ghp.ci"
+GITHUB_PROXY="https://ghfast.top"
 
 backup()(
     FILE_PATH=$1
