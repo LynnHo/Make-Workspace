@@ -124,7 +124,8 @@ fi
 
 # step 4: optionals
 timeout 60 $TOOL_HOME/bin/tldr -u || \
-timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
+timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages || \
+true
 
 
 # step 5: replace the current shell with zsh
