@@ -68,7 +68,7 @@ AUTO_UPDATE_INTERVAL=1 # days
 USERHOST="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
 MAIL_API="$WS/mail.py"
 MAIL_DEFAULT_SUBJECT="$USERHOST"
-GITHUB_PROXY="https://ghp.ci"
+GITHUB_PROXY="https://ghfast.top"
 
 
 ## TERM
