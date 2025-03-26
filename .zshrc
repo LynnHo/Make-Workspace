@@ -314,6 +314,8 @@ if command -v eza >/dev/null 2>&1; then
     alias ls="eza -b --color=auto"
     alias lt="ls -lah --tree"
     alias lt2="lt --level=2"
+    alias lold="ls -lah -snew"
+    alias lnew="ls -lah -snew -r"
 fi
 alias la="ls -lah"
 
