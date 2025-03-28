@@ -314,8 +314,10 @@ if command -v eza >/dev/null 2>&1; then
     alias ls="eza -b --color=auto"
     alias lt="ls -lah --tree"
     alias lt2="lt --level=2"
-    alias lold="ls -lah -snew"
+    alias lfile="ls -lah --only-files"
+    alias ldir="ls -lah --only-dirs"
     alias lnew="ls -lah -snew -r"
+    alias lold="ls -lah -snew"
 fi
 alias la="ls -lah"
 
