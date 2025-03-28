@@ -24,7 +24,7 @@ dependencies:
   - eza=0.18.16
   - dust=1.0.0
   - duf=0.8.1
-  - git-delta=0.16.5
+  - git-delta=0.18.2
   - gh=2.49.2
   - huggingface_hub
   - aria2=1.37.0
