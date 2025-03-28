@@ -506,7 +506,7 @@ update_tools()(
     (mv $WS/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
     rm -f $WS/.lesspipe_tmp.sh
 
-    timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh
+    timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh && \
     (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh; chmod +x $TOOL_HOME/bin/hfd.sh)
     rm -f $WS/.hfd_tmp.sh
 )
@@ -517,7 +517,7 @@ update_tools_stable()(
     conda env update --name tools --file $WS/.tools_tmp.yml
     rm -f $WS/.tools_tmp.yml
 
-    timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh
+    timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh && \
     (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh; chmod +x $TOOL_HOME/bin/hfd.sh)
     rm -f $WS/.hfd_tmp.sh
 )
