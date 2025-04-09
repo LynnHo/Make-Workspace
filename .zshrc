@@ -459,6 +459,7 @@ sendafter()( echo "sendme after: $*"; echo "========== Start =========="; eval "
 ### execution
 chmod +x $WS/run.sh
 alias run="$WS/run.sh"
+alias r="run"
 
 loop_until_success(){
     echo "loop_until_success: $*"; echo "========== Start ==========";
