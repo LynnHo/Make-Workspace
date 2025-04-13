@@ -384,6 +384,8 @@ trash()( # compatible with rm
     done
     bash -c "trash-put $new_args"
 )
+alias fdf="fd -u -t f"
+alias fdd="fd -u -t d"
 alias fdimg="fd -u -e jpeg -e jpg -e png -e bmp -e tiff -e tif -e webp"
 
 ### network
