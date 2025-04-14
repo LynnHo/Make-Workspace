@@ -28,6 +28,7 @@ dependencies:
   - bioconda::rename
   - bat
   - eza # - exa
+  - ripgrep
   - dust
   - duf
   - git-delta
