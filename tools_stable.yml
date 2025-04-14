@@ -22,6 +22,7 @@ dependencies:
   - bioconda::rename=1.601
   - bat=0.24.0
   - eza=0.18.16
+  - ripgrep=14.1.1
   - dust=1.0.0
   - duf=0.8.1
   - git-delta=0.16.5
