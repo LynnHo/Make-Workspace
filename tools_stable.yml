@@ -28,7 +28,7 @@ dependencies:
   - git-delta=0.16.5
   - gh=2.49.2
   - huggingface_hub
-  - aria2=1.37.0
+  - aria2=1.36.0
   - jq=1.7.1
   - tldr=3.2.0
   - trash-cli=0.23.11.10
@@ -38,3 +38,4 @@ dependencies:
   - rvalieris::xfennec-progress=0.16
   - pv=1.6.6
   - viu=1.5.1
+  - imagemagick=7.0.11_14
