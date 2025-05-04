@@ -44,3 +44,4 @@ dependencies:
   - rvalieris::xfennec-progress
   - pv
   - viu
+  - imagemagick
