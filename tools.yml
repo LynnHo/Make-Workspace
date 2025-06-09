@@ -36,6 +36,7 @@ dependencies:
   - huggingface_hub
   - aria2
   - jq
+  - fx
   - tldr
   - trash-cli
   - sshpass
