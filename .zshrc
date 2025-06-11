@@ -1,3 +1,6 @@
+# Author: Zhenliang He
+# Project: https://github.com/LynnHo/Make-Workspace
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -240,6 +243,7 @@ alias conda="mamba"
 ( (mkdir -p $HOME/.conda; cd $HOME/.conda; act_list=$((conda env list | awk '{print $NF}'; cat .environments.txt 2>/dev/null) | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"' | sort | uniq); echo $act_list > .environments.txt) &)
 envls()( cat $HOME/.conda/{environments.txt,.environments.txt} | xargs -I {} bash -c '[[ -d "{}" ]] && readlink -f "{}"' | sort | uniq )
 alias envcr="conda env create"
+alias envud="conda env update"
 alias envrm="conda remove --all --name"
 
 ### conda activate
