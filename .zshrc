@@ -409,16 +409,19 @@ spwd()(
         echo "\"${1:-$(pwd)}\": No such file or directory" >&2
         return 2
     fi
-    pwd_=$(realpath -s "${1:-$(pwd)}")
-    spwd_=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}:$pwd_
+    user_host=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}
     port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
-    link=$(readlink -f $pwd_)
-    echo "SCP : scp -P $port -r \"$spwd_\" ./"
-    echo "SRCP: rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
-    echo "RCP : rsync -aP -h \"$pwd_\" ./"
-    echo "SPWD: $spwd_"
-    echo "PORT: $port"
-    [[ -L $pwd_ ]] && echo "LINK: $pwd_ -> $link" || true
+    pwd_=$(realpath -s "${1:-$(pwd)}")
+    spwd_=$user_host:$pwd_
+    link=$(realpath $pwd_)
+    echo "[ SCP  ] scp -P $port -r \"$spwd_\" ./"
+    echo "[ SRCP ] rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
+    echo "[ STCP ] ssh -p $port $user_host 'tar -cf - -C \"$(dirname $pwd_)\" \"$(basename $pwd_)\"' | tar -xvf - -C ."
+    echo "[ RCP  ] rsync -aP -h \"$pwd_\" ./"
+    echo "[ TCP  ] tar -cf - -C \"$(dirname $pwd_)\" \"$(basename $pwd_)\" | tar -xvf - -C ."
+    echo "[ SPWD ] $spwd_"
+    echo "[ PORT ] $port"
+    [[ $link != $pwd_ ]] && echo "[ LINK ] $pwd_ -> $link" || true
 )
 
 ### others
