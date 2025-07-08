@@ -1,6 +1,7 @@
 import argparse
 import json
 import smtplib
+import socks
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -86,10 +87,16 @@ if __name__ == '__main__':
     parser.add_argument('--body', required=True)
     parser.add_argument('--body_type', choices=['plain', 'html'], default='plain')
     parser.add_argument('--attachment_paths', nargs='+', default=None)
+    parser.add_argument('--proxy', default=None)
+    parser.add_argument('--proxy_port', type=int, default=None)
     args = parser.parse_args()
 
     with open(os.path.expanduser(args.mail_config), 'r') as f:
         mail_config = json.load(f)
+
+    if args.proxy is not None and args.proxy_port is not None:
+        socks.set_default_proxy(socks.SOCKS5, args.proxy, args.proxy_port)
+        socks.wrapmodule(smtplib)
 
     send_email(
         smtp_server=mail_config['smtp_server'],
