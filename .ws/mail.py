@@ -2,6 +2,7 @@ import argparse
 import json
 import smtplib
 import socks
+import subprocess
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -97,6 +98,7 @@ if __name__ == '__main__':
     if args.proxy is not None and args.proxy_port is not None:
         socks.set_default_proxy(socks.SOCKS5, args.proxy, args.proxy_port)
         socks.wrapmodule(smtplib)
+        mail_config['smtp_server'] = subprocess.run(f"dig @223.5.5.5 {mail_config['smtp_server']} A +short | tail -1", shell=True, capture_output=True, text=True).stdout.strip()
 
     send_email(
         smtp_server=mail_config['smtp_server'],
