@@ -505,6 +505,7 @@ alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
 ## customized utils
 if [ -f "$HOME/.userrc" ]; then
     source "$HOME/.userrc"
+    source "$WS/.userrc"
 fi
 
 
