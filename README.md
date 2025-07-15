@@ -20,7 +20,7 @@
 
 3. (optional) customization
 
-    + create `~/.userrc` and set your own utils (alias, functions, variables, etc.)
+    + create `~/.userrc` or `~/.ws/.userrc` and set your own utils (alias, functions, variables, etc.)
   
     + *do not edit `~/.zshrc`*
 
