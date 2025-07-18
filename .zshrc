@@ -391,6 +391,8 @@ trash()( # compatible with rm
 alias fdf="fd -u -t f"
 alias fdd="fd -u -t d"
 alias fdimg="fd -u -e jpeg -e jpg -e png -e bmp -e tiff -e tif -e webp"
+split_n_by_lines(){ L=$(wc -l < "$1"); split -l $(( (L+$2-1)/$2 )) "$1" "$1." }
+alias sn="split_n_by_lines"
 
 ### network
 alias net="nethogs"
