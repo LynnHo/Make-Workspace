@@ -554,6 +554,8 @@ update_workspace()(
     rsync -av $WS/.Make-Workspace_tmp/.ws/ $WS/
     rm -rf $WS/.Make-Workspace_tmp
 
+    tmux source-file $HOME/.tmux.conf
+
     timeout 60 tldr -u || \
     timeout 60 tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages
 )
