@@ -462,8 +462,8 @@ alias hfd="HF_ENDPOINT=https://hf-mirror.com hfd.sh"
 
 
 ## mail
-sendme()( python $MAIL_API --subject "${1:-$MAIL_DEFAULT_SUBJECT}" --body "$2" $([ -n $http_proxy ] && { echo $http_proxy | sed "s@.*://\(.*\):\(.*\)@--proxy \1 --proxy_port \2@g" } || echo "") )
-sendto()( python $MAIL_API --receiver_email "$1" --subject "${2:-$MAIL_DEFAULT_SUBJECT}" --body "$3" $([ -n $http_proxy ] && { echo $http_proxy | sed "s@.*://\(.*\):\(.*\)@--proxy \1 --proxy_port \2@g" } || echo "") )
+sendme()( python $MAIL_API --subject "${1:-$MAIL_DEFAULT_SUBJECT}" --body "$2" )
+sendto()( python $MAIL_API --receiver_email "$1" --subject "${2:-$MAIL_DEFAULT_SUBJECT}" --body "$3" )
 sendafter()( echo "sendme after: $*"; echo "========== Start =========="; eval "$@"; cmd_status=$?; [ $cmd_status -eq 0 ] && sendme "$MAIL_DEFAULT_SUBJECT: Command Succeeded" "Command succeeded: $*" || sendme "$MAIL_DEFAULT_SUBJECT: Command Failed" "Command failed: $*"; return $cmd_status )
 
 
