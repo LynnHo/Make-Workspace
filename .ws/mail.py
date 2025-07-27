@@ -1,9 +1,10 @@
 import argparse
 import json
+import os
 import smtplib
 import socks
 import subprocess
-import os
+from urllib.parse import urlparse
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -94,6 +95,11 @@ if __name__ == '__main__':
 
     with open(os.path.expanduser(args.mail_config), 'r') as f:
         mail_config = json.load(f)
+
+    if (args.proxy is None or args.proxy_port is None) and os.environ.get('http_proxy'):
+        urlparsed = urlparse(os.environ.get('http_proxy'))
+        args.proxy = urlparsed.hostname
+        args.proxy_port = urlparsed.port
 
     if args.proxy is not None and args.proxy_port is not None:
         socks.set_default_proxy(socks.SOCKS5, args.proxy, args.proxy_port)
