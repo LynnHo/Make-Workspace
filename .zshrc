@@ -391,7 +391,7 @@ trash()( # compatible with rm
 alias fdf="fd -u -t f"
 alias fdd="fd -u -t d"
 alias fdimg="fd -u -e jpeg -e jpg -e png -e bmp -e tiff -e tif -e webp"
-split_n_by_lines(){ L=$(wc -l < "$1"); split -l $(( (L+$2-1)/$2 )) "$1" "$1." }
+split_n_by_lines()( L=$(wc -l < "$1"); split -l $(( (L+$2-1)/$2 )) "$1" "$1." )
 alias sn="split_n_by_lines"
 
 ### network
@@ -451,11 +451,11 @@ for a in {0..7}; do
         done
     done
 done
-CD()(
+CD(){
     local device; local cmd
     { read device; read cmd; } <<< $(echo $@ | awk '{for(i=1; i<=NF; i++) {if($i ~ /^[0-9]+$/) {printf("%s%s", sep, $i); sep=","} else {rest = substr($0, index($0, $i)); break}} print "\n" rest}')
     eval "CUDA_VISIBLE_DEVICES='$device' $cmd"
-)
+}
 
 ### HF
 alias hfd="HF_ENDPOINT=https://hf-mirror.com hfd.sh"
@@ -464,7 +464,7 @@ alias hfd="HF_ENDPOINT=https://hf-mirror.com hfd.sh"
 ## mail
 sendme()( python $MAIL_API --subject "${1:-$MAIL_DEFAULT_SUBJECT}" --body "$2" )
 sendto()( python $MAIL_API --receiver_email "$1" --subject "${2:-$MAIL_DEFAULT_SUBJECT}" --body "$3" )
-sendafter()( echo "sendme after: $*"; echo "========== Start =========="; eval "$@"; cmd_status=$?; [ $cmd_status -eq 0 ] && sendme "$MAIL_DEFAULT_SUBJECT: Command Succeeded" "Command succeeded: $*" || sendme "$MAIL_DEFAULT_SUBJECT: Command Failed" "Command failed: $*"; return $cmd_status )
+sendafter(){ echo "sendme after: $*"; echo "========== Start =========="; eval "$@"; cmd_status=$?; [ $cmd_status -eq 0 ] && sendme "$MAIL_DEFAULT_SUBJECT: Command Succeeded" "Command succeeded: $*" || sendme "$MAIL_DEFAULT_SUBJECT: Command Failed" "Command failed: $*"; return $cmd_status }
 
 
 ## others
