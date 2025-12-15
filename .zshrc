@@ -156,7 +156,7 @@ zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 
 ### process preview
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm,cmd -w -w'
+zstyle ':completion:*:*:*:*:processes' command 'ps -u ${ROOT_USER:-$USER} -o pid,user,comm,cmd -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --preview-window 'up:4'
 
@@ -336,7 +336,7 @@ alias btop="bpytop"
 #### usage
 usg()(
     while getopts "cmt" opt; do case "$opt" in c) sort_opt="-%cpu";; m) sort_opt="-%mem";; t) sort_opt="-etime";; *) return 1;; esac; done; shift $((OPTIND-1))
-    ps -u ${1:-$USER} -o $'%%\b\033[37m' -o user:16 -o $'%%\b\033[1;31m ' -o %cpu:8 -o $'%%\b\033[1;32m ' -o %mem:8 -o $'%%\b\033[1;34m ' -o etime:12 -o $'%%\b\033[1;35m ' -o pid:8 -o $'%%\b\033[0m ' -o command --sort=${sort_opt:--%cpu} ww
+    ps -u ${1:-${ROOT_USER:-$USER}} -o $'%%\b\033[37m' -o user:16 -o $'%%\b\033[1;31m ' -o %cpu:8 -o $'%%\b\033[1;32m ' -o %mem:8 -o $'%%\b\033[1;34m ' -o etime:12 -o $'%%\b\033[1;35m ' -o pid:8 -o $'%%\b\033[0m ' -o command --sort=${sort_opt:--%cpu} ww
 )
 usga()(
     while getopts "cm" opt; do case "$opt" in c) sort_opt="-k2,2nr -k3,3nr";; m) sort_opt="-k3,3nr -k2,2nr";; *) return 1;; esac; done; shift $((OPTIND-1))
