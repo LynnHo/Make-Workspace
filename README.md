@@ -23,5 +23,7 @@
     + create `~/.userrc` or `~/.ws/.userrc` and set your own utils (alias, functions, variables, etc.)
   
     + *do not edit `~/.zshrc`*
+  
+    + create `~/.prerc` and set your pre-run commands (e.g., `[[ -z "$TMUX" ]] && exec tmux new-session -A -s WORKSPACE` for auto tmux) 
 
 5. manually update (automatically update every day by default): `udws`
