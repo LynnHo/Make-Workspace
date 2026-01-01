@@ -1,15 +1,26 @@
 # Author: Zhenliang He
 # Project: https://github.com/LynnHo/Make-Workspace
 
+## HOMES
+if ! [[ $(pwd) == $HOME* ]]; then
+    export HOME=$(readlink -f "$HOME")
+fi
+export SOFTWARE_HOME="$HOME/ProgramFiles"
+export ANACONDA_HOME="$SOFTWARE_HOME/anaconda3"
+export TOOL_HOME="$ANACONDA_HOME/envs/tools"
+export WS="$HOME/.ws"
+
+
+## PATHs
+export PATH="$TOOL_HOME/bin:$PATH"
+
+
+## P10k instant prompt
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-if ! [[ $(pwd) == $HOME* ]]; then
-    export HOME=$(readlink -f "$HOME")
 fi
 
 
@@ -52,17 +63,6 @@ source $ZSH/oh-my-zsh.sh
 # ==============================================================================
 # =                               shell settings                               =
 # ==============================================================================
-
-## HOMES
-export SOFTWARE_HOME="$HOME/ProgramFiles"
-export ANACONDA_HOME="$SOFTWARE_HOME/anaconda3"
-export TOOL_HOME="$ANACONDA_HOME/envs/tools"
-export WS="$HOME/.ws"
-
-
-## PATHs
-export PATH="$TOOL_HOME/bin:$PATH"
-
 
 ## WORKSPACE
 chmod -R 700 $WS
