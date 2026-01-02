@@ -505,7 +505,7 @@ alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 
 ### workspace
 alias rzshrc="exec zsh"
-alias udws="update_workspace; source ~/.zshrc 2>/dev/null; update_all; rzshrc"
+alias udws="(update_workspace; source ~/.zshrc 2>/dev/null; update_all); rzshrc"
 
 
 ## customized utils
