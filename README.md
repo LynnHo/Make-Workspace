@@ -24,6 +24,6 @@
   
     + *do not edit `~/.zshrc`*
   
-    + create `~/.prerc` and set your pre-run commands (e.g., `[[ -z "$TMUX" ]] && exec tmux new-session -A -s WORKSPACE` for auto tmux) 
+    + create `~/.prerc` and set your pre-run commands (e.g., `[[ "${ZSH_SUBSHELL:-0}" -eq 0 ]] && [[ "${BASH_SUBSHELL:-0}" -eq 0 ]] && [[ -z "$TMUX" ]] && exec tmux new-session -A -s WORKSPACE` for auto tmux) 
 
 5. manually update (automatically update every day by default): `udws`
