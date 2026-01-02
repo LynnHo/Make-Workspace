@@ -152,8 +152,8 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview '
     size=$(timeout 0.1 du -sh $(readlink -f $item) | cut -f1) 2>/dev/null
     view=$([[ ! -d $item ]] && timeout 0.1 viu -w 64 $item || timeout 0.1 less $item) 2>/dev/null
     echo $info; echo $(hl \[SIZE\]) ${size:-...}; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...}
-    size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...})
-    view=$([[ ! -d $item ]] && viu -w 64 $item || [[ $(file -b $item) == *text*very*long*lines* ]] && echo "Too long text to preview"|| less $item) 2>/dev/null && (clear; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------); echo $view)
+    size=$(du -sh $(readlink -f $item) | cut -f1) 2>/dev/null && (printf "\033[2J\033[3J\033[H"; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------)\\n${view:-...})
+    view=$([[ ! -d $item ]] && viu -w 64 $item || [[ $(file -b $item) == *text*very*long*lines* ]] && echo "Too long text to preview"|| less $item) 2>/dev/null && (printf "\033[2J\033[3J\033[H"; echo $info; echo $(hl \[SIZE\]) $size; echo \\n$(hl \[VIEW\])\\n$(hl ------); echo $view)
 '
 zstyle ':fzf-tab:complete:*:options' fzf-preview
 zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
@@ -167,12 +167,12 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --height '~75%' --p
 ### command preview
 zstyle ':fzf-tab:complete:(-command-|-equal-|man|where*|which|type):*' fzf-preview '
     hl(){ echo -ne "\033[0;36m$@\033[0m"; }
-    clear
+    printf "\033[2J\033[3J\033[H"
     page=$(
     (out=$(timeout 0.2 tldr "$word") && echo $(hl \[TLDR Page\])\\n$(hl -----------) && echo $out | bat -p -P --color always -l yaml) ||
     (out=$(man "$word") && echo $(hl \[MAN Page\])\\n$(hl ----------) && echo $out | bat -p -P --color always -l man)
     ) 2>/dev/null && echo $(hl \[INFO\])\\n$(hl ------)\\n...\\n\\n$page
-    info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && clear && echo $(hl \[INFO\])\\n$(hl ------)\\n$info\\n\\n$page
+    info=$((source $HOME/.zshrc; out=$(which "$word") && echo $out) || (echo "${(P)word}")) 2>/dev/null && printf "\033[2J\033[3J\033[H" && echo $(hl \[INFO\])\\n$(hl ------)\\n$info\\n\\n$page
 ' # TODO: source here is not good
 
 ### variable preview
