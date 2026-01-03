@@ -500,6 +500,9 @@ hl()(
     fi
 )
 
+### progress
+alias pg="progress -M"
+
 ### calculation
 alias c="func()( python3 -c \"from math import *; print(\$*)\" ); noglob func"
 
