@@ -295,6 +295,7 @@ alias th="tmuxh"
 alias tv="tmuxv"
 alias ta="tmuxa"
 alias tk="tmuxk"
+alias tw="tmux new-session -A -s WORKSPACE"
 
 
 ## git
