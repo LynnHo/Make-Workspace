@@ -530,6 +530,7 @@ update_tools()(
     (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
      timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
     conda env update --name tools --file $WS/.tools_tmp.yml
+    chmod +x $TOOL_HOME/bin/{ping,ping6}
     rm -f $WS/.tools_tmp.yml
 
     (timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
@@ -546,6 +547,7 @@ update_tools_stable()(
     (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml || \
      timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
     conda env update --name tools --file $WS/.tools_tmp.yml
+    chmod +x $TOOL_HOME/bin/{ping,ping6}
     rm -f $WS/.tools_tmp.yml
 
     timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh && \
