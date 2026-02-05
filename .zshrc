@@ -72,7 +72,7 @@ source $ZSH/oh-my-zsh.sh
 chmod -R 700 $WS
 AUTO_UPDATE_WORKSPACE="true"
 AUTO_UPDATE_INTERVAL=1 # days
-USERHOST="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}"
+USERHOST="$USER@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(/bin/hostname -I | awk '{print $1}')}"
 MAIL_API="$WS/mail.py"
 MAIL_DEFAULT_SUBJECT="$USERHOST"
 GITHUB_PROXY="https://ghfast.top"
@@ -418,7 +418,7 @@ spwd()(
         echo "\"${1:-$(pwd)}\": No such file or directory" >&2
         return 2
     fi
-    user_host=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(hostname -I | awk '{print $1}')}
+    user_host=${ROOT_USER:-$USER}@${$(echo $SSH_CONNECTION | awk '{print $3}'):-$(/bin/hostname -I | awk '{print $1}')}
     port=${$(echo $SSH_CONNECTION | awk '{print $4}'):-'22 (maybe)'}
     pwd_=$(realpath -s "${1:-$(pwd)}")
     spwd_=$user_host:$pwd_
