@@ -379,10 +379,10 @@ killn()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | xargs -r k
 skilln()( ps -ef | grep "$*" | grep -v "grep.*$*" | awk '{print $2}' | sudo xargs -r kill -9 )
 
 ### files
-alias rcp="rsync -aP -h"
-rmv()( if [ "$#" -ne 2 ]; then echo -e "Usage:\nrmv A B     (move A into B -> B/A)\nrmv A/ B    (move the content of A into B, like mv A B)"; return 1; fi; rsync -aP -h --remove-source-files "$1" "$2" && rm -r "$1" )
-rrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -aP --delete "$temp_dir/" "$1"; rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
-srrm()( if [ -f "$1" ] || [ -h "$1" ]; then sudo rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); sudo rsync -aP --delete "$temp_dir/" "$1"; sudo rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
+alias rcp="rsync -a --partial --info=progress2 -h"
+rmv()( if [ "$#" -ne 2 ]; then echo -e "Usage:\nrmv A B     (move A into B -> B/A)\nrmv A/ B    (move the content of A into B, like mv A B)"; return 1; fi; rsync -a --info=progress2 -h --remove-source-files "$1" "$2" && rm -r "$1" )
+rrm()( if [ -f "$1" ] || [ -h "$1" ]; then rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); rsync -a --delete "$temp_dir/" "$1"; rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
+srrm()( if [ -f "$1" ] || [ -h "$1" ]; then sudo rm "$1"; elif [ -d "$1" ]; then local temp_dir=$(mktemp -d); sudo rsync -a --delete "$temp_dir/" "$1"; sudo rm -rf "$temp_dir" "$1"; else echo "$1 is not a valid file, directory, or symlink"; return  1; fi )
 trash()( # compatible with rm
     allowed_args="-f|-h|--help|--trash-dir|-v|--verbose|--version"
     new_args=""
@@ -424,9 +424,9 @@ spwd()(
     spwd_=$user_host:$pwd_
     link=$(realpath $pwd_)
     echo "[ SCP  ] scp -P $port -r \"$spwd_\" ./"
-    echo "[ SRCP ] rsync -aP -h -e \"ssh -p $port\" \"$spwd_\" ./"
+    echo "[ SRCP ] rsync -a --partial --info=progress2 -h -e \"ssh -p $port\" \"$spwd_\" ./"
     echo "[ STCP ] ssh -p $port $user_host 'tar -cf - -C \"$(dirname $pwd_)\" \"$(basename $pwd_)\"' | tar -xvf - -C ."
-    echo "[ RCP  ] rsync -aP -h \"$pwd_\" ./"
+    echo "[ RCP  ] rsync -a --partial --info=progress2 -h \"$pwd_\" ./"
     echo "[ TCP  ] tar -cf - -C \"$(dirname $pwd_)\" \"$(basename $pwd_)\" | tar -xvf - -C ."
     echo "[ SPWD ] $spwd_"
     echo "[ PORT ] $port"
@@ -562,7 +562,7 @@ update_workspace()(
     mv $WS/.Make-Workspace_tmp/.p10k.zsh $HOME/.p10k.zsh
     mv $WS/.Make-Workspace_tmp/my_configs.vim $HOME/.vim_runtime/my_configs.vim
     mv $WS/.Make-Workspace_tmp/.tmux.conf $HOME/.tmux.conf
-    rsync -av $WS/.Make-Workspace_tmp/.ws/ $WS/
+    rsync -a $WS/.Make-Workspace_tmp/.ws/ $WS/
     rm -rf $WS/.Make-Workspace_tmp
 
     tmux source-file $HOME/.tmux.conf
