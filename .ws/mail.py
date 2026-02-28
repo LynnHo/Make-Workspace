@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from email.header import Header
-
+from email.utils import parseaddr, formataddr
 
 def send_email(
     smtp_server,
@@ -21,6 +21,7 @@ def send_email(
     subject,
     body,
     body_type='plain',
+    sender_name=None,
     attachment_paths=None,
     get_socket_func=None
 ):
@@ -38,6 +39,9 @@ def send_email(
     - body_type: Type of the body content ('plain' or 'html', default is 'plain').
     - attachment_paths: List of file paths for the attachments (optional).
     """
+    def _format_addr(s):
+        name, addr = parseaddr(s)
+        return formataddr((Header(name, 'utf-8').encode(), addr))
 
     if get_socket_func is not None:
         ori_get_socket_func = smtplib.SMTP._get_socket
@@ -55,9 +59,12 @@ def send_email(
             server = smtplib.SMTP_SSL(smtp_server, port)
 
         message = MIMEMultipart()
-        message['From'] = Header(sender_email, 'utf-8')
-        message['To'] = Header(receiver_email, 'utf-8')
-        message['Subject'] = Header(subject, 'utf-8')
+
+        if sender_name is None:
+            sender_name = sender_email.split('@')[0]
+        message['From'] = _format_addr(f'{sender_name} <{sender_email}>')
+        message['To'] = _format_addr(f'{receiver_email.split("@")[0]} <{receiver_email}>')
+        message['Subject'] = Header(subject, 'utf-8').encode()
         message.attach(MIMEText(body, body_type, 'utf-8'))
         if attachment_paths is None:
             attachment_paths = []
