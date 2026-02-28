@@ -58,12 +58,15 @@ def send_email(
                 server.quit()
             server = smtplib.SMTP_SSL(smtp_server, port)
 
-        message = MIMEMultipart()
-
         if sender_name is None:
             sender_name = sender_email.split('@')[0]
+        if isinstance(receiver_email, str):
+            receiver_email = [receiver_email]
+
+        message = MIMEMultipart()
+
         message['From'] = _format_addr(f'{sender_name} <{sender_email}>')
-        message['To'] = _format_addr(f'{receiver_email.split("@")[0]} <{receiver_email}>')
+        message['To'] = ', '.join([_format_addr(f'{r.split("@")[0]} <{r}>') for r in receiver_email])
         message['Subject'] = Header(subject, 'utf-8').encode()
         message.attach(MIMEText(body, body_type, 'utf-8'))
         if attachment_paths is None:
