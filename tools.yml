@@ -9,6 +9,7 @@ dependencies:
   - zsh
 
   # basic
+  - nodejs
   - cmake
   - vim
   - parallel
