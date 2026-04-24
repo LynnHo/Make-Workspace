@@ -10,6 +10,7 @@ dependencies:
 
   # basic
   - nodejs
+  - uv
   - cmake
   - vim
   - parallel
