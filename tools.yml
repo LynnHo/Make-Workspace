@@ -49,3 +49,6 @@ dependencies:
   - pv
   - viu
   - imagemagick
+  - pandoc
+  - python-docx
+  - python-pptx
