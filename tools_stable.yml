@@ -43,3 +43,6 @@ dependencies:
   - pv=1.6.6
   - viu=1.5.1
   - imagemagick=7.1.2_21
+  - pandoc=3.9.0.2
+  - python-docx=1.2.0
+  - python-pptx=1.0.2
