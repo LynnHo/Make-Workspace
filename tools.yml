@@ -52,3 +52,4 @@ dependencies:
   - pandoc
   - python-docx
   - python-pptx
+  - openpyxl
