@@ -15,7 +15,6 @@
     # mirror: git clone --depth 1 https://gitee.com/LynnHo/Make-Workspace
     cd Make-Workspace
     source make_workspace_stable.sh
-    # source make_workspace_latest.sh
     ```
 
 3. (optional) customization
