@@ -544,8 +544,8 @@ update_tools()(
 )
 
 update_tools_stable()(
-    (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools_stable.yml || \
-     timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools_stable.yml) && \
+    (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/${TOOLS_STABLE:-tools_stable.yml} || \
+     timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/${TOOLS_STABLE:-tools_stable.yml}) && \
     # conda env update --name tools --file $WS/.tools_tmp.yml
     conda env update --name tools --file $WS/.tools_tmp.yml --prune
     chmod +x $TOOL_HOME/bin/{ping,ping6}
