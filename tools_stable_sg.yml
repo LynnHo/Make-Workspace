@@ -33,7 +33,7 @@ dependencies:
   - aria2=1.37.0
   - jq=1.7.1
   - fx=36.0.3
-  - tldr=3.2.0
+  - tldr=3.4.4
   - trash-cli=0.23.11.10
   - sshpass=1.06
   - lftp=4.9.3
