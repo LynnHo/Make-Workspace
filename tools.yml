@@ -51,6 +51,7 @@ dependencies:
   - pv
   - viu
   - imagemagick
+  - ffmpeg
   - yt-dlp
   - pandoc
   - python-docx
