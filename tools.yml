@@ -53,6 +53,7 @@ dependencies:
   - imagemagick
   - ffmpeg
   - yt-dlp
+  - markitdown
   - pandoc
   - python-docx
   - python-pptx
