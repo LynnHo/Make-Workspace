@@ -47,6 +47,7 @@ dependencies:
   - imagemagick=7.1.2_21
   - ffmpeg=8.1.1
   - yt-dlp=2026.3.17
+  - markitdown=0.1.5
   - pandoc=3.9.0.2
   - python-docx=1.2.0
   - python-pptx=1.0.2
