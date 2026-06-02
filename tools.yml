@@ -53,8 +53,11 @@ dependencies:
   - imagemagick
   - ffmpeg
   - yt-dlp
-  - markitdown
+
   - pandoc
   - python-docx
   - python-pptx
   - openpyxl
+
+  - pip:
+      - "markitdown[all]"
