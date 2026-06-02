@@ -52,5 +52,7 @@ dependencies:
   - python-pptx=1.0.2
   - openpyxl=3.1.5
   - pandas=3.0.3
+
+  - onnxruntime=1.26.0
   - pip:
       - "markitdown[all]==0.1.5"
