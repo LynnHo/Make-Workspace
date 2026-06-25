@@ -74,6 +74,7 @@ dependencies:
   - cairosvg=2.9.0
   - pip:
       - "markitdown[all]==0.1.5"
+      - edge-tts==7.2.8
 
   # Web
   - flask=3.1.3
