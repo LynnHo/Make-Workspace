@@ -1,64 +1,78 @@
 name: tools
 channels:
   - conda-forge
+
 dependencies:
-  - python=3
+  # Language
+  - python>=3.10
   - pip
   - pipx
-
-  # core
-  - zsh
-
-  # basic
-  - rust
-  - nodejs
   - uv
+  - nodejs
+  - rust
   - cmake
+
+  # Terminal
+  - zsh
+  - tmux
+
+  # Editor
   - vim
-  - parallel
-  - p7zip
-  - libunrar
-  - curl
-  - rsync
+
+  # Repo
   - git
   - git-lfs
-
-  # tools
-  - tmux
-  - htop
-  - bpytop
-  - nvitop # - gpustat
-  - fd-find
-  - bioconda::rename
-  - bat
-  - eza # - exa
-  - ripgrep
-  - dust
-  - duf
   - git-delta
   - gh
   - huggingface_hub
-  - aria2
+
+  # File
+  - fd-find
+  - ripgrep
+  - eza # - exa
+  - bat
   - jq
   - fx
-  - tldr
-  - trash-cli
-  - sshpass
-  - lftp
-  - speedtest-cli
-  - inetutils
-  - rvalieris::xfennec-progress
-  - pv
   - viu
-  - imagemagick
-  - ffmpeg
-  - yt-dlp
+  - bioconda::rename
+  - trash-cli
 
+  # Archive
+  - p7zip
+  - libunrar
+
+  # Monitoring
+  - htop
+  - bpytop
+  - nvitop # - gpustat
+  - duf
+  - dust
+
+  # Network
+  - curl
+  - aria2
+  - rsync
+  - lftp
+  - sshpass
+  - inetutils
+  - speedtest-cli
+
+  # Media
+  - yt-dlp
+  - ffmpeg
+  - imagemagick
+
+  # Document
+  - pandas
   - pandoc
   - python-docx
   - python-pptx
   - openpyxl
-  - pandas
-
   - pip:
       - "markitdown[all]"
+
+  # Helper
+  - tldr
+  - pv
+  - parallel
+  - rvalieris::xfennec-progress
