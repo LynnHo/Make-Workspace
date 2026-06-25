@@ -69,6 +69,8 @@ dependencies:
   - python-pptx
   - openpyxl
   - pymupdf
+  - ebooklib
+  - nbconvert
   - cairosvg
   - pip:
       - "markitdown[all]"
