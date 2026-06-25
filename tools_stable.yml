@@ -67,6 +67,7 @@ dependencies:
   - python-docx=1.2.0
   - python-pptx=1.0.2
   - openpyxl=3.1.5
+  - cairosvg=2.9.0
   - pip:
       - "markitdown[all]==0.1.5"
 
