@@ -75,6 +75,7 @@ dependencies:
   - cairosvg
   - pip:
       - "markitdown[all]"
+      - edge-tts
 
   # Web
   - flask
