@@ -19,13 +19,6 @@ dependencies:
   # Editor
   - vim
 
-  # Repo
-  - git
-  - git-lfs
-  - git-delta
-  - gh
-  - huggingface_hub
-
   # File
   - fd-find
   - ripgrep
@@ -58,10 +51,17 @@ dependencies:
   - inetutils
   - speedtest-cli
 
+  # Repo
+  - git
+  - git-lfs
+  - git-delta
+  - gh
+  - huggingface_hub
+
   # Media
+  - imagemagick
   - yt-dlp
   - ffmpeg
-  - imagemagick
 
   # Document
   - pandas
