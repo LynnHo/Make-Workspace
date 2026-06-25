@@ -50,6 +50,7 @@ dependencies:
 
   # Network
   - curl
+  - curl-cffi
   - aria2
   - rsync
   - lftp
