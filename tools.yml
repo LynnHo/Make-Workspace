@@ -68,6 +68,7 @@ dependencies:
   - python-docx
   - python-pptx
   - openpyxl
+  - cairosvg
   - pip:
       - "markitdown[all]"
 
