@@ -18,13 +18,6 @@ dependencies:
   # Editor
   - vim=9.0.2059
 
-  # Repo
-  - git=2.49.0
-  - git-lfs=3.5.1
-  - git-delta=0.16.5
-  - gh=2.49.2
-  - huggingface_hub
-
   # File
   - fd-find=8.5.3
   - ripgrep=14.1.1
@@ -57,13 +50,17 @@ dependencies:
   - inetutils=2.7
   - speedtest-cli=2.1.3
 
+  # Repo
+  - git=2.49.0
+  - git-lfs=3.5.1
+  - git-delta=0.16.5
+  - gh=2.49.2
+  - huggingface_hub
+  
   # Media
+  - imagemagick=7.1.2_3
   - yt-dlp=2026.3.17
   - ffmpeg=8.0.0
-  - imagemagick=7.1.2_3
-
-  # Web
-  - flask=3.1.3
 
   # Document
   - pandas=3.0.3
@@ -79,6 +76,9 @@ dependencies:
       - "markitdown[all]==0.1.5"
       - edge-tts==7.2.8
 
+  # Web
+  - flask=3.1.3
+  
   # Helper
   - tldr=3.4.4
   - pv=1.6.6
