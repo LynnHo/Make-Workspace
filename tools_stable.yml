@@ -68,6 +68,8 @@ dependencies:
   - python-pptx=1.0.2
   - openpyxl=3.1.5
   - pymupdf=1.27.2.2
+  - ebooklib=0.17
+  - nbconvert=7.17.1
   - cairosvg=2.9.0
   - pip:
       - "markitdown[all]==0.1.5"
