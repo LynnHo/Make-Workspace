@@ -49,6 +49,7 @@ dependencies:
 
   # Network
   - curl=8.19.0
+  - curl-cffi=0.15.0
   - aria2=1.37.0
   - rsync=3.3.0
   - lftp=4.9.3
