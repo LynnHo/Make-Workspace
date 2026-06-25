@@ -67,9 +67,8 @@ dependencies:
   - python-docx=1.2.0
   - python-pptx=1.0.2
   - openpyxl=3.1.5
-
-  # AI
-  - onnxruntime=1.26.0
+  - pip:
+      - "markitdown[all]==0.1.5"
 
   # Helper
   - tldr=3.4.4
@@ -77,6 +76,5 @@ dependencies:
   - parallel=20240122
   - rvalieris::xfennec-progress=0.16
 
-  # Pip
-  - pip:
-      - "markitdown[all]==0.1.5"
+  # AI
+  - onnxruntime=1.26.0
