@@ -46,6 +46,7 @@ dependencies:
   - curl-cffi
   - aria2
   - rsync
+  - pysocks
   - lftp
   - sshpass
   - inetutils
