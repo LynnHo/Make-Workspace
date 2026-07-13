@@ -10,6 +10,7 @@ dependencies:
   - nodejs=22.6.0
   - rust=1.95.0
   - cmake=3.27.4
+  - bioconda::perl-local-lib=2.000029
 
   # Terminal
   - zsh=5.8
