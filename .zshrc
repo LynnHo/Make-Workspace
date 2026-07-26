@@ -520,6 +520,9 @@ fi
 if [ -f "$WS/.userrc" ]; then
     source "$WS/.userrc"
 fi
+if [ -f "$WS/.shell_common" ]; then
+    source "$WS/.shell_common"
+fi
 
 
 # ==============================================================================
