@@ -85,3 +85,6 @@ dependencies:
   - pv=1.6.6
   - parallel=20240122
   - rvalieris::xfennec-progress=0.16
+
+  # AI
+  - openai
