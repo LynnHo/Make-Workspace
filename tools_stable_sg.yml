@@ -88,4 +88,5 @@ dependencies:
   - rvalieris::xfennec-progress=0.16
 
   # AI
+  - openai
   - onnxruntime=1.26.0
