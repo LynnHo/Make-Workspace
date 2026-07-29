@@ -74,9 +74,6 @@ dependencies:
   - ebooklib
   - nbconvert
   - cairosvg
-  - pip:
-      - "markitdown[all]"
-      - edge-tts
 
   # Web
   - flask
@@ -89,3 +86,11 @@ dependencies:
 
   # AI
   - openai
+  - scholarly
+
+  - pip:
+      # Document
+      - "markitdown[all]"
+      - edge-tts
+      # AI
+      exa-py
