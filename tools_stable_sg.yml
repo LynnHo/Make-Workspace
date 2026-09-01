@@ -42,7 +42,7 @@ dependencies:
   - dust=1.0.0
 
   # Network
-  - curl=8.19.0
+  - curl=8.18.0
   - curl-cffi=0.15.0
   - aria2=1.37.0
   - rsync=3.3.0
