@@ -65,7 +65,6 @@ dependencies:
   - ffmpeg
 
   # Document
-  - pandas
   - pandoc
   - python-docx
   - python-pptx
@@ -83,6 +82,14 @@ dependencies:
   - pv
   - parallel
   - rvalieris::xfennec-progress
+
+  # Science
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - seaborn
+  - sympy
 
   # AI
   - openai
