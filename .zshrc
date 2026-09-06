@@ -12,7 +12,7 @@ export WS="$HOME/.ws"
 
 
 ## PATHs
-export PATH="$TOOL_HOME/bin:$PATH"
+export PATH="$TOOL_HOME/bin:$HOME/.local/bin:$PATH"
 
 
 ## pre run
