@@ -70,6 +70,8 @@ dependencies:
   - python-pptx
   - openpyxl
   - pymupdf
+  - pdfplumber
+  - poppler
   - ebooklib
   - nbconvert
   - cairosvg
