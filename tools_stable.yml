@@ -41,7 +41,7 @@ dependencies:
   - dust=1.0.0
 
   # Network
-  - curl=8.19.0
+  - curl>=8.23.0
   - curl-cffi=0.15.0
   - aria2=1.37.0
   - rsync=3.3.0
@@ -64,14 +64,16 @@ dependencies:
   - ffmpeg=8.1.1
 
   # Document
-  - pandoc=3.9.0.2
-  - python-docx=1.2.0
-  - python-pptx=1.0.2
-  - openpyxl=3.1.5
-  - pymupdf=1.27.2.2
-  - ebooklib=0.17
-  - nbconvert=7.17.1
-  - cairosvg=2.9.0
+  - pandoc>=3.9.0.2
+  - python-docx>=1.2.0
+  - python-pptx>=1.0.2
+  - openpyxl>=3.1.5
+  - pymupdf>=2.0
+  - pdfplumber>=0.11.10
+  - poppler>=26.09.0
+  - ebooklib>=0.17
+  - nbconvert>=7.17.1
+  - cairosvg>=2.9.0
 
   # Web
   - flask=3.1.3
@@ -89,14 +91,14 @@ dependencies:
   - matplotlib=3.11.1
   - seaborn=0.13.2
   - sympy=1.14.0
-  
+
   # AI
   - openai
   - scholarly=1.7.11
 
   - pip:
       # Document
-      - "markitdown[all]==0.1.5"
-      - edge-tts==7.2.8
+      - "markitdown[all]>=0.1.5"
+      - edge-tts>=7.2.8
       # AI
       - exa-py==2.16.2
