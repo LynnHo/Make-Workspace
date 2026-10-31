@@ -102,4 +102,4 @@ dependencies:
       - "markitdown[all]"
       - edge-tts
       # AI
-      exa-py
+      - exa-py
