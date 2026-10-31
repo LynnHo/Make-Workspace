@@ -54,7 +54,7 @@ backup $ANACONDA_HOME
 # timeout 60 wget -c $GITHUB_PROXY/https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh || \
 wget -c https://gitee.com/LynnHo/Make-Workspace/releases/download/0.2/Miniforge3-23.3.1-1-Linux-x86_64.sh -O ./miniforge.sh
 bash ./miniforge.sh -b -p $ANACONDA_HOME
-. $ANACONDA_HOME/bin/activate
+. "$ANACONDA_HOME/bin/activate" base
 
 
 # step 1.2: install tools
