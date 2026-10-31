@@ -21,15 +21,6 @@ echo "Installing workspace with $tools_file"
 
 GITHUB_PROXY="https://ghfast.top"
 
-record_tools_profile()(
-    profile_tmp=$(mktemp "$WS/.tools_profile.XXXXXX") || { echo "Cannot create tools profile record" >&2; exit 1; }
-    if ! printf '%s\n' "$1" > "$profile_tmp" || ! mv -fT -- "$profile_tmp" "$WS/.tools_profile"; then
-        rm -f "$profile_tmp"
-        echo "Cannot save tools profile record" >&2
-        exit 1
-    fi
-)
-
 backup()(
     FILE_PATH=$1
     NEW_FILE_PATH="${FILE_PATH}.bk_$(date +%Y%m%d-%H%M%S)"
@@ -148,7 +139,7 @@ timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent
 true
 
 
-record_tools_profile "$tools_file"
+printf '%s\n' "$tools_file" > "$WS/.tools_profile"
 
 
 # step 5: replace the current shell with zsh

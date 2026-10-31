@@ -529,21 +529,11 @@ fi
 # =                            auto update workspace                           =
 # ==============================================================================
 
-record_tools_profile()(
-    local profile_tmp
-    profile_tmp=$(mktemp "$WS/.tools_profile.XXXXXX") || { echo "Cannot create tools profile record" >&2; exit 1; }
-    if ! printf '%s\n' "$1" > "$profile_tmp" || ! mv -fT -- "$profile_tmp" "$WS/.tools_profile"; then
-        rm -f "$profile_tmp"
-        echo "Cannot save tools profile record" >&2
-        exit 1
-    fi
-)
-
 update_tools()(
     (timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
      timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
     conda env update --name tools --file "$WS/.tools_tmp.yml" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
-    record_tools_profile tools.yml || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    printf '%s\n' tools.yml > "$WS/.tools_profile" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
     chmod +x $TOOL_HOME/bin/{ping,ping6} || { rm -f "$WS/.tools_tmp.yml"; return 1; }
     rm -f "$WS/.tools_tmp.yml"
 
@@ -567,7 +557,7 @@ update_tools_stable()(
     (timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" "https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/$tools_file" || \
      timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" "https://gitee.com/LynnHo/Make-Workspace/raw/main/$tools_file") && \
     conda env update --name tools --file "$WS/.tools_tmp.yml" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
-    record_tools_profile "$tools_file" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    printf '%s\n' "$tools_file" > "$WS/.tools_profile" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
     chmod +x $TOOL_HOME/bin/{ping,ping6} || { rm -f "$WS/.tools_tmp.yml"; return 1; }
     rm -f "$WS/.tools_tmp.yml"
 
