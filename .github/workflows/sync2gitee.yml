@@ -1,0 +1,21 @@
+name: sync2gitee
+on:
+  push:
+  schedule:
+    # UTC 17:00 -> CST (China) 1:00 see https://datetime360.com/cn/utc-cst-china-time/
+    - cron: '1 17 * * *'
+jobs:
+  run:
+    name: Sync GitHub to Gitee
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror the GitHub repos to Gitee
+        uses: Yikun/hub-mirror-action@master
+        with:
+          src: github/${{ github.repository_owner }}
+          dst: gitee/${{ secrets.GITEE_USER }}
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: ${{ github.event.repository.name }}
+          account_type: user
+          force_update: true

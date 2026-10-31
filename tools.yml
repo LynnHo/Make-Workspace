@@ -1,0 +1,105 @@
+name: tools
+channels:
+  - conda-forge
+
+dependencies:
+  # Language
+  - python>=3.10
+  - pip
+  - pipx
+  - uv
+  - nodejs
+  - rust
+  - cmake
+
+  # Terminal
+  - zsh
+  - tmux
+
+  # Editor
+  - vim
+
+  # File
+  - fd-find
+  - ripgrep
+  - eza # - exa
+  - bat
+  - jq
+  - fx
+  - viu
+  - bioconda::rename
+  - trash-cli
+
+  # Archive
+  - p7zip
+  - libunrar
+
+  # Monitoring
+  - htop
+  - bpytop
+  - nvitop # - gpustat
+  - duf
+  - dust
+
+  # Network
+  - curl
+  - curl-cffi
+  - aria2
+  - rsync
+  - pysocks
+  - lftp
+  - sshpass
+  - inetutils
+  - speedtest-cli
+
+  # Repo
+  - git
+  - git-lfs
+  - git-delta
+  - gh
+  - huggingface_hub
+
+  # Media
+  - imagemagick
+  - yt-dlp
+  - ffmpeg
+
+  # Document
+  - pandoc
+  - python-docx
+  - python-pptx
+  - openpyxl
+  - pdfplumber
+  - poppler
+  - ebooklib
+  - nbconvert
+  - cairosvg
+
+  # Web
+  - flask
+
+  # Helper
+  - tldr
+  - pv
+  - parallel
+  - rvalieris::xfennec-progress
+
+  # Science
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - seaborn
+  - sympy
+
+  # AI
+  - openai
+  - scholarly
+
+  - pip:
+      # Document
+      - pymupdf
+      - "markitdown[all]"
+      - edge-tts
+      # AI
+      exa-py
