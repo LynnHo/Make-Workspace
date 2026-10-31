@@ -61,9 +61,8 @@ rm -rf $HOME/.fzf
 git_clone https://github.com/junegunn/fzf.git $HOME/.fzf
 cd $HOME/.fzf
 version=$(git tag -l | sort -V | tail -n 1)
-(set -o pipefail
 timeout 60 wget -O - https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/ || \
-wget -O - $GITHUB_PROXY/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/)
+wget -O - $GITHUB_PROXY/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/
 chmod +x $TOOL_HOME/bin/fzf
 cd -
 
@@ -123,6 +122,7 @@ cp ./.zshrc $HOME/.zshrc
 # step 3.2.2: install .ws
 backup $WS
 cp -r ./.ws $WS
+printf '%s\n' tools.yml > "$WS/.tools_profile"
 
 
 # step 3.3.1: set zsh in tmux
@@ -159,9 +159,6 @@ fi
 timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages || \
 true
-
-
-printf '%s\n' tools.yml > "$WS/.tools_profile"
 
 
 # step 5: replace the current shell with zsh

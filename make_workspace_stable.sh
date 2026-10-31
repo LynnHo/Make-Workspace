@@ -101,6 +101,7 @@ cp ./.zshrc $HOME/.zshrc
 # step 3.2.2: install .ws
 backup $WS
 cp -r ./.ws $WS
+printf '%s\n' "$tools_file" > "$WS/.tools_profile"
 
 
 # step 3.3.1: set zsh in tmux
@@ -137,9 +138,6 @@ fi
 timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages || \
 true
-
-
-printf '%s\n' "$tools_file" > "$WS/.tools_profile"
 
 
 # step 5: replace the current shell with zsh

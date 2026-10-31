@@ -532,7 +532,7 @@ fi
 update_tools()(
     (timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
      timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
-    conda env update --name tools --file "$WS/.tools_tmp.yml" && \
+    conda env update --name tools --file "$WS/.tools_tmp.yml"
     printf '%s\n' tools.yml > "$WS/.tools_profile"
     chmod +x $TOOL_HOME/bin/{ping,ping6}
     rm -f "$WS/.tools_tmp.yml"
@@ -555,7 +555,8 @@ update_tools_stable()(
     tools_file=${tools_file:-tools_stable.yml}
     (timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" "https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/$tools_file" || \
      timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" "https://gitee.com/LynnHo/Make-Workspace/raw/main/$tools_file") && \
-    conda env update --name tools --file "$WS/.tools_tmp.yml" && \
+    conda env update --name tools --file "$WS/.tools_tmp.yml"
+    # conda env update --name tools --file $WS/.tools_tmp.yml --prune
     printf '%s\n' "$tools_file" > "$WS/.tools_profile"
     chmod +x $TOOL_HOME/bin/{ping,ping6}
     rm -f "$WS/.tools_tmp.yml"
