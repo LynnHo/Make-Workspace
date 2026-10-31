@@ -1,6 +1,17 @@
 #!/bin/bash
 set -e
 
+usage='Usage: bash make_workspace_stable.sh [--slim|--sg]'
+[[ $# -le 1 ]] || { echo "$usage" >&2; exit 2; }
+case "${1-}" in
+    "")     tools_file=tools_stable.yml ;;
+    --slim) tools_file=tools_slim_stable.yml ;;
+    --sg)   tools_file=tools_stable_sg.yml ;;
+    --help) echo "$usage"; exit 0 ;;
+    *)      echo "$usage" >&2; exit 2 ;;
+esac
+echo "Installing workspace with $tools_file"
+
 # Author: He Zhenliang
 # Date: 2023
 
@@ -9,6 +20,15 @@ set -e
 # ==============================================================================
 
 GITHUB_PROXY="https://ghfast.top"
+
+record_tools_profile()(
+    profile_tmp=$(mktemp "$WS/.tools_profile.XXXXXX") || { echo "Cannot create tools profile record" >&2; exit 1; }
+    if ! printf '%s\n' "$1" > "$profile_tmp" || ! mv -fT -- "$profile_tmp" "$WS/.tools_profile"; then
+        rm -f "$profile_tmp"
+        echo "Cannot save tools profile record" >&2
+        exit 1
+    fi
+)
 
 backup()(
     FILE_PATH=$1
@@ -47,7 +67,7 @@ bash ./miniforge.sh -b -p $ANACONDA_HOME
 
 
 # step 1.2: install tools
-$ANACONDA_HOME/bin/mamba env create -f tools_stable.yml
+"$ANACONDA_HOME/bin/mamba" env create -f "$tools_file"
 
 
 # step 2.1: install vimrc
@@ -126,6 +146,9 @@ fi
 timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages || \
 true
+
+
+record_tools_profile "$tools_file"
 
 
 # step 5: replace the current shell with zsh

@@ -10,6 +10,15 @@ set -e
 
 GITHUB_PROXY="https://ghfast.top"
 
+record_tools_profile()(
+    profile_tmp=$(mktemp "$WS/.tools_profile.XXXXXX") || { echo "Cannot create tools profile record" >&2; exit 1; }
+    if ! printf '%s\n' "$1" > "$profile_tmp" || ! mv -fT -- "$profile_tmp" "$WS/.tools_profile"; then
+        rm -f "$profile_tmp"
+        echo "Cannot save tools profile record" >&2
+        exit 1
+    fi
+)
+
 backup()(
     FILE_PATH=$1
     NEW_FILE_PATH="${FILE_PATH}.bk_$(date +%Y%m%d-%H%M%S)"
@@ -61,8 +70,9 @@ rm -rf $HOME/.fzf
 git_clone https://github.com/junegunn/fzf.git $HOME/.fzf
 cd $HOME/.fzf
 version=$(git tag -l | sort -V | tail -n 1)
+(set -o pipefail
 timeout 60 wget -O - https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/ || \
-wget -O - $GITHUB_PROXY/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/
+wget -O - $GITHUB_PROXY/https://github.com/junegunn/fzf/releases/download/$version/fzf-$version-linux_amd64.tar.gz | tar -xzf - -C $TOOL_HOME/bin/)
 chmod +x $TOOL_HOME/bin/fzf
 cd -
 
@@ -158,6 +168,9 @@ fi
 timeout 60 $TOOL_HOME/bin/tldr -u || \
 timeout 60 $TOOL_HOME/bin/tldr -u -s $GITHUB_PROXY/https://raw.githubusercontent.com/tldr-pages/tldr/main/pages || \
 true
+
+
+record_tools_profile tools.yml
 
 
 # step 5: replace the current shell with zsh

@@ -529,33 +529,50 @@ fi
 # =                            auto update workspace                           =
 # ==============================================================================
 
+record_tools_profile()(
+    local profile_tmp
+    profile_tmp=$(mktemp "$WS/.tools_profile.XXXXXX") || { echo "Cannot create tools profile record" >&2; exit 1; }
+    if ! printf '%s\n' "$1" > "$profile_tmp" || ! mv -fT -- "$profile_tmp" "$WS/.tools_profile"; then
+        rm -f "$profile_tmp"
+        echo "Cannot save tools profile record" >&2
+        exit 1
+    fi
+)
+
 update_tools()(
-    (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
-     timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
-    conda env update --name tools --file $WS/.tools_tmp.yml
-    chmod +x $TOOL_HOME/bin/{ping,ping6}
-    rm -f $WS/.tools_tmp.yml
+    (timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/tools.yml || \
+     timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" https://gitee.com/LynnHo/Make-Workspace/raw/main/tools.yml) && \
+    conda env update --name tools --file "$WS/.tools_tmp.yml" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    record_tools_profile tools.yml || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    chmod +x $TOOL_HOME/bin/{ping,ping6} || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    rm -f "$WS/.tools_tmp.yml"
 
     (timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh || \
      timeout 10 wget -o /dev/stdout -O $WS/.lesspipe_tmp.sh $GITHUB_PROXY/https://raw.githubusercontent.com/wofr06/lesspipe/lesspipe/lesspipe.sh) && \
-    (mv $WS/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh; chmod +x $TOOL_HOME/bin/lesspipe.sh)
+    (mv $WS/.lesspipe_tmp.sh $TOOL_HOME/bin/lesspipe.sh && chmod +x $TOOL_HOME/bin/lesspipe.sh) || { rm -f "$WS/.lesspipe_tmp.sh"; return 1; }
     rm -f $WS/.lesspipe_tmp.sh
 
     timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh && \
-    (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh; chmod +x $TOOL_HOME/bin/hfd.sh)
+    (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh && chmod +x $TOOL_HOME/bin/hfd.sh) || { rm -f "$WS/.hfd_tmp.sh"; return 1; }
     rm -f $WS/.hfd_tmp.sh
 )
 
 update_tools_stable()(
-    (timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/${TOOLS_STABLE:-tools_stable.yml} || \
-     timeout 10 wget -o /dev/stdout -O $WS/.tools_tmp.yml https://gitee.com/LynnHo/Make-Workspace/raw/main/${TOOLS_STABLE:-tools_stable.yml}) && \
-    conda env update --name tools --file $WS/.tools_tmp.yml
-    # conda env update --name tools --file $WS/.tools_tmp.yml --prune
-    chmod +x $TOOL_HOME/bin/{ping,ping6}
-    rm -f $WS/.tools_tmp.yml
+    local tools_file="${TOOLS_STABLE:-}"
+    if [[ -z "$tools_file" && -f "$WS/.tools_profile" ]]; then
+        tools_file=$(awk 'NR > 1 {exit 1} NR == 1 {value=$0} END {if (NR == 1 && length(value)) print value; else exit 1}' "$WS/.tools_profile") || tools_file=
+        [[ "$tools_file" != *$'\r'* ]] || tools_file=
+    fi
+    tools_file=${tools_file:-tools_stable.yml}
+    (timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" "https://raw.githubusercontent.com/LynnHo/Make-Workspace/main/$tools_file" || \
+     timeout 10 wget -o /dev/stdout -O "$WS/.tools_tmp.yml" "https://gitee.com/LynnHo/Make-Workspace/raw/main/$tools_file") && \
+    conda env update --name tools --file "$WS/.tools_tmp.yml" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    record_tools_profile "$tools_file" || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    chmod +x $TOOL_HOME/bin/{ping,ping6} || { rm -f "$WS/.tools_tmp.yml"; return 1; }
+    rm -f "$WS/.tools_tmp.yml"
 
     timeout 10 wget -o /dev/stdout -O $WS/.hfd_tmp.sh https://hf-mirror.com/hfd/hfd.sh && \
-    (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh; chmod +x $TOOL_HOME/bin/hfd.sh)
+    (mv $WS/.hfd_tmp.sh $TOOL_HOME/bin/hfd.sh && chmod +x $TOOL_HOME/bin/hfd.sh) || { rm -f "$WS/.hfd_tmp.sh"; return 1; }
     rm -f $WS/.hfd_tmp.sh
 )
 
