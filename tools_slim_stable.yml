@@ -1,0 +1,57 @@
+name: tools
+channels:
+  - conda-forge
+dependencies:
+  # Language
+  - python=3.12.0
+  - pip=23.3.1
+
+  # Terminal
+  - zsh=5.8
+  - tmux=3.4
+
+  # Editor
+  - vim=9.0.2059
+
+  # File
+  - fd-find=8.5.3
+  - ripgrep=14.1.1
+  - eza=0.18.16
+  - bat=0.24.0
+  - jq=1.7.1
+  - fx=36.0.3
+  - viu=1.5.1
+  - bioconda::rename=1.601
+  - trash-cli=0.23.11.10
+
+  # Archive
+  - p7zip=16.02
+  - libunrar=7.0.9
+
+  # Monitoring
+  - htop=3.2.2
+  - bpytop=1.0.68
+  - nvitop=1.3.1
+  - duf=0.8.1
+  - dust=1.0.0
+
+  # Network
+  - curl>=8.23.0
+  - aria2=1.37.0
+  - rsync=3.3.0
+  - pysocks=1.7.1
+  - lftp=4.9.3
+  - sshpass=1.06
+  - inetutils=2.7
+  - speedtest-cli=2.1.3
+
+  # Repo
+  - git=2.53.0
+  - git-lfs=3.5.1
+  - git-delta=0.16.5
+
+  # Helper
+  - tldr=3.4.4
+  - pv=1.6.6
+  - parallel=20240122
+  - rvalieris::xfennec-progress=0.16
