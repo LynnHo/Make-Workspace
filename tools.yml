@@ -74,9 +74,12 @@ dependencies:
   - ebooklib
   - nbconvert
   - cairosvg
+  - skia-pathops
+  - uharfbuzz
 
   # Web
   - flask
+  - playwright
 
   # Helper
   - tldr
